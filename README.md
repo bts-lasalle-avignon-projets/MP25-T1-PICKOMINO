@@ -20,6 +20,8 @@ $ make
 $ ./pickomino.out
 ```
 
+![](./images/pickomino.gif)
+
 ## Changelog
 
 ## TODO
@@ -27,10 +29,6 @@ $ ./pickomino.out
 ## Défauts constatés non corrigés
 
 ## Équipe de développement
-
-- 
-- 
-
 
 ---
 &copy; 2024-2025 LaSalle Avignon

@@ -1,1 +1,1 @@
-# pickomino-team1
+# Mini-projet : Pickomino

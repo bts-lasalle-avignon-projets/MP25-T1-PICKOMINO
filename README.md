@@ -30,5 +30,8 @@ $ ./pickomino.out
 
 ## Équipe de développement
 
+MILLOT Pierre : [**[pierre(dot)millot(dot)pro(at)gmail(dot)com](mailto:pierre.millot.pro@gmail.com)**]
+NAVARRO Mattéo : [**[matteo(dot)navarro(dot)pro(at)gmail(dot)com](mailto:matteo.navarro.pro@gmail.com)**]
+
 ---
 &copy; 2024-2025 LaSalle Avignon

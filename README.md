@@ -12,7 +12,7 @@
 
 ## Présentation
 
-Pickomino est un jeux de société créer par Gigamic, qui se joue avec 2 ou 7 joueurs maximum. Le but du jeu est d'avoir plus de vers que ces adversaires pour remporter la partie.
+Pickomino est un jeux de société créé par Reiner Knizia et édité par Gigamic, qui se joue avec 2 ou 7 joueurs maximum. Le but du jeu est d'avoir plus de vers que ces adversaires pour remporter la partie.
 Le jeux est composer de 2 zones de jeux distinctes:
 
 - L'inventaire de chaque joueurs.
@@ -20,16 +20,28 @@ Le jeux est composer de 2 zones de jeux distinctes:
 
 #### L'inventaire du joueur
 
-- Chaque joueur récupère le pickomino qui viens de remporter et l'empiles au dessus des autres.
-- Un joueur peut récupérer le pickomino d'un joueur adverse, si la valeur de ces dès est égale au pickomino du sommet de la pile du joueur adverse.
+- Stocker les pickominos gagners.
+- Echanger les pickominos perdus.
 
 #### Le plateau de jeu
 
-- Les pickominos sont aligner en ligne de façon croissante (*de 21 à 36*).
-- Chaque joueur ayant la valeur d'un pickomino sur la plateau de jeu peut le récupérer.
-- Si un joueur fait un tours nul (n'obient pas de pickomino), le dernier pickomino le plus fort sur le plateau est retourner.
+- Brochette de touts les pickominos.
+- Les 8 dès de 6 faces.
+- Transfert des pickominos vers les joueurs.
 
-### Déroulement d'une partie
+#### Déroulement d'une partie
+
+Pour commencer une partie, c'est le joueur le plus jeune qui débute. Le premier joueur lance les 8 dés. Il doit choisir parmi les dés le symbole qui lui convient et mettre de côté tous les dés ayant le même symbole. À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il n'a pas choisi auparavant. :warning: Le joueur doit impérativement mettre de côté au moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile correspondant à la valeur totale de tous ses dés.
+
+- Face 1 = 1 point
+- Face 2 = 2 points
+- Face 3 = 3 points
+- Face 4 = 4 points
+- Face 5 = 5 points
+- Face « ver » = 5 points
+
+Si, à l'issue des lancers, le joueur ne peut pas prendre de tuile ou n'a pas obtenu de « ver », il doit remettre sa dernière tuile obtenue dans la brochette sur le plateau de jeu, et la tuile de plus haute valeur est retournée (retirée du jeu).  
+La partie se termine quand toutes les tuiles ont été prises. Chaque joueur compte le nombre de vers présents sur l'ensemble de ses tuiles. Le joueur ayant le plus de vers remporte la partie.
 
 ### Utilisation
 

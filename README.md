@@ -53,6 +53,34 @@ $ ./pickomino.out
 
 ![](./images/pickomino.gif)
 
+---
+
+## Itérations
+
+#### Itération 1:
+
+- Créer le squelette des fichiers
+- Lancer une partie:
+  - Saisir le nombre de joueurs
+  - Saisir le nom du joueur
+  - Lancer les dés et récupérer les tuiles
+- Terminer une partie:
+  - Afficher le gagnant
+
+#### Itération 2:
+
+- Jouer une partie contre la machine
+- Jouer une ou plusieurs parties
+- Récupérer un pickominos dans l'inventaire d'un joueur adverse (becquetage)
+- Visualiser l'historique des parties
+
+#### Itération 3:
+
+- Visualiser l'historique des scores
+- Jouer une partie en réseau
+
+---
+
 ## Changelog
 
 ## TODO

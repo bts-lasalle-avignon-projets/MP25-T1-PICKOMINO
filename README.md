@@ -16,26 +16,39 @@
 
 ## Présentation
 
-Pickomino est un jeux de société créé par Reiner Knizia et édité par Gigamic, qui se joue avec 2 ou 7 joueurs maximum. Le but du jeu est d'avoir plus de vers que ces adversaires pour remporter la partie.
-Le jeux est composer de 2 zones de jeux distinctes:
+Pickomino est un jeu de société créé par Reiner Knizia et édité par Gigamic, qui se joue avec 2 ou 7 joueurs maximum.
 
-- L'inventaire de chaque joueurs.
-- Le plateau de jeu.
+Le but du jeu est d'avoir plus de vers que ces adversaires pour remporter la partie.
 
-#### L'inventaire du joueur
+Le jeu est composé de 16 pickominos (tuiles), de 21 à 36 :
 
-- Stocker les pickominos gagners.
-- Echanger les pickominos perdus.
+- Les tuiles de 21 à 24 valent 1 ver
+- Les tuiles de 25 à 28 valent 2 vers
+- Les tuiles de 29 à 32 valent 3 vers
+- Les tuiles de 33 à 36 valent 4 vers
 
-#### Le plateau de jeu
+Le jeu est composé de 2 zones distinctes :
 
-- Brochette de touts les pickominos.
-- Les 8 dès de 6 faces.
-- Transfert des pickominos vers les joueurs.
+- L'inventaire de chaque joueur
+- Le plateau de jeu
 
-#### Déroulement d'une partie
+### L'inventaire du joueur
 
-Pour commencer une partie, c'est le joueur le plus jeune qui débute. Le premier joueur lance les 8 dés. Il doit choisir parmi les dés le symbole qui lui convient et mettre de côté tous les dés ayant le même symbole. À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il n'a pas choisi auparavant. :warning: Le joueur doit impérativement mettre de côté au moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile correspondant à la valeur totale de tous ses dés.
+- Stockage des pickominos gagnés sous forme de pile
+- Échange des pickominos perdus
+
+### Le plateau de jeu
+
+- Brochette de tous les pickominos
+- 8 dés de 6 faces
+
+### Déroulement d'une partie
+
+Pour commencer une partie, c'est le joueur le plus jeune qui débute.
+
+Le premier joueur lance les 8 dés. Il doit choisir parmi les dés le symbole qui lui convient et mettre de côté tous les dés ayant le même symbole.
+
+À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il n'a pas choisi auparavant. :warning: Le joueur doit impérativement mettre de côté au moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile correspondant à la valeur totale de tous ses dés.
 
 - Face 1 = 1 point
 - Face 2 = 2 points
@@ -44,10 +57,11 @@ Pour commencer une partie, c'est le joueur le plus jeune qui débute. Le premier
 - Face 5 = 5 points
 - Face « ver » = 5 points
 
-Si, à l'issue des lancers, le joueur ne peut pas prendre de tuile ou n'a pas obtenu de « ver », il doit remettre sa dernière tuile obtenue dans la brochette sur le plateau de jeu, et la tuile de plus haute valeur est retournée (retirée du jeu).  
+Si, à l'issue des lancers, le joueur ne peut pas prendre de tuile ou n'a pas obtenu de « ver », il doit remettre sa dernière tuile obtenue dans la brochette sur le plateau de jeu, et la tuile de plus haute valeur est retournée (retirée du jeu).
+
 La partie se termine quand toutes les tuiles ont été prises. Chaque joueur compte le nombre de vers présents sur l'ensemble de ses tuiles. Le joueur ayant le plus de vers remporte la partie.
 
-### Utilisation
+## Utilisation
 
 ```bash
 $ make
@@ -61,29 +75,29 @@ $ ./pickomino.out
 
 ## Itérations
 
-#### Itération 1:
+### Itération 1 :
 
 - Créer le squelette des fichiers
-- Lancer une partie:
+- Lancer une partie :
   - Saisir le nombre de joueurs
   - Saisir le nom du joueur
-  - Lancer les dés et récupérer les tuiles
-- Terminer une partie:
+- Jouer une partie :
+  - Lancer les dés 
+  - Récupérer les tuiles
+  - Récupérer un pickomino dans l'inventaire d'un joueur adverse (becquetage)
+- Terminer une partie :
   - Afficher le gagnant
 
-#### Itération 2:
+### Itération 2 :
 
 - Jouer une partie contre la machine
 - Jouer une ou plusieurs parties
-- Récupérer un pickominos dans l'inventaire d'un joueur adverse (becquetage)
 - Visualiser l'historique des parties
 
-#### Itération 3:
+### Itération 3 :
 
 - Visualiser l'historique des scores
 - Jouer une partie en réseau
-
----
 
 ## Changelog
 
@@ -93,9 +107,9 @@ $ ./pickomino.out
 
 ## Équipe de développement
 
-MILLOT Pierre : [**[pierre(dot)millot(dot)pro(at)gmail(dot)com](mailto:pierre.millot.pro@gmail.com)**]
+- MILLOT Pierre : [**[pierre(dot)millot(dot)pro(at)gmail(dot)com](mailto:pierre.millot.pro@gmail.com)**]
 
-NAVARRO Mattéo : [**[matteo(dot)navarro(dot)pro(at)gmail(dot)com](mailto:matteo.navarro.pro@gmail.com)**]
+- NAVARRO Mattéo : [**[matteo(dot)navarro(dot)pro(at)gmail(dot)com](mailto:matteo.navarro.pro@gmail.com)**]
 
 ---
 &copy; 2024-2025 LaSalle Avignon

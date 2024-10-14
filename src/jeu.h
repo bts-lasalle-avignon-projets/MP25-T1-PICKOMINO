@@ -5,7 +5,8 @@
 
 #define AFFICHER_REGLES 1
 #define JOUER           2
-#define QUITTER         3
+#define HISTORIQUE      3
+#define QUITTER         4
 
 void jouerPickomino();
 void initialiserPartie(Jeu& jeu);

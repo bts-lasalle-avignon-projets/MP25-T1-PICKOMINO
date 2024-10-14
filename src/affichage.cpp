@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <fstream>
+#include <string>
 
 int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
 {
@@ -260,7 +262,8 @@ void afficherAccueil()
     std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |    " << std::endl;
     std::cout << " |_|   |_|\\___|_|\\_\\___/|_| |_| |_|_|_| |_|\\___/ " << std::endl;
     std::cout << std::endl;
-    std::cout << "  MILLOT Pierre                            "<< BLEU << "v" << VERSION << COULEUR_DEFAUT << std::endl;
+    std::cout << "  MILLOT Pierre                            " << BLEU << "v" << VERSION
+              << COULEUR_DEFAUT << std::endl;
     std::cout << "  NAVARRO Mattéo" << std::endl;
     afficherSeparation();
     std::cout << std::endl << std::endl;
@@ -272,9 +275,14 @@ int afficherMenu()
 
     std::cout << "<----------------------> MENU <---------------------->" << std::endl;
     std::cout << std::endl;
-    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT << std::endl;
-    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT << std::endl;
-    std::cout << ROUGE << "                    3 - Quitter le jeu                " << COULEUR_DEFAUT << std::endl;
+    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << JAUNE << "                    3 - Historique des parties        " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << ROUGE << "                    4 - Quitter le jeu                " << COULEUR_DEFAUT
+              << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
     std::cout << "Choisir une option : ";
@@ -339,4 +347,22 @@ void afficherSaisieInvalide()
 void afficherSeparation()
 {
     std::cout << "=============================================================" << std::endl;
+}
+
+void afficherHistorique()
+{
+    std::ifstream fichier("src/historique.txt");
+
+    if(!fichier.is_open())
+    {
+        std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
+    }
+
+    std::string ligne;
+    while(std::getline(fichier, ligne))
+    {
+        std::cout << ligne << std::endl;
+    }
+
+    fichier.close();
 }

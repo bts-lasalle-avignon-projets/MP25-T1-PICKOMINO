@@ -23,5 +23,6 @@ int  afficherMenu();
 void afficherRegles();
 void afficherSaisieInvalide();
 void afficherSeparation();
+void afficherHistorique();
 
 #endif

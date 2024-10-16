@@ -4,7 +4,7 @@
 
 int main()
 {
-    //jouerPickomino();
+    jouerPickomino();
 
     return 0;
 }

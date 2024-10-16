@@ -37,9 +37,19 @@ struct Pickomino
 
 struct Plateau
 {
-    Pickomino brochettePickominos[NB_PICKOMINOS];
-    int       sommeTotalDes;
+    int       numeroJoueur;
+    int       totalDes;
+    int       nbDes;    
     int       des[NB_DES];
+    int       desRetenus[NB_FACES];
+    Pickomino brochettePickominos[NB_PICKOMINOS];
+};
+
+struct Jeu
+{
+    int     nbJoueurs;
+    Joueur  joueurs[NB_JOUEURS_MAX];
+    Plateau plateau;
 };
 
 #endif

@@ -52,4 +52,7 @@ struct Jeu
     Plateau plateau;
 };
 
+void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
+void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
+
 #endif

@@ -23,7 +23,7 @@ void initialiserPartie()
 
     for (int i = 0; i < jeu.nbJoueurs; ++i) 
     {
-        afficherJoueur(jeu.joueurs[i].nom, jeu.joueurs[i].versTotal, jeu.joueurs[i].sommetPile);
+        afficherJoueur(jeu.joueurs[i].nom, jeu.joueurs[i].versTotal, jeu.joueurs[i].sommetPile, jeu.joueurs[i].pilePickomino);
     }
 
     initialiserBrochette(jeu.plateau.brochettePickominos);

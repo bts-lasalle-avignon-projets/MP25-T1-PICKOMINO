@@ -5,6 +5,7 @@ int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
 {
     int nombreJoueurs = 0;
     do {
+        std::cout << "\n" << std::endl;
         std::cout << "Combien de joueurs ? (maximum : " << nbJoueursMax << " ,minimum : " << nbJoueursMin << ")" << std::endl;
         std::cin >> nombreJoueurs;
         if (nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax) {
@@ -20,17 +21,23 @@ void saisirNomJoueur(std::string& nom) {
     std::cin >> nom;
 }
 
-void afficherJoueur(const std::string& nom, int versTotal, int sommetPile) 
+void afficherJoueur(const std::string& nom, int versTotal, int sommetPile, int pilePickomino[NB_PICKOMINOS]) 
 {
     std::cout << "\n" << std::endl;
     std::cout << "Nom du joueur : " << nom << std::endl;
     std::cout << "Vers total : " << versTotal << std::endl;
+    std::cout << "Pile de pickominos : ";
+    if (pilePickomino[0] == 0)
+    {
+        std::cout << "Vide" << std::endl;
+    }
     std::cout << "Pickominos tout en haut de la pile : " << sommetPile << std::endl;
 }
 
 void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
 {
     std::cout << "\n" << std::endl;
+    std::cout << "Brochette Pickominos :" << "\n" << std::endl;
     for (int i = 0; i < NB_PICKOMINOS; ++i)
         {
             std::cout << brochette[i].valeur << " | " << brochette[i].nombreVers << " | ";

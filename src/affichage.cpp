@@ -1,58 +1,83 @@
 #include "affichage.h"
 #include <iostream>
+#include <iomanip>
 
-int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin) 
+int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
 {
     int nombreJoueurs = 0;
-    do {
-        std::cout << "\n" << std::endl;
-        std::cout << "Combien de joueurs ? (maximum : " << nbJoueursMax << " ,minimum : " << nbJoueursMin << ")" << std::endl;
+    do
+    {
+        std::cout << "Entrez le nombre de joueurs (minimum : " << nbJoueursMin
+                  << " - maximum : " << nbJoueursMax << ") ? ";
         std::cin >> nombreJoueurs;
-        if (nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax) {
-            std::cout << "Nombre invalide, saisir un nombre de joueurs entre " << nbJoueursMin << " et " << nbJoueursMax << std::endl;
+        if(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax)
+        {
+            std::cout << "Saisie invalide !" << std::endl;
         }
-    } while (nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax);
-    
+    } while(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax);
+
     return nombreJoueurs;
 }
 
-void saisirNomJoueur(std::string& nom) {
+void saisirNomJoueur(std::string& nom)
+{
     std::cout << "Entrez le nom du joueur : ";
     std::cin >> nom;
 }
 
-void afficherJoueur(const std::string& nom, int versTotal, int sommetPile, int pilePickomino[NB_PICKOMINOS]) 
+void afficherJoueur(const Joueur& joueur)
 {
-    std::cout << "\n" << std::endl;
-    std::cout << "Nom du joueur : " << nom << std::endl;
-    std::cout << "Vers total : " << versTotal << std::endl;
-    std::cout << "Pile de pickominos : ";
-    if (pilePickomino[0] == 0)
+    std::cout << std::endl;
+    std::cout << "Nom du joueur : " << joueur.nom << std::endl;
+    std::cout << "Total vers : " << joueur.versTotal << std::endl;
+    std::cout << "Nombre de pickominos : ";
+    if(joueur.sommetPile == 0)
     {
-        std::cout << "Vide" << std::endl;
+        std::cout << "aucun" << std::endl;
     }
-    std::cout << "Pickominos tout en haut de la pile : " << sommetPile << std::endl;
+    else
+    {
+        std::cout << joueur.sommetPile << std::endl;
+        std::cout << "Pickomino tout en haut de la pile : "
+                  << joueur.pilePickomino[joueur.sommetPile - 1] << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
 {
-    std::cout << "\n" << std::endl;
-    std::cout << "Brochette Pickominos :" << "\n" << std::endl;
-    for (int i = 0; i < NB_PICKOMINOS; ++i)
+    std::cout << "Brochette Pickominos : " << std::endl;
+    std::cout << "|";
+    for(int i = 0; i < NB_PICKOMINOS; ++i)
+    {
+        if(brochette[i].etat == Etat::VISIBLE)
         {
-            std::cout << brochette[i].valeur << " | " << brochette[i].nombreVers << " | ";
-            if (brochette[i].etat == 0)
-            {
-                std::cout << "Visible" << std::endl;
-            }
-            else if (brochette[i].etat == 1)
-            {
-                std::cout << "Retourne" << std::endl;
-            }
-            else
-            {
-                std::cout << "Prise" << std::endl;
-            }
-        
+            std::cout << std::setfill(' ') << std::setw(4) << brochette[i].valeur;
         }
+        else if(brochette[i].etat == Etat::RETOURNE)
+        {
+            std::cout << "X  ";
+        }
+        else
+        {
+        }
+    }
+    std::cout << "  |" << std::endl;
+    std::cout << "|";
+    for(int i = 0; i < NB_PICKOMINOS; ++i)
+    {
+        if(brochette[i].etat == Etat::VISIBLE)
+        {
+            std::cout << std::setfill(' ') << std::setw(4) << brochette[i].nombreVers;
+        }
+        else if(brochette[i].etat == Etat::RETOURNE)
+        {
+            std::cout << "    ";
+        }
+        else
+        {
+        }
+    }
+    std::cout << "  |" << std::endl;
+    std::cout << std::endl;
 }

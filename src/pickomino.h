@@ -12,6 +12,7 @@
 #define NB_PICKOMINOS         16
 #define VALEUR_PICKOMINOS_MIN 21
 #define VALEUR_PICKOMINOS_MAX 36
+#define NB_VERS_MAX           4
 
 struct Joueur
 {
@@ -23,9 +24,8 @@ struct Joueur
 
 enum Etat
 {
-    VISIBLE,
-    RETOURNE,
-    PRISE
+    RETOURNE = -1,
+    VISIBLE
 };
 
 struct Pickomino
@@ -39,7 +39,7 @@ struct Plateau
 {
     int       numeroJoueur;
     int       totalDes;
-    int       nbDes;    
+    int       nbDes;
     int       des[NB_DES];
     int       desRetenus[NB_FACES];
     Pickomino brochettePickominos[NB_PICKOMINOS];

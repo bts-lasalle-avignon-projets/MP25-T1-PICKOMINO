@@ -8,6 +8,7 @@
 
 #define NB_DES   8
 #define NB_FACES 6
+#define FACE_VER 6
 
 #define NB_PICKOMINOS         16
 #define VALEUR_PICKOMINOS_MIN 21
@@ -54,5 +55,7 @@ struct Jeu
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
+void reinitialiserPlateau(Plateau& plateau);
+void lancerDes(int nbDes, int des[NB_DES]);
 
 #endif

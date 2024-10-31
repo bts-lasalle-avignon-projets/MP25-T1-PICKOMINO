@@ -5,5 +5,6 @@
 
 void jouerPickomino();
 void initialiserPartie(Jeu& jeu);
+bool jouerTour(Jeu& jeu);
 
 #endif

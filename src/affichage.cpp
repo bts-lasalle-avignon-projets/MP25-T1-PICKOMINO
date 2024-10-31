@@ -92,7 +92,7 @@ void afficherDes(int nbDes, const int des[NB_DES])
     std::cout << "Dés lancés : ";
     for(int i = 0; i < nbDes; ++i)
     {
-        if(des[i] == 6)
+        if(des[i] == FACE_VER)
         {
             std::cout << "[V] ";
         }

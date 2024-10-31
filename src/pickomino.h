@@ -8,6 +8,7 @@
 
 #define NB_DES   8
 #define NB_FACES 6
+#define FACE_VER 6
 
 #define NB_PICKOMINOS         16
 #define VALEUR_PICKOMINOS_MIN 21

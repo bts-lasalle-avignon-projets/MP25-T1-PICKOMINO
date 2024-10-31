@@ -9,6 +9,9 @@ void jouerPickomino()
     Jeu jeu;
 
     initialiserPartie(jeu);
+    jeu.plateau.numeroJoueur = 0;
+    afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
+    jouerTour(jeu);
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -30,4 +33,14 @@ void initialiserPartie(Jeu& jeu)
 
     initialiserBrochette(jeu.plateau.brochettePickominos);
     afficherBrochettePickominos(jeu.plateau.brochettePickominos);
+}
+
+bool jouerTour(Jeu& jeu)
+{
+    reinitialiserNombreDeEtDeRetenus(jeu.plateau.desRetenus, jeu.plateau.nbDes);
+
+    lancerDes(jeu.plateau.nbDes, jeu.plateau.des);
+    afficherDes(jeu.plateau.nbDes, jeu.plateau.des);
+    
+    return true;
 }

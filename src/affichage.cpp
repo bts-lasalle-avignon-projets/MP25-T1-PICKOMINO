@@ -81,3 +81,25 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
     std::cout << "  |" << std::endl;
     std::cout << std::endl;
 }
+
+void afficherJoueurTour(const Joueur& joueur)
+{
+    std::cout << "Au tour du joueur : " 
+              << joueur.nom << std::endl;
+}
+
+void afficherDes(int nbDes, const int des[NB_DES]) 
+{
+    std::cout << "Dés lancés : ";
+    for (int i = 0; i < nbDes; ++i) 
+    {
+        if (des[i] == 6) 
+        {
+            std::cout << "[V] ";
+        } else 
+        {
+            std::cout << "[ " << des[i] << " ] ";
+        }
+    }
+    std::cout << std::endl;
+}

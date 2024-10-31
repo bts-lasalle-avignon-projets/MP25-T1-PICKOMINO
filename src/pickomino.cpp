@@ -22,19 +22,20 @@ void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS])
     }
 }
 
-void reinitialiserNombreDeEtDeRetenus(int desRetenus[NB_FACES], int &nbDes)
+void reinitialiserPlateau(Plateau& plateau)
 {
-    nbDes = NB_DES;
-    for (int i = 0; i < NB_FACES; ++i) 
+    plateau.nbDes = NB_DES;
+    for(int i = 0; i < NB_FACES; ++i)
     {
-        desRetenus[i] = 0;
+        plateau.desRetenus[i] = 0;
     }
+    plateau.totalDes = 0;
 }
 
-void lancerDes(int nbDes, int des[NB_DES]) 
+void lancerDes(int nbDes, int des[NB_DES])
 {
-    for (int i = 0; i < nbDes; ++i) 
+    for(int i = 0; i < nbDes; ++i)
     {
-        des[i] = rand() % 6 + 1;
+        des[i] = rand() % NB_FACES + 1;
     }
 }

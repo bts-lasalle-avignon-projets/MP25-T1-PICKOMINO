@@ -9,8 +9,7 @@ void jouerPickomino()
     Jeu jeu;
 
     initialiserPartie(jeu);
-    jeu.plateau.numeroJoueur = 0;
-    afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
+
     jouerTour(jeu);
 }
 
@@ -18,7 +17,8 @@ void initialiserPartie(Jeu& jeu)
 {
     srand(time(NULL));
 
-    jeu.nbJoueurs = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
+    jeu.nbJoueurs            = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
+    jeu.plateau.numeroJoueur = 0;
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
@@ -37,10 +37,12 @@ void initialiserPartie(Jeu& jeu)
 
 bool jouerTour(Jeu& jeu)
 {
-    reinitialiserNombreDeEtDeRetenus(jeu.plateau.desRetenus, jeu.plateau.nbDes);
+    afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
+
+    reinitialiserPlateau(jeu.plateau);
 
     lancerDes(jeu.plateau.nbDes, jeu.plateau.des);
     afficherDes(jeu.plateau.nbDes, jeu.plateau.des);
-    
+
     return true;
 }

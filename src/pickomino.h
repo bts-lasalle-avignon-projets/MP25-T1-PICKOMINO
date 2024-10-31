@@ -54,7 +54,7 @@ struct Jeu
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
-void reinitialiserNombreDeEtDeRetenus(int desRetenus[NB_FACES], int &nbDes);
+void reinitialiserPlateau(Plateau& plateau);
 void lancerDes(int nbDes, int des[NB_DES]);
 
 #endif

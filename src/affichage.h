@@ -10,5 +10,11 @@ void afficherJoueur(const Joueur& joueur);
 void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS]);
 void afficherJoueurTour(const Joueur& joueur);
 void afficherDes(int nbDes, const int des[NB_DES]);
+void afficherChoixImpossible();
+int choisirDesRetenus();
+void afficherVerifierDeDejaPris();
+void afficherDesRetenus(const int desRetenus[NB_FACES]);
+void afficherCalculTotalDesRetenus(int totalDes);
+bool choixFinTour();
 
 #endif

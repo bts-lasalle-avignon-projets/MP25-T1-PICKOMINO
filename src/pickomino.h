@@ -57,5 +57,10 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
 void reinitialiserPlateau(Plateau& plateau);
 void lancerDes(int nbDes, int des[NB_DES]);
+bool verifierChoixImpossible(int desRetenus[NB_FACES], int des[NB_DES], int &nbDes);
+void stockerDesRetenus(int valeurDeChoisi, int desRetenus[NB_FACES], int des[NB_DES], int &nbDes);
+bool verifierDeDejaPris(int valeurDeChoisi, int desRetenus[NB_FACES], int nbDes, int des[NB_DES]);
+int calculerTotalDesRetenus(int totalDes, int desRetenus[NB_FACES]);
+bool verifierPresenceVer(int desRetenus[NB_FACES]);
 
 #endif

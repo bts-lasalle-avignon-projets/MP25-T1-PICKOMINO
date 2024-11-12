@@ -37,6 +37,7 @@ void afficherJoueur(const Joueur& joueur)
     }
     else
     {
+        // @todo afficher la pile de pickominos
         std::cout << joueur.sommetPile << std::endl;
         std::cout << "Pickomino tout en haut de la pile : "
                   << joueur.pilePickomino[joueur.sommetPile - 1] << std::endl;
@@ -94,7 +95,7 @@ void afficherDes(int nbDes, const int des[NB_DES])
     {
         if(des[i] == FACE_VER)
         {
-            std::cout << "[V] ";
+            std::cout << "[ V ] ";
         }
         else
         {
@@ -102,4 +103,106 @@ void afficherDes(int nbDes, const int des[NB_DES])
         }
     }
     std::cout << std::endl;
+}
+
+void afficherChoixImpossible()
+{
+    std::cout << "Les faces possibles ont déjà été retenues ou plus aucun dé n'est disponible."
+              << std::endl;
+}
+
+int choisirDesRetenus()
+{
+    std::string valeurDeChoisi;
+    int         valeur = 0;
+
+    do
+    {
+        std::cout << "Choisir la valeur à retenir : ";
+        std::cin >> valeurDeChoisi;
+        std::cout << std::endl;
+
+        if(valeurDeChoisi == "V" || valeurDeChoisi == "v")
+        {
+            valeur = FACE_VER;
+        }
+        else if(valeurDeChoisi >= "1" && valeurDeChoisi <= "5")
+        {
+            valeur = std::stoi(valeurDeChoisi);
+        }
+        else
+        {
+            std::cout << "Valeur invalide ! choisir une valeur de 1 à 5 ou 'V'" << std::endl;
+        }
+    } while(valeur < 1 || valeur > FACE_VER);
+
+    return valeur;
+}
+
+void afficherVerifierDeDejaPris()
+{
+    std::cout << "Ce dé est déjà retenu ou il n'est pas existant parmis les dés lancés."
+              << std::endl
+              << "Veuillez choisir une autre valeur." << std::endl;
+}
+
+void afficherDesRetenus(const int desRetenus[NB_FACES])
+{
+    std::cout << "Dés retenus :" << std::endl;
+    std::cout << "|";
+    for(int i = 0; i < NB_FACES; ++i)
+    {
+        if(i == FACE_VER - 1)
+        {
+            std::cout << std::setfill(' ') << std::setw(4) << "V";
+        }
+        else
+        {
+            std::cout << std::setfill(' ') << std::setw(4) << i + 1;
+        }
+    }
+    std::cout << "  |" << std::endl;
+    std::cout << "|";
+    for(int i = 0; i < NB_FACES; ++i)
+    {
+        std::cout << std::setfill(' ') << std::setw(4) << desRetenus[i];
+    }
+    std::cout << "  |" << std::endl;
+    std::cout << std::endl;
+}
+
+void afficherCalculTotalDesRetenus(int totalDes)
+{
+    std::cout << "Total : " << totalDes << std::endl << std::endl;
+}
+
+bool choisirFinTour()
+{
+    char choix;
+    bool valide  = false;
+    bool finTour = false;
+
+    do
+    {
+        std::cout << "Voulez-vous terminer votre tour ? (oO/nN) ";
+        std::cin >> choix;
+        std::cout << std::endl;
+        if(choix == 'o' || choix == 'O')
+        {
+            finTour = true;
+            valide  = true;
+        }
+        else if(choix == 'n' || choix == 'N')
+        {
+            finTour = false;
+            valide  = true;
+        }
+        else
+        {
+            std::cout << "Choix invalide !" << std::endl;
+            valide = false;
+        }
+    } while(!valide);
+
+    return finTour;
 }

@@ -40,17 +40,17 @@ void lancerDes(int nbDes, int des[NB_DES])
     }
 }
 
-bool verifierChoixImpossible(int desRetenus[NB_FACES], int des[NB_DES], int &nbDes) 
+bool verifierChoixImpossible(const Plateau& plateau)
 {
-    for(int i = 0; i < nbDes; ++i) 
+    for(int i = 0; i < plateau.nbDes; ++i)
     {
-        int faceActuelle = des[i] - 1;
+        int faceActuelle = plateau.des[i] - 1;
 
-        if(faceActuelle >= 0 && faceActuelle < NB_FACES && desRetenus[faceActuelle] == 0) 
+        if(faceActuelle >= 0 && faceActuelle < NB_FACES && plateau.desRetenus[faceActuelle] == 0)
         {
             return false;
         }
-        else if(nbDes == 0)
+        else if(plateau.nbDes == 0)
         {
             return true;
         }
@@ -58,41 +58,42 @@ bool verifierChoixImpossible(int desRetenus[NB_FACES], int des[NB_DES], int &nbD
         {
         }
     }
-    
+
     return true;
 }
 
-void stockerDesRetenus(int valeurDeChoisi, int desRetenus[NB_FACES], int des[NB_DES], int &nbDes)
+void stockerDesRetenus(int valeurDeChoisi, Plateau& plateau)
 {
     int nbDesRetire = 0;
 
-    for(int i = 0; i < nbDes; i++) 
+    for(int i = 0; i < plateau.nbDes; i++)
     {
-        if(des[i] == valeurDeChoisi) 
+        if(plateau.des[i] == valeurDeChoisi)
         {
-            desRetenus[valeurDeChoisi - 1]++;
+            plateau.desRetenus[valeurDeChoisi - 1]++;
             nbDesRetire++;
         }
     }
 
-    nbDes = nbDes - nbDesRetire;
+    plateau.nbDes = plateau.nbDes - nbDesRetire;
 }
 
-bool verifierDeDejaPris(int valeurDeChoisi, int desRetenus[NB_FACES], int nbDes, int des[NB_DES])
+bool verifierDeDejaPris(int valeurDeChoisi, const Plateau& plateau)
 {
-    if(desRetenus[valeurDeChoisi - 1] > 0 && (valeurDeChoisi - 1) >= 0 && (valeurDeChoisi - 1) < NB_FACES)
+    if(plateau.desRetenus[valeurDeChoisi - 1] > 0 && (valeurDeChoisi - 1) >= 0 &&
+       (valeurDeChoisi - 1) < NB_FACES)
     {
         return true;
     }
-    
-    for(int i = 0; i < nbDes; ++i)
+
+    for(int i = 0; i < plateau.nbDes; ++i)
     {
-        if(valeurDeChoisi == des[i])
+        if(valeurDeChoisi == plateau.des[i])
         {
             return false;
         }
     }
-    
+
     return true;
 }
 

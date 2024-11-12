@@ -37,6 +37,7 @@ void afficherJoueur(const Joueur& joueur)
     }
     else
     {
+        // @todo afficher la pile de pickominos
         std::cout << joueur.sommetPile << std::endl;
         std::cout << "Pickomino tout en haut de la pile : "
                   << joueur.pilePickomino[joueur.sommetPile - 1] << std::endl;
@@ -94,7 +95,7 @@ void afficherDes(int nbDes, const int des[NB_DES])
     {
         if(des[i] == FACE_VER)
         {
-            std::cout << "[V] ";
+            std::cout << "[ V ] ";
         }
         else
         {
@@ -106,32 +107,34 @@ void afficherDes(int nbDes, const int des[NB_DES])
 
 void afficherChoixImpossible()
 {
-    std::cout << "Les faces possibles ont déjà été retenues ou plus aucun dés n'est disponible." 
+    std::cout << "Les faces possibles ont déjà été retenues ou plus aucun dé n'est disponible."
               << std::endl;
 }
 
 int choisirDesRetenus()
 {
     std::string valeurDeChoisi;
-    int valeur = 0;
+    int         valeur = 0;
 
-    std::cout << "Choisir la valeur des dés retenus : ";
-    std::cin >> valeurDeChoisi;
-    std::cout << std::endl;
+    do
+    {
+        std::cout << "Choisir la valeur à retenir : ";
+        std::cin >> valeurDeChoisi;
+        std::cout << std::endl;
 
-    if(valeurDeChoisi == "V" || valeurDeChoisi == "v") 
-    {
-        valeur = FACE_VER;
-    }
-    else if(valeurDeChoisi >= "1" && valeurDeChoisi <= "5")
-    {
-        valeur = std::stoi(valeurDeChoisi);
-    }
-    else
-    {
-        std::cout << "Valeur invalide, choisissez un chiffre de 1 à 5 ou 'V'" << std::endl;
-        return choisirDesRetenus(); 
-    }
+        if(valeurDeChoisi == "V" || valeurDeChoisi == "v")
+        {
+            valeur = FACE_VER;
+        }
+        else if(valeurDeChoisi >= "1" && valeurDeChoisi <= "5")
+        {
+            valeur = std::stoi(valeurDeChoisi);
+        }
+        else
+        {
+            std::cout << "Valeur invalide ! choisir une valeur de 1 à 5 ou 'V'" << std::endl;
+        }
+    } while(valeur < 1 || valeur > FACE_VER);
 
     return valeur;
 }
@@ -139,7 +142,8 @@ int choisirDesRetenus()
 void afficherVerifierDeDejaPris()
 {
     std::cout << "Ce dé est déjà retenu ou il n'est pas existant parmis les dés lancés."
-              << std::endl << "Veuillez choisir une autre valeur." << std::endl;
+              << std::endl
+              << "Veuillez choisir une autre valeur." << std::endl;
 }
 
 void afficherDesRetenus(const int desRetenus[NB_FACES])
@@ -150,7 +154,7 @@ void afficherDesRetenus(const int desRetenus[NB_FACES])
     {
         if(i == FACE_VER - 1)
         {
-            std::cout << std::setfill(' ') << std::setw(4) << "v";
+            std::cout << std::setfill(' ') << std::setw(4) << "V";
         }
         else
         {
@@ -161,7 +165,7 @@ void afficherDesRetenus(const int desRetenus[NB_FACES])
     std::cout << "|";
     for(int i = 0; i < NB_FACES; ++i)
     {
-        std::cout << std::setfill(' ') << std::setw(4) << desRetenus[i];  
+        std::cout << std::setfill(' ') << std::setw(4) << desRetenus[i];
     }
     std::cout << "  |" << std::endl;
     std::cout << std::endl;
@@ -169,30 +173,36 @@ void afficherDesRetenus(const int desRetenus[NB_FACES])
 
 void afficherCalculTotalDesRetenus(int totalDes)
 {
-    std::cout << "Valeur totale de tous vos dés après ce lancer : "
-              << totalDes << std::endl << std::endl;
+    std::cout << "Total : " << totalDes << std::endl << std::endl;
 }
 
-bool choixFinTour()
+bool choisirFinTour()
 {
     char choix;
+    bool valide  = false;
+    bool finTour = false;
+
     do
     {
-        std::cout << "Voulez-vous terminer votre tour ? (o/n) " << std::endl;
+        std::cout << "Voulez-vous terminer votre tour ? (oO/nN) ";
         std::cin >> choix;
         std::cout << std::endl;
-        if(choix == 'o' || choix == 'O') 
+        if(choix == 'o' || choix == 'O')
         {
-            return true;
-        } 
-        else if(choix == 'n' || choix == 'N') 
-        {
-            return false;
-        } 
-        else 
-        {
-            std::cout << "Choix de fin de tour incorrect." << std::endl;
+            finTour = true;
+            valide  = true;
         }
-    } while(true);
-}
+        else if(choix == 'n' || choix == 'N')
+        {
+            finTour = false;
+            valide  = true;
+        }
+        else
+        {
+            std::cout << "Choix invalide !" << std::endl;
+            valide = false;
+        }
+    } while(!valide);
 
+    return finTour;
+}

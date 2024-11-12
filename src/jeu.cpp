@@ -37,62 +37,65 @@ void initialiserPartie(Jeu& jeu)
 
 bool jouerTour(Jeu& jeu)
 {
-    int valeurDeChoisi;
+    bool finTour = false;
+    int  valeurDeChoisi;
 
     afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
 
     reinitialiserPlateau(jeu.plateau);
 
-    while (jeu.plateau.nbDes > 0) 
+    do
     {
         lancerDes(jeu.plateau.nbDes, jeu.plateau.des);
         afficherDes(jeu.plateau.nbDes, jeu.plateau.des);
 
-        if(verifierChoixImpossible(jeu.plateau.desRetenus, jeu.plateau.des, jeu.plateau.nbDes)) 
+        if(verifierChoixImpossible(jeu.plateau))
         {
             afficherChoixImpossible();
-            return true;
-        }
-
-        verifierDisponibiliteDe(jeu, valeurDeChoisi);
-        gererDesRetenus(jeu, valeurDeChoisi);
-        
-        bool finTour = choixFinTour();
-        if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
-        {
-            //Choisir une tuile dans la brochette ou le joueur
-            break;
-        }
-        else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))
-        {
-            //Remettre la dernière tuile de la pile dans la brochette 
-            //et retourner la tuile la plus haute de la brochette de pichominos
-            break;
+            finTour = true;
         }
         else
-        {  
+        {
+            verifierDisponibiliteDe(jeu, valeurDeChoisi);
+            gererDesRetenus(jeu, valeurDeChoisi);
+
+            finTour = choisirFinTour();
+            if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
+            {
+                // @todo Choisir une tuile dans la brochette ou le joueur
+                break;
+            }
+            else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))
+            {
+                // @todo Remettre la dernière tuile de la pile dans la brochette
+                // et retourner la tuile la plus haute de la brochette de pichominos
+                break;
+            }
+            else
+            {
+            }
         }
-    }
+    } while(!finTour);
 
     return true;
 }
 
 void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
 {
-    do 
+    do
     {
         valeurDeChoisi = choisirDesRetenus();
-        if(verifierDeDejaPris(valeurDeChoisi, jeu.plateau.desRetenus, jeu.plateau.nbDes, jeu.plateau.des)) 
+        if(verifierDeDejaPris(valeurDeChoisi, jeu.plateau))
         {
             afficherVerifierDeDejaPris();
         }
-    } while(verifierDeDejaPris(valeurDeChoisi, jeu.plateau.desRetenus, jeu.plateau.nbDes, jeu.plateau.des));
+    } while(verifierDeDejaPris(valeurDeChoisi, jeu.plateau));
 }
 
 void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
 {
-    stockerDesRetenus(valeurDeChoisi, jeu.plateau.desRetenus, jeu.plateau.des, jeu.plateau.nbDes);
+    stockerDesRetenus(valeurDeChoisi, jeu.plateau);
     afficherDesRetenus(jeu.plateau.desRetenus);
-    afficherCalculTotalDesRetenus(calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+    afficherCalculTotalDesRetenus(
+      calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
 }
-

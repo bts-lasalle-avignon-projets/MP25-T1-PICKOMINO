@@ -10,7 +10,15 @@ void jouerPickomino()
 
     initialiserPartie(jeu);
 
-    jouerTour(jeu);
+    do
+    {
+        for (int i = 0; i < jeu.nbJoueurs; i++)
+        {
+            bool finDeTour = jouerTour(jeu);
+        }
+        
+    } while (true);
+    
 }
 
 void initialiserPartie(Jeu& jeu)

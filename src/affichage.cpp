@@ -37,10 +37,15 @@ void afficherJoueur(const Joueur& joueur)
     }
     else
     {
-        // @todo afficher la pile de pickominos
         std::cout << joueur.sommetPile << std::endl;
+        std::cout << "Pile pickomino de : " << joueur.nom << std::endl;
+        for(int i = joueur.sommetPile; i > 0; --i)
+        {
+            std::cout << joueur.pilePickomino[i] << std::endl;
+        }
+        std::cout << std::endl;
         std::cout << "Pickomino tout en haut de la pile : "
-                  << joueur.pilePickomino[joueur.sommetPile - 1] << std::endl;
+                  << joueur.pilePickomino[joueur.sommetPile] << std::endl;
     }
     std::cout << std::endl;
 }
@@ -205,4 +210,14 @@ bool choisirFinTour()
     } while(!valide);
 
     return finTour;
+}
+
+int  choisirPickomino()
+{
+    int valeurPickominoChoisi;
+
+    std::cout << "Choisir une tuile pickomino : ";
+    std::cin >> valeurPickominoChoisi;
+    std::cout << std::endl;
+    return valeurPickominoChoisi;
 }

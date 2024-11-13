@@ -9,6 +9,10 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
     {
         joueurs[i].versTotal  = 0;
         joueurs[i].sommetPile = 0;
+        for(int j = 0; j < NB_PICKOMINOS; ++j)
+        {
+            joueurs[i].pilePickomino[j] = 0;
+        }
     }
 }
 
@@ -124,4 +128,43 @@ bool verifierPresenceVer(int desRetenus[NB_FACES])
     }
 
     return false;
+}
+
+void volerPickominoPile(int choisirPickomino, Joueur (&joueurs)[NB_JOUEURS_MAX], int numeroJoueur, Pickomino(&brochette)[NB_PICKOMINOS], int nbJoueurs)
+{
+    for(int i = 0; i < nbJoueurs; ++i)
+    {
+        if(choisirPickomino == joueurs[i].sommetPile)
+        {
+            joueurs[numeroJoueur].sommetPile++;
+            joueurs[numeroJoueur].pilePickomino[joueurs[numeroJoueur].sommetPile] = choisirPickomino;
+
+            choisirPickomino = joueurs[i].pilePickomino[joueurs[i].sommetPile];
+            joueurs[i].sommetPile--;
+        }
+    }
+
+    if(brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].valeur == choisirPickomino && brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
+    {
+        joueurs[numeroJoueur].sommetPile++;
+        joueurs[numeroJoueur].pilePickomino[joueurs[numeroJoueur].sommetPile] = choisirPickomino;
+
+        brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].etat = RETOURNE;
+    }
+    else if(brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].valeur == choisirPickomino && brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].etat == RETOURNE)
+    {
+        for(int i = choisirPickomino - VALEUR_PICKOMINOS_MIN; i > 0; --i)
+        {
+            if(brochette[i - 1].etat == VISIBLE)
+            {
+                joueurs[numeroJoueur].sommetPile++;
+                joueurs[numeroJoueur].pilePickomino[joueurs[numeroJoueur].sommetPile] = brochette[i - 1].valeur;
+
+                brochette[i - 1].etat = RETOURNE;
+            }
+        }
+    }
+    else
+    {
+    }
 }

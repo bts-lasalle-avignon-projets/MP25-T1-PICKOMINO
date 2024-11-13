@@ -62,7 +62,14 @@ bool jouerTour(Jeu& jeu)
             finTour = choisirFinTour();
             if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
             {
-                // @todo Choisir une tuile dans la brochette ou le joueur
+                int pickominoChoisi = choisirPickomino();
+                volerPickominoPile(pickominoChoisi, jeu.joueurs, jeu.plateau.numeroJoueur, jeu.plateau.brochettePickominos, jeu.nbJoueurs);
+                afficherBrochettePickominos(jeu.plateau.brochettePickominos);
+                for(int i = 0; i < jeu.nbJoueurs; ++i)
+                {
+                    afficherJoueur(jeu.joueurs[i]);
+                }
+                // @todo Choisir une tuile dans la brochette ou le joue
                 break;
             }
             else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))

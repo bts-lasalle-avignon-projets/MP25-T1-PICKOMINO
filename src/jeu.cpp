@@ -12,10 +12,8 @@ void jouerPickomino()
 
     do
     {
-        for (int i = 0; i < jeu.nbJoueurs; i++)
-        {
-            bool finDeTour = jouerTour(jeu);
-        }
+        bool finDeTour           = jouerTour(jeu);
+        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
         
     } while (true);
     

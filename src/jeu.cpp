@@ -60,31 +60,37 @@ bool jouerTour(Jeu& jeu)
             gererDesRetenus(jeu, valeurDeChoisi);
 
             finTour = choisirFinTour();
-            if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
+
+            if (finTour)
             {
-                int pickominoChoisi = choisirPickomino();
-                volerPickominoPile(pickominoChoisi, jeu.joueurs, jeu.plateau.numeroJoueur, jeu.plateau.brochettePickominos, jeu.nbJoueurs);
-                afficherBrochettePickominos(jeu.plateau.brochettePickominos);
-                for(int i = 0; i < jeu.nbJoueurs; ++i)
-                {
-                    afficherJoueur(jeu.joueurs[i]);
-                }
-                // @todo Choisir une tuile dans la brochette ou le joue
+                gererFinTour(jeu);
                 break;
-            }
-            else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))
-            {
-                // @todo Remettre la dernière tuile de la pile dans la brochette
-                // et retourner la tuile la plus haute de la brochette de pichominos
-                break;
-            }
-            else
-            {
             }
         }
     } while(!finTour);
 
     return true;
+}
+
+void gererFinTour(Jeu& jeu)
+{
+    if (verifierPresenceVer(jeu.plateau.desRetenus) && verifierValeurTotalDesTropPetit(jeu.plateau))
+    {
+        volerPickominoJoueur(jeu, jeu.plateau);
+        PrendrePickominoBrochette(jeu, jeu.plateau, jeu.plateau.brochettePickominos);
+    }
+    else
+    {
+        remettreTuileDansBrochette(jeu, jeu.plateau, jeu.plateau.brochettePickominos);
+    }
+
+    afficherBrochettePickominos(jeu.plateau.brochettePickominos);
+
+    for (int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        afficherJoueur(jeu.joueurs[i]);
+    }
+
 }
 
 void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
@@ -104,5 +110,5 @@ void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
     stockerDesRetenus(valeurDeChoisi, jeu.plateau);
     afficherDesRetenus(jeu.plateau.desRetenus);
     afficherCalculTotalDesRetenus(
-      calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+    calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
 }

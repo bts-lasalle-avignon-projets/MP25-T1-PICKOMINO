@@ -62,6 +62,9 @@ void stockerDesRetenus(int valeurDeChoisi, Plateau& plateau);
 bool verifierDeDejaPris(int valeurDeChoisi, const Plateau& plateau);
 int  calculerTotalDesRetenus(int totalDes, int desRetenus[NB_FACES]);
 bool verifierPresenceVer(int desRetenus[NB_FACES]);
-void volerPickominoPile(int choisirPickomino, Joueur (&joueurs)[NB_JOUEURS_MAX], int numeroJoueur, Pickomino(&brochette)[NB_PICKOMINOS], int nbJoueurs);
+void PrendrePickominoBrochette(Jeu& jeu, Plateau& plateau, Pickomino(&brochette)[NB_PICKOMINOS]);
+void volerPickominoJoueur(Jeu& jeu, Plateau& plateau);
+void remettreTuileDansBrochette(Jeu& jeu, Plateau& plateau, Pickomino(&brochette)[NB_PICKOMINOS]);
+bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 
 #endif

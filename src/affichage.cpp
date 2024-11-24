@@ -62,7 +62,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
         }
         else if(brochette[i].etat == Etat::RETOURNE)
         {
-            std::cout << "X  ";
+            std::cout << "  X";
         }
         else
         {
@@ -78,7 +78,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
         }
         else if(brochette[i].etat == Etat::RETOURNE)
         {
-            std::cout << "    ";
+            std::cout << "   ";
         }
         else
         {

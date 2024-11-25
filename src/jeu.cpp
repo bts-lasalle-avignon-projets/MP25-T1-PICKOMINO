@@ -70,17 +70,27 @@ bool jouerTour(Jeu& jeu)
             gererDesRetenus(jeu, valeurDeChoisi);
 
             finTour = choisirFinTour();
+<<<<<<< HEAD
         }
 
         if(finTour)
         {
             gererFinTour(jeu, tourPerdu);
+=======
+
+            if (finTour)
+            {
+                gererFinTour(jeu);
+                break;
+            }
+>>>>>>> 7f6c6ce4ed9c278a9637db6e0629d9a415a1d3e1
         }
     } while(!finTour);
 
     return true;
 }
 
+<<<<<<< HEAD
 void gererFinTour(Jeu& jeu, bool tourPerdu)
 {
     if(verifierPresenceVer(jeu.plateau.desRetenus) &&
@@ -95,14 +105,34 @@ void gererFinTour(Jeu& jeu, bool tourPerdu)
     else
     {
         remettreTuileDansBrochette(jeu.joueurs, jeu.plateau, jeu.plateau.brochettePickominos);
+=======
+void gererFinTour(Jeu& jeu)
+{
+    if (verifierPresenceVer(jeu.plateau.desRetenus) && verifierValeurTotalDesTropPetit(jeu.plateau))
+    {
+        volerPickominoJoueur(jeu, jeu.plateau);
+        PrendrePickominoBrochette(jeu, jeu.plateau, jeu.plateau.brochettePickominos);
+    }
+    else
+    {
+        remettreTuileDansBrochette(jeu, jeu.plateau, jeu.plateau.brochettePickominos);
+>>>>>>> 7f6c6ce4ed9c278a9637db6e0629d9a415a1d3e1
     }
 
     afficherBrochettePickominos(jeu.plateau.brochettePickominos);
 
+<<<<<<< HEAD
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
         afficherJoueur(jeu.joueurs[i]);
     }
+=======
+    for (int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        afficherJoueur(jeu.joueurs[i]);
+    }
+
+>>>>>>> 7f6c6ce4ed9c278a9637db6e0629d9a415a1d3e1
 }
 
 void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
@@ -122,7 +152,7 @@ void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
     stockerDesRetenus(valeurDeChoisi, jeu.plateau);
     afficherDesRetenus(jeu.plateau.desRetenus);
     afficherCalculTotalDesRetenus(
-      calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+    calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
 }
 
 int determinerJoueurGagnant(const Jeu& jeu)

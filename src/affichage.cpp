@@ -25,6 +25,14 @@ void saisirNomJoueur(std::string& nom)
     std::cin >> nom;
 }
 
+void afficherJoueurs(const Jeu& jeu)
+{
+    for(int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        afficherJoueur(jeu.joueurs[i]);
+    }
+}
+
 void afficherJoueur(const Joueur& joueur)
 {
     std::cout << std::endl;
@@ -38,14 +46,12 @@ void afficherJoueur(const Joueur& joueur)
     else
     {
         std::cout << joueur.sommetPile << std::endl;
-        std::cout << "Pile pickomino de : " << joueur.nom << std::endl;
+        std::cout << "Pile de pickominos : ";
         for(int i = joueur.sommetPile; i > 0; --i)
         {
-            std::cout << joueur.pilePickomino[i] << std::endl;
+            std::cout << joueur.pilePickomino[i] << " ";
         }
         std::cout << std::endl;
-        std::cout << "Pickomino tout en haut de la pile : "
-                  << joueur.pilePickomino[joueur.sommetPile] << std::endl;
     }
     std::cout << std::endl;
 }
@@ -90,7 +96,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
 
 void afficherJoueurTour(const Joueur& joueur)
 {
-    std::cout << "Au tour du joueur : " << joueur.nom << std::endl;
+    std::cout << "Au tour du joueur : " << joueur.nom << std::endl << std::endl;
 }
 
 void afficherDes(int nbDes, const int des[NB_DES])
@@ -212,7 +218,7 @@ bool choisirFinTour()
     return finTour;
 }
 
-int  choisirPickomino()
+int choisirPickomino()
 {
     int valeurPickominoChoisi;
 

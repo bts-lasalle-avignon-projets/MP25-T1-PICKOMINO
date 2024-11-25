@@ -101,9 +101,9 @@ bool verifierDeDejaPris(int valeurDeChoisi, const Plateau& plateau)
     return true;
 }
 
-int calculerTotalDesRetenus(int totalDes, int desRetenus[NB_FACES])
+int calculerTotalDesRetenus(int desRetenus[NB_FACES])
 {
-    totalDes = 0;
+    int totalDes = 0;
 
     for(int i = 0; i < NB_FACES; ++i)
     {
@@ -122,7 +122,7 @@ int calculerTotalDesRetenus(int totalDes, int desRetenus[NB_FACES])
 
 bool verifierPresenceVer(int desRetenus[NB_FACES])
 {
-    if(desRetenus[5] > 0)
+    if(desRetenus[FACE_VER - 1] > 0)
     {
         return true;
     }
@@ -130,35 +130,47 @@ bool verifierPresenceVer(int desRetenus[NB_FACES])
     return false;
 }
 
-void PrendrePickominoBrochette(Jeu& jeu, Plateau& plateau, Pickomino(&brochette)[NB_PICKOMINOS])
+void prendrePickominoBrochette(Jeu& jeu)
 {
-    int totalDesRetenus = calculerTotalDesRetenus(0, plateau.desRetenus);
+    int totalDesRetenus = calculerTotalDesRetenus(jeu.plateau.desRetenus);
 
     if(totalDesRetenus > VALEUR_PICKOMINOS_MAX)
     {
         totalDesRetenus = VALEUR_PICKOMINOS_MAX;
     }
 
-    if(brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur == totalDesRetenus && brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
+    if(jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur ==
+         totalDesRetenus &&
+       jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
     {
-        jeu.joueurs[plateau.numeroJoueur].sommetPile++;
-        jeu.joueurs[plateau.numeroJoueur].pilePickomino[jeu.joueurs[plateau.numeroJoueur].sommetPile] = totalDesRetenus;
-        jeu.joueurs[plateau.numeroJoueur].versTotal = jeu.joueurs[plateau.numeroJoueur].versTotal + brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
+        jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile++;
+        jeu.joueurs[jeu.plateau.numeroJoueur]
+          .pilePickomino[jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] = totalDesRetenus;
+        jeu.joueurs[jeu.plateau.numeroJoueur].versTotal =
+          jeu.joueurs[jeu.plateau.numeroJoueur].versTotal +
+          jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
 
-        brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat = RETOURNE;
+        jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat = RETOURNE;
     }
-    
-    else if(brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur == totalDesRetenus && brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == RETOURNE)
+
+    else if(jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur ==
+              totalDesRetenus &&
+            jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat ==
+              RETOURNE)
     {
         for(int i = totalDesRetenus - VALEUR_PICKOMINOS_MIN; i > 0; --i)
         {
-            if(brochette[i - 1].etat == VISIBLE)
+            if(jeu.plateau.brochettePickominos[i - 1].etat == VISIBLE)
             {
-                jeu.joueurs[plateau.numeroJoueur].sommetPile++;
-                jeu.joueurs[plateau.numeroJoueur].pilePickomino[jeu.joueurs[plateau.numeroJoueur].sommetPile] = brochette[i - 1].valeur;
-                jeu.joueurs[plateau.numeroJoueur].versTotal = jeu.joueurs[plateau.numeroJoueur].versTotal + brochette[i - 1].nombreVers;
+                jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile++;
+                jeu.joueurs[jeu.plateau.numeroJoueur]
+                  .pilePickomino[jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] =
+                  jeu.plateau.brochettePickominos[i - 1].valeur;
+                jeu.joueurs[jeu.plateau.numeroJoueur].versTotal =
+                  jeu.joueurs[jeu.plateau.numeroJoueur].versTotal +
+                  jeu.plateau.brochettePickominos[i - 1].nombreVers;
 
-                brochette[i - 1].etat = RETOURNE;
+                jeu.plateau.brochettePickominos[i - 1].etat = RETOURNE;
             }
         }
     }
@@ -167,39 +179,55 @@ void PrendrePickominoBrochette(Jeu& jeu, Plateau& plateau, Pickomino(&brochette)
     }
 }
 
-void volerPickominoJoueur(Jeu& jeu, Plateau& plateau)
+void volerPickominoJoueur(Jeu& jeu)
 {
-    int totalDesRetenus = calculerTotalDesRetenus(0, plateau.desRetenus);
+    int totalDesRetenus = calculerTotalDesRetenus(jeu.plateau.desRetenus);
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
         if(totalDesRetenus == jeu.joueurs[i].sommetPile)
         {
-            jeu.joueurs[plateau.numeroJoueur].sommetPile++;
-            jeu.joueurs[plateau.numeroJoueur].pilePickomino[jeu.joueurs[plateau.numeroJoueur].sommetPile] = totalDesRetenus;
-            jeu.joueurs[plateau.numeroJoueur].versTotal = jeu.joueurs[plateau.numeroJoueur].versTotal + plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
+            jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile++;
+            jeu.joueurs[jeu.plateau.numeroJoueur]
+              .pilePickomino[jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] = totalDesRetenus;
+            jeu.joueurs[jeu.plateau.numeroJoueur].versTotal =
+              jeu.joueurs[jeu.plateau.numeroJoueur].versTotal +
+              jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
 
             totalDesRetenus = jeu.joueurs[i].pilePickomino[jeu.joueurs[i].sommetPile];
-            jeu.joueurs[i].versTotal = jeu.joueurs[i].versTotal - plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
+            jeu.joueurs[i].versTotal =
+              jeu.joueurs[i].versTotal -
+              jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
             jeu.joueurs[i].sommetPile--;
         }
     }
 }
 
-void remettreTuileDansBrochette(Jeu& jeu, Plateau& plateau, Pickomino(&brochette)[NB_PICKOMINOS])
+void remettreTuileDansBrochette(Jeu& jeu)
 {
-    if(jeu.joueurs[plateau.numeroJoueur].sommetPile > 0)
+    if(jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile > 0)
     {
-        jeu.joueurs[plateau.numeroJoueur].versTotal = jeu.joueurs[plateau.numeroJoueur].versTotal - brochette[jeu.joueurs[plateau.numeroJoueur].pilePickomino[jeu.joueurs[plateau.numeroJoueur].sommetPile] - VALEUR_PICKOMINOS_MIN].nombreVers;
-        brochette[jeu.joueurs[plateau.numeroJoueur].pilePickomino[jeu.joueurs[plateau.numeroJoueur].sommetPile] - VALEUR_PICKOMINOS_MIN].etat = VISIBLE;
-        jeu.joueurs[plateau.numeroJoueur].pilePickomino[jeu.joueurs[plateau.numeroJoueur].sommetPile] = 0;
-        jeu.joueurs[plateau.numeroJoueur].sommetPile--;
+        jeu.joueurs[jeu.plateau.numeroJoueur].versTotal =
+          jeu.joueurs[jeu.plateau.numeroJoueur].versTotal -
+          jeu.plateau
+            .brochettePickominos[jeu.joueurs[jeu.plateau.numeroJoueur].pilePickomino
+                                   [jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] -
+                                 VALEUR_PICKOMINOS_MIN]
+            .nombreVers;
+        jeu.plateau
+          .brochettePickominos[jeu.joueurs[jeu.plateau.numeroJoueur]
+                                 .pilePickomino[jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] -
+                               VALEUR_PICKOMINOS_MIN]
+          .etat = VISIBLE;
+        jeu.joueurs[jeu.plateau.numeroJoueur]
+          .pilePickomino[jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] = 0;
+        jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile--;
     }
 
-    for(int i = NB_PICKOMINOS; i >= 0; --i)
+    for(int i = NB_PICKOMINOS - 1; i >= 0; --i)
     {
-        if(brochette[i].etat == VISIBLE)
+        if(jeu.plateau.brochettePickominos[i].etat == VISIBLE)
         {
-            brochette[i].etat = RETOURNE;
+            jeu.plateau.brochettePickominos[i].etat = RETOURNE;
             break;
         }
     }
@@ -207,7 +235,7 @@ void remettreTuileDansBrochette(Jeu& jeu, Plateau& plateau, Pickomino(&brochette
 
 bool verifierValeurTotalDesTropPetit(Plateau& plateau)
 {
-    int totalDesRetenus = calculerTotalDesRetenus(0, plateau.desRetenus);
+    int totalDesRetenus = calculerTotalDesRetenus(plateau.desRetenus);
     if(totalDesRetenus >= VALEUR_PICKOMINOS_MIN)
     {
         return true;

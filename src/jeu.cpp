@@ -10,7 +10,10 @@ void jouerPickomino()
 
     initialiserPartie(jeu);
 
-    jouerTour(jeu);
+    do
+    {
+        jouerTour(jeu);
+    } while(!estPartieFinie(jeu.plateau.brochettePickominos));
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -26,13 +29,7 @@ void initialiserPartie(Jeu& jeu)
         initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     }
 
-    for(int i = 0; i < jeu.nbJoueurs; ++i)
-    {
-        afficherJoueur(jeu.joueurs[i]);
-    }
-
     initialiserBrochette(jeu.plateau.brochettePickominos);
-    afficherBrochettePickominos(jeu.plateau.brochettePickominos);
 }
 
 bool jouerTour(Jeu& jeu)
@@ -41,6 +38,8 @@ bool jouerTour(Jeu& jeu)
     int  valeurDeChoisi;
 
     afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
+
+    afficherBrochettePickominos(jeu.plateau.brochettePickominos);
 
     reinitialiserPlateau(jeu.plateau);
 
@@ -52,6 +51,7 @@ bool jouerTour(Jeu& jeu)
         if(verifierChoixImpossible(jeu.plateau))
         {
             afficherChoixImpossible();
+            remettreTuileDansBrochette(jeu);
             finTour = true;
         }
         else
@@ -60,37 +60,32 @@ bool jouerTour(Jeu& jeu)
             gererDesRetenus(jeu, valeurDeChoisi);
 
             finTour = choisirFinTour();
-
-            if (finTour)
+            if(finTour)
             {
                 gererFinTour(jeu);
-                break;
             }
         }
     } while(!finTour);
+
+    afficherJoueurs(jeu);
+
+    // au joueur suivant
+    jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
 
     return true;
 }
 
 void gererFinTour(Jeu& jeu)
 {
-    if (verifierPresenceVer(jeu.plateau.desRetenus) && verifierValeurTotalDesTropPetit(jeu.plateau))
+    if(verifierPresenceVer(jeu.plateau.desRetenus) && verifierValeurTotalDesTropPetit(jeu.plateau))
     {
-        volerPickominoJoueur(jeu, jeu.plateau);
-        PrendrePickominoBrochette(jeu, jeu.plateau, jeu.plateau.brochettePickominos);
+        volerPickominoJoueur(jeu);
+        prendrePickominoBrochette(jeu);
     }
     else
     {
-        remettreTuileDansBrochette(jeu, jeu.plateau, jeu.plateau.brochettePickominos);
+        remettreTuileDansBrochette(jeu);
     }
-
-    afficherBrochettePickominos(jeu.plateau.brochettePickominos);
-
-    for (int i = 0; i < jeu.nbJoueurs; ++i)
-    {
-        afficherJoueur(jeu.joueurs[i]);
-    }
-
 }
 
 void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
@@ -105,10 +100,21 @@ void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
     } while(verifierDeDejaPris(valeurDeChoisi, jeu.plateau));
 }
 
-void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
+void gererDesRetenus(Jeu& jeu, const int& valeurDeChoisi)
 {
     stockerDesRetenus(valeurDeChoisi, jeu.plateau);
     afficherDesRetenus(jeu.plateau.desRetenus);
-    afficherCalculTotalDesRetenus(
-    calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+    afficherCalculTotalDesRetenus(calculerTotalDesRetenus(jeu.plateau.desRetenus));
+}
+
+bool estPartieFinie(const Pickomino (&brochette)[NB_PICKOMINOS])
+{
+    for(int i = 0; i < NB_PICKOMINOS; ++i)
+    {
+        if(brochette[i].etat == Etat::VISIBLE)
+        {
+            return false;
+        }
+    }
+    return true;
 }

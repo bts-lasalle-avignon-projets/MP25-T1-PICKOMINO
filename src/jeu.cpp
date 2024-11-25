@@ -125,3 +125,18 @@ int determinerJoueurGagnant(const Jeu& jeu)
 
     return joueurGagnant;
 }
+
+int determinerJoueurGagnant(const Jeu& jeu)
+{
+    int joueurGagnant = -1;
+
+    for(int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        if(jeu.joueurs[i].versTotal > jeu.joueurs[joueurGagnant].versTotal)
+        {
+            joueurGagnant = i;
+        }
+    }
+
+    return joueurGagnant;
+}

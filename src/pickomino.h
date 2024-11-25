@@ -18,6 +18,7 @@
 struct Joueur
 {
     std::string nom;
+    int         numero;
     int         versTotal;
     int         pilePickomino[NB_PICKOMINOS];
     int         sommetPile;
@@ -66,5 +67,6 @@ void prendrePickominoBrochette(Jeu& jeu);
 void volerPickominoJoueur(Jeu& jeu);
 void remettreTuileDansBrochette(Jeu& jeu);
 bool verifierValeurTotalDesTropPetit(Plateau& plateau);
+bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);
 
 #endif

@@ -218,12 +218,11 @@ bool choisirFinTour()
     return finTour;
 }
 
-int choisirPickomino()
+void afficherJoueurGagnant(const std::string& nom, int versTotal)
 {
-    int valeurPickominoChoisi;
-
-    std::cout << "Choisir une tuile pickomino : ";
-    std::cin >> valeurPickominoChoisi;
-    std::cout << std::endl;
-    return valeurPickominoChoisi;
+    std::cout << "Le gagnant de cette partie est : ";
+    std::cout << nom;
+    std::cout << " avec ";
+    std::cout << versTotal;
+    std::cout << " vers";
 }

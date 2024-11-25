@@ -1,4 +1,5 @@
 #include "jeu.h"
+#include "pickomino.h"
 #include "affichage.h"
 
 #include <cstdlib>
@@ -13,7 +14,13 @@ void jouerPickomino()
     do
     {
         jouerTour(jeu);
-    } while(!estPartieFinie(jeu.plateau.brochettePickominos));
+        // au joueur suivant
+        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
+
+    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+    int joueurGagnant = determinerJoueurGagnant(jeu);
+    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -69,9 +76,6 @@ bool jouerTour(Jeu& jeu)
 
     afficherJoueurs(jeu);
 
-    // au joueur suivant
-    jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
-
     return true;
 }
 
@@ -88,7 +92,7 @@ void gererFinTour(Jeu& jeu)
     }
 }
 
-void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
+void verifierDisponibiliteDe(const Jeu& jeu, int& valeurDeChoisi)
 {
     do
     {
@@ -107,14 +111,17 @@ void gererDesRetenus(Jeu& jeu, const int& valeurDeChoisi)
     afficherCalculTotalDesRetenus(calculerTotalDesRetenus(jeu.plateau.desRetenus));
 }
 
-bool estPartieFinie(const Pickomino (&brochette)[NB_PICKOMINOS])
+int determinerJoueurGagnant(const Jeu& jeu)
 {
-    for(int i = 0; i < NB_PICKOMINOS; ++i)
+    int joueurGagnant = 0;
+
+    for(int i = 1; i < jeu.nbJoueurs; ++i)
     {
-        if(brochette[i].etat == Etat::VISIBLE)
+        if(jeu.joueurs[i].versTotal > jeu.joueurs[joueurGagnant].versTotal)
         {
-            return false;
+            joueurGagnant = i;
         }
     }
-    return true;
+
+    return joueurGagnant;
 }

@@ -16,5 +16,6 @@ void afficherVerifierDeDejaPris();
 void afficherDesRetenus(const int desRetenus[NB_FACES]);
 void afficherCalculTotalDesRetenus(int totalDes);
 bool choisirFinTour();
+void afficherJoueurGagnant(const std::string& nom, int versTotal);
 
 #endif

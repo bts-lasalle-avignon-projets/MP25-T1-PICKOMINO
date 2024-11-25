@@ -10,7 +10,15 @@ void jouerPickomino()
 
     initialiserPartie(jeu);
 
-    jouerTour(jeu);
+    do
+    {
+        jouerTour(jeu);
+        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
+
+    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+    int joueurGagnant = determinerJoueurGagnant(jeu);
+    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -62,13 +70,10 @@ bool jouerTour(Jeu& jeu)
             finTour = choisirFinTour();
             if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
             {
-                // @todo Choisir une tuile dans la brochette ou le joueur
                 break;
             }
             else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))
             {
-                // @todo Remettre la dernière tuile de la pile dans la brochette
-                // et retourner la tuile la plus haute de la brochette de pichominos
                 break;
             }
             else
@@ -98,4 +103,19 @@ void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
     afficherDesRetenus(jeu.plateau.desRetenus);
     afficherCalculTotalDesRetenus(
       calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+}
+
+int determinerJoueurGagnant(const Jeu& jeu)
+{
+    int joueurGagnant = -1;
+
+    for(int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        if(jeu.joueurs[i].versTotal > jeu.joueurs[joueurGagnant].versTotal)
+        {
+            joueurGagnant = i;
+        }
+    }
+
+    return joueurGagnant;
 }

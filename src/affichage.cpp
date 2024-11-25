@@ -206,3 +206,11 @@ bool choisirFinTour()
 
     return finTour;
 }
+void afficherJoueurGagnant(const std::string& nom, int versTotal)
+{
+    std::cout << "Le gagnant de cette partie est : ";
+    std::cout << nom;
+    std::cout << " avec ";
+    std::cout << versTotal;
+    std::cout << " vers";
+}

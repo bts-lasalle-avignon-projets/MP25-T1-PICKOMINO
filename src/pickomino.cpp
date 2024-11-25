@@ -125,24 +125,15 @@ bool verifierPresenceVer(int desRetenus[NB_FACES])
 
     return false;
 }
-bool verifierBrochetteVide(Pickomino(&brochette)[NB_PICKOMINOS])
+bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS])
 {
-    int compteurPickominoVisible = 0;
-
     for(int i = 0; i < NB_PICKOMINOS; ++i)
     {
         if(brochette[i].etat == VISIBLE)
         {
-            compteurPickominoVisible++;
+            return true;
         }
     }
 
-    if(compteurPickominoVisible > 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
 }

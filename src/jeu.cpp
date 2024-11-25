@@ -14,10 +14,11 @@ void jouerPickomino()
     {
         jouerTour(jeu);
         jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
-        
-    } while (verifierBrochetteVide(jeu.plateau.brochettePickominos));
 
-    afficherJoueurGagnant(jeu);
+    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+    int joueurGagnant = determinerJoueurGagnant(jeu);
+    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -102,4 +103,19 @@ void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
     afficherDesRetenus(jeu.plateau.desRetenus);
     afficherCalculTotalDesRetenus(
       calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+}
+
+int determinerJoueurGagnant(const Jeu& jeu)
+{
+    int joueurGagnant = -1;
+
+    for(int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        if(jeu.joueurs[i].versTotal > jeu.joueurs[joueurGagnant].versTotal)
+        {
+            joueurGagnant = i;
+        }
+    }
+
+    return joueurGagnant;
 }

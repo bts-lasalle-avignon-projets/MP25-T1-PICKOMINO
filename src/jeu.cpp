@@ -10,7 +10,15 @@ void jouerPickomino()
 
     initialiserPartie(jeu);
 
-    jouerTour(jeu);
+    do
+    {
+        jouerTour(jeu);
+        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
+
+    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+    int joueurGagnant = determinerJoueurGagnant(jeu);
+    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -39,6 +47,7 @@ bool jouerTour(Jeu& jeu)
 {
     bool finTour = false;
     int  valeurDeChoisi;
+    bool tourPerdu = false;
 
     afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
 
@@ -52,7 +61,8 @@ bool jouerTour(Jeu& jeu)
         if(verifierChoixImpossible(jeu.plateau))
         {
             afficherChoixImpossible();
-            finTour = true;
+            finTour   = true;
+            tourPerdu = true;
         }
         else
         {
@@ -60,31 +70,39 @@ bool jouerTour(Jeu& jeu)
             gererDesRetenus(jeu, valeurDeChoisi);
 
             finTour = choisirFinTour();
-            if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
-            {
-                int pickominoChoisi = choisirPickomino();
-                volerPickominoPile(pickominoChoisi, jeu.joueurs, jeu.plateau.numeroJoueur, jeu.plateau.brochettePickominos, jeu.nbJoueurs);
-                afficherBrochettePickominos(jeu.plateau.brochettePickominos);
-                for(int i = 0; i < jeu.nbJoueurs; ++i)
-                {
-                    afficherJoueur(jeu.joueurs[i]);
-                }
-                // @todo Choisir une tuile dans la brochette ou le joue
-                break;
-            }
-            else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))
-            {
-                // @todo Remettre la dernière tuile de la pile dans la brochette
-                // et retourner la tuile la plus haute de la brochette de pichominos
-                break;
-            }
-            else
-            {
-            }
+        }
+
+        if(finTour)
+        {
+            gererFinTour(jeu, tourPerdu);
         }
     } while(!finTour);
 
     return true;
+}
+
+void gererFinTour(Jeu& jeu, bool tourPerdu)
+{
+    if(verifierPresenceVer(jeu.plateau.desRetenus) &&
+       verifierValeurTotalDesTropPetit(jeu.plateau) && !tourPerdu)
+    {
+        bool verifierVolPossible = volerPickominoJoueur(jeu.joueurs, jeu.plateau, jeu.nbJoueurs);
+        if(!verifierVolPossible)
+        {
+            PrendrePickominoBrochette(jeu.joueurs, jeu.plateau, jeu.plateau.brochettePickominos);
+        }
+    }
+    else
+    {
+        remettreTuileDansBrochette(jeu.joueurs, jeu.plateau, jeu.plateau.brochettePickominos);
+    }
+
+    afficherBrochettePickominos(jeu.plateau.brochettePickominos);
+
+    for(int i = 0; i < jeu.nbJoueurs; ++i)
+    {
+        afficherJoueur(jeu.joueurs[i]);
+    }
 }
 
 void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi)
@@ -105,4 +123,19 @@ void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi)
     afficherDesRetenus(jeu.plateau.desRetenus);
     afficherCalculTotalDesRetenus(
       calculerTotalDesRetenus(jeu.plateau.totalDes, jeu.plateau.desRetenus));
+}
+
+int determinerJoueurGagnant(const Jeu& jeu)
+{
+    int joueurGagnant = 0;
+
+    for(int i = 1; i < jeu.nbJoueurs; ++i)
+    {
+        if(jeu.joueurs[i].versTotal > jeu.joueurs[joueurGagnant].versTotal)
+        {
+            joueurGagnant = i;
+        }
+    }
+
+    return joueurGagnant;
 }

@@ -8,5 +8,7 @@ void initialiserPartie(Jeu& jeu);
 bool jouerTour(Jeu& jeu);
 void verifierDisponibiliteDe(Jeu& jeu, int& valeurDeChoisi);
 void gererDesRetenus(Jeu& jeu, int& valeurDeChoisi);
+void gererFinTour(Jeu& jeu, bool tourPerdu);
+int  determinerJoueurGagnant(const Jeu& jeu);
 
 #endif

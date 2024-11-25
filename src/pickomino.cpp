@@ -9,6 +9,7 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
     {
         joueurs[i].versTotal  = 0;
         joueurs[i].sommetPile = 0;
+        joueurs[i].numero     = i;
         for(int j = 0; j < NB_PICKOMINOS; ++j)
         {
             joueurs[i].pilePickomino[j] = 0;
@@ -130,41 +131,133 @@ bool verifierPresenceVer(int desRetenus[NB_FACES])
     return false;
 }
 
-void volerPickominoPile(int choisirPickomino, Joueur (&joueurs)[NB_JOUEURS_MAX], int numeroJoueur, Pickomino(&brochette)[NB_PICKOMINOS], int nbJoueurs)
+bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS])
 {
-    for(int i = 0; i < nbJoueurs; ++i)
+    for(int i = 0; i < NB_PICKOMINOS; ++i)
     {
-        if(choisirPickomino == joueurs[i].sommetPile)
+        if(brochette[i].etat == VISIBLE)
         {
-            joueurs[numeroJoueur].sommetPile++;
-            joueurs[numeroJoueur].pilePickomino[joueurs[numeroJoueur].sommetPile] = choisirPickomino;
-
-            choisirPickomino = joueurs[i].pilePickomino[joueurs[i].sommetPile];
-            joueurs[i].sommetPile--;
+            return true;
         }
     }
 
-    if(brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].valeur == choisirPickomino && brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
-    {
-        joueurs[numeroJoueur].sommetPile++;
-        joueurs[numeroJoueur].pilePickomino[joueurs[numeroJoueur].sommetPile] = choisirPickomino;
+    return false;
+}
 
-        brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].etat = RETOURNE;
-    }
-    else if(brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].valeur == choisirPickomino && brochette[choisirPickomino - VALEUR_PICKOMINOS_MIN].etat == RETOURNE)
+void PrendrePickominoBrochette(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                               Plateau& plateau,
+                               Pickomino (&brochette)[NB_PICKOMINOS])
+{
+    int totalDesRetenus = calculerTotalDesRetenus(0, plateau.desRetenus);
+
+    if(totalDesRetenus > VALEUR_PICKOMINOS_MAX)
     {
-        for(int i = choisirPickomino - VALEUR_PICKOMINOS_MIN; i > 0; --i)
+        totalDesRetenus = VALEUR_PICKOMINOS_MAX;
+    }
+
+    if(brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur == totalDesRetenus &&
+       brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
+    {
+        joueurs[plateau.numeroJoueur].sommetPile++;
+        joueurs[plateau.numeroJoueur].pilePickomino[joueurs[plateau.numeroJoueur].sommetPile] =
+          totalDesRetenus;
+        joueurs[plateau.numeroJoueur].versTotal =
+          joueurs[plateau.numeroJoueur].versTotal +
+          brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
+
+        brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat = RETOURNE;
+    }
+
+    else if(brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur == totalDesRetenus &&
+            brochette[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == RETOURNE)
+    {
+        for(int i = totalDesRetenus - VALEUR_PICKOMINOS_MIN; i > 0; --i)
         {
             if(brochette[i - 1].etat == VISIBLE)
             {
-                joueurs[numeroJoueur].sommetPile++;
-                joueurs[numeroJoueur].pilePickomino[joueurs[numeroJoueur].sommetPile] = brochette[i - 1].valeur;
+                joueurs[plateau.numeroJoueur].sommetPile++;
+                joueurs[plateau.numeroJoueur]
+                  .pilePickomino[joueurs[plateau.numeroJoueur].sommetPile] =
+                  brochette[i - 1].valeur;
+                joueurs[plateau.numeroJoueur].versTotal =
+                  joueurs[plateau.numeroJoueur].versTotal + brochette[i - 1].nombreVers;
 
                 brochette[i - 1].etat = RETOURNE;
+                break;
             }
         }
     }
     else
     {
+    }
+}
+
+bool volerPickominoJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], Plateau& plateau, int nbJoueurs)
+{
+    int totalDesRetenus = calculerTotalDesRetenus(0, plateau.desRetenus);
+    for(int i = 0; i < nbJoueurs; ++i)
+    {
+        if(totalDesRetenus == joueurs[i].pilePickomino[joueurs[i].sommetPile] &&
+           joueurs[plateau.numeroJoueur].numero != joueurs[i].numero)
+        {
+            joueurs[plateau.numeroJoueur].sommetPile++;
+            joueurs[plateau.numeroJoueur].pilePickomino[joueurs[plateau.numeroJoueur].sommetPile] =
+              totalDesRetenus;
+            joueurs[plateau.numeroJoueur].versTotal =
+              joueurs[plateau.numeroJoueur].versTotal +
+              plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
+
+            totalDesRetenus = joueurs[i].pilePickomino[joueurs[i].sommetPile];
+            joueurs[i].versTotal =
+              joueurs[i].versTotal -
+              plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
+            joueurs[i].sommetPile--;
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void remettreTuileDansBrochette(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                                Plateau& plateau,
+                                Pickomino (&brochette)[NB_PICKOMINOS])
+{
+    if(joueurs[plateau.numeroJoueur].sommetPile > 0)
+    {
+        joueurs[plateau.numeroJoueur].versTotal =
+          joueurs[plateau.numeroJoueur].versTotal -
+          brochette[joueurs[plateau.numeroJoueur]
+                      .pilePickomino[joueurs[plateau.numeroJoueur].sommetPile] -
+                    VALEUR_PICKOMINOS_MIN]
+            .nombreVers;
+        brochette[joueurs[plateau.numeroJoueur]
+                    .pilePickomino[joueurs[plateau.numeroJoueur].sommetPile] -
+                  VALEUR_PICKOMINOS_MIN]
+          .etat = VISIBLE;
+        joueurs[plateau.numeroJoueur].pilePickomino[joueurs[plateau.numeroJoueur].sommetPile] = 0;
+        joueurs[plateau.numeroJoueur].sommetPile--;
+    }
+
+    for(int i = NB_PICKOMINOS; i >= 0; --i)
+    {
+        if(brochette[i].etat == VISIBLE)
+        {
+            brochette[i].etat = RETOURNE;
+            break;
+        }
+    }
+}
+
+bool verifierValeurTotalDesTropPetit(Plateau& plateau)
+{
+    int totalDesRetenus = calculerTotalDesRetenus(0, plateau.desRetenus);
+    if(totalDesRetenus >= VALEUR_PICKOMINOS_MIN)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }

@@ -62,7 +62,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
         }
         else if(brochette[i].etat == Etat::RETOURNE)
         {
-            std::cout << "X  ";
+            std::cout << "  X";
         }
         else
         {
@@ -78,7 +78,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
         }
         else if(brochette[i].etat == Etat::RETOURNE)
         {
-            std::cout << "    ";
+            std::cout << "   ";
         }
         else
         {
@@ -212,12 +212,11 @@ bool choisirFinTour()
     return finTour;
 }
 
-int  choisirPickomino()
+void afficherJoueurGagnant(const std::string& nom, int versTotal)
 {
-    int valeurPickominoChoisi;
-
-    std::cout << "Choisir une tuile pickomino : ";
-    std::cin >> valeurPickominoChoisi;
-    std::cout << std::endl;
-    return valeurPickominoChoisi;
+    std::cout << "Le gagnant de cette partie est : ";
+    std::cout << nom;
+    std::cout << " avec ";
+    std::cout << versTotal;
+    std::cout << " vers";
 }

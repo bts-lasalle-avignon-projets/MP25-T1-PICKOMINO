@@ -18,6 +18,7 @@
 struct Joueur
 {
     std::string nom;
+    int         numero;
     int         versTotal;
     int         pilePickomino[NB_PICKOMINOS];
     int         sommetPile;
@@ -62,6 +63,14 @@ void stockerDesRetenus(int valeurDeChoisi, Plateau& plateau);
 bool verifierDeDejaPris(int valeurDeChoisi, const Plateau& plateau);
 int  calculerTotalDesRetenus(int totalDes, int desRetenus[NB_FACES]);
 bool verifierPresenceVer(int desRetenus[NB_FACES]);
-void volerPickominoPile(int choisirPickomino, Joueur (&joueurs)[NB_JOUEURS_MAX], int numeroJoueur, Pickomino(&brochette)[NB_PICKOMINOS], int nbJoueurs);
+bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);
+void PrendrePickominoBrochette(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                               Plateau& plateau,
+                               Pickomino (&brochette)[NB_PICKOMINOS]);
+bool volerPickominoJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], Plateau& plateau, int nbJoueurs);
+void remettreTuileDansBrochette(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                                Plateau& plateau,
+                                Pickomino (&brochette)[NB_PICKOMINOS]);
+bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 
 #endif

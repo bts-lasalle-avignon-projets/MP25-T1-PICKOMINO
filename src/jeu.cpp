@@ -12,11 +12,12 @@ void jouerPickomino()
 
     do
     {
-        bool finDeTour           = jouerTour(jeu);
+        jouerTour(jeu);
         jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
         
-    } while (true);
-    
+    } while (verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+    afficherJoueurGagnant(jeu);
 }
 
 void initialiserPartie(Jeu& jeu)
@@ -68,13 +69,10 @@ bool jouerTour(Jeu& jeu)
             finTour = choisirFinTour();
             if(finTour && verifierPresenceVer(jeu.plateau.desRetenus))
             {
-                // @todo Choisir une tuile dans la brochette ou le joueur
                 break;
             }
             else if(finTour && !verifierPresenceVer(jeu.plateau.desRetenus))
             {
-                // @todo Remettre la dernière tuile de la pile dans la brochette
-                // et retourner la tuile la plus haute de la brochette de pichominos
                 break;
             }
             else

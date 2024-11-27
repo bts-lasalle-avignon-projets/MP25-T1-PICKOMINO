@@ -95,6 +95,7 @@ $ ./pickomino.out
 - Jouer une partie contre la machine
 - Jouer une ou plusieurs parties
 - Visualiser l'historique des parties
+- Gérer un cas d'égalité
 
 ### Itération 3 :
 

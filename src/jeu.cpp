@@ -27,18 +27,7 @@ void jouerPickomino()
 
             case 2:
             {
-                initialiserPartie(jeu);
-                do
-                {
-                    jouerTour(jeu);
-                    // au joueur suivant
-                    jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
-
-                } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
-
-                int joueurGagnant = determinerJoueurGagnant(jeu);
-                afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
-
+                jouerPartie(jeu);
                 saisieInvalide = true;
                 break;
             }
@@ -55,6 +44,21 @@ void jouerPickomino()
             }
         }
     } while (saisieInvalide);
+}
+
+void jouerPartie(Jeu& jeu)
+{
+    initialiserPartie(jeu);
+    do
+    {
+        jouerTour(jeu);
+        // au joueur suivant
+        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
+
+    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+    int joueurGagnant = determinerJoueurGagnant(jeu);
+    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
 }
 
 void initialiserPartie(Jeu& jeu)

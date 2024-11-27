@@ -8,21 +8,53 @@
 void jouerPickomino()
 {
     Jeu jeu;
+    bool saisieInvalide = true;
 
     afficherAccueil();
-    int choisirOption = afficherMenu();
-    initialiserPartie(jeu);
 
     do
     {
-        jouerTour(jeu);
-        // au joueur suivant
-        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
+        int choisirOption = afficherMenu();
 
-    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+        switch (choisirOption)
+        {
+            case 1:
+            {
+                afficherRegles();
+                //saisieInvalide = false;
+                break;
+            }
 
-    int joueurGagnant = determinerJoueurGagnant(jeu);
-    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
+            case 2:
+            {
+                initialiserPartie(jeu);
+                do
+                {
+                    jouerTour(jeu);
+                    // au joueur suivant
+                    jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
+
+                } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
+
+                int joueurGagnant = determinerJoueurGagnant(jeu);
+                afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
+
+                saisieInvalide = true;
+                break;
+            }
+
+            case 3: 
+            {
+                std::exit(0);
+            }
+
+            default:
+            {
+                afficherSaisieInvalide();
+                break;
+            }
+        }
+    } while (saisieInvalide);
 }
 
 void initialiserPartie(Jeu& jeu)

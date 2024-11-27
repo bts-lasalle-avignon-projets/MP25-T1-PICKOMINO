@@ -23,10 +23,13 @@ void saisirNomJoueur(std::string& nom)
 {
     std::cout << "Entrez le nom du joueur : ";
     std::cin >> nom;
+    std::cout << "\n";
 }
 
 void afficherJoueurs(const Jeu& jeu)
 {
+    std::cout << "=============================================================\n" << std::endl;
+
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
         afficherJoueur(jeu.joueurs[i]);
@@ -35,7 +38,6 @@ void afficherJoueurs(const Jeu& jeu)
 
 void afficherJoueur(const Joueur& joueur)
 {
-    std::cout << std::endl;
     std::cout << "Nom du joueur : " << joueur.nom << std::endl;
     std::cout << "Total vers : " << joueur.versTotal << std::endl;
     std::cout << "Nombre de pickominos : ";
@@ -96,6 +98,8 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
 
 void afficherJoueurTour(const Joueur& joueur)
 {
+    std::cout << "=============================================================\n" << std::endl;
+
     std::cout << "Au tour du joueur : " << joueur.nom << std::endl << std::endl;
 }
 
@@ -118,7 +122,7 @@ void afficherDes(int nbDes, const int des[NB_DES])
 
 void afficherChoixImpossible()
 {
-    std::cout << "Les faces possibles ont déjà été retenues ou plus aucun dé n'est disponible."
+    std::cout << "Les faces possibles ont déjà été retenues ou plus aucun dé n'est disponible.\n"
               << std::endl;
 }
 
@@ -143,7 +147,7 @@ int choisirDesRetenus()
         }
         else
         {
-            std::cout << "Valeur invalide ! choisir une valeur de 1 à 5 ou 'V'" << std::endl;
+            std::cout << "Valeur invalide ! choisir une valeur de 1 à 5 ou 'V'\n" << std::endl;
         }
     } while(valeur < 1 || valeur > FACE_VER);
 
@@ -154,7 +158,7 @@ void afficherVerifierDeDejaPris()
 {
     std::cout << "Ce dé est déjà retenu ou il n'est pas existant parmis les dés lancés."
               << std::endl
-              << "Veuillez choisir une autre valeur." << std::endl;
+              << "Veuillez choisir une autre valeur.\n" << std::endl;
 }
 
 void afficherDesRetenus(const int desRetenus[NB_FACES])
@@ -210,10 +214,12 @@ bool choisirFinTour()
         }
         else
         {
-            std::cout << "Choix invalide !" << std::endl;
+            std::cout << "Choix invalide !\n" << std::endl;
             valide = false;
         }
     } while(!valide);
+
+    std::cout << "______________________________________________\n" << std::endl;
 
     return finTour;
 }
@@ -224,7 +230,9 @@ void afficherJoueurGagnant(const std::string& nom, int versTotal)
     std::cout << nom;
     std::cout << " avec ";
     std::cout << versTotal;
-    std::cout << " vers";
+    std::cout << " vers\n";
+
+    std::cout << "=============================================================\n" << std::endl;
 }
 
 void afficherAccueil()
@@ -248,9 +256,37 @@ int afficherMenu()
     std::cout << std::endl;
     std::cout << "                    1 - Règles                        " << std::endl;
     std::cout << "                    2 - Jouer une partie              " << std::endl;
+    std::cout << "                    3 - Quitter pickomino             " << std::endl;
     std::cout << std::endl;
-    std::cout << "<---------------------------------------------------->" << std::endl;
+    std::cout << "<---------------------------------------------------->\n" << std::endl;
+    std::cout << "Choisir une option :";
     std::cin >> optionChoisi;
+    std::cout << "\n\n";
 
     return optionChoisi;
+}
+
+void  afficherRegles()
+{
+    std::cout << "Pour commencer une partie, c'est le joueur le plus jeune qui débute.\n" << std::endl;
+    std::cout << "Le premier joueur lance les 8 dés. Il doit choisir parmi les dés le symbole qui lui convient et mettre de côté tous les dés ayant le même symbole.\n" << std::endl;
+    std::cout << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile correspondant à la valeur totale de tous ses dés.\n" << std::endl;
+    std::cout << "Face 1 = 1 point" << std::endl;
+    std::cout << "Face 2 = 2 points" << std::endl;
+    std::cout << "Face 3 = 3 points" << std::endl;
+    std::cout << "Face 4 = 4 points" << std::endl;
+    std::cout << "Face 5 = 5 points" << std::endl;
+    std::cout << "Face v = 5 points\n" << std::endl;
+    std::cout << "Si, à l'issue des lancers, le joueur ne peut pas prendre de tuile ou n'a pas obtenu de « ver », il doit remettre sa dernière tuile obtenue dans la brochette sur le plateau de jeu, et la tuile de plus haute valeur est retournée (retirée du jeu).\n" << std::endl;
+    std::cout << "La partie se termine quand toutes les tuiles ont été prises. Chaque joueur compte le nombre de vers présents sur l'ensemble de ses tuiles. Le joueur ayant le plus de vers remporte la partie.\n" << std::endl;
+}
+
+void  afficherSaisieInvalide()
+{
+    std::cout << "Saisie invalide, réessayez." << std::endl;
+}
+
+void separation()
+{
+    std::cout << "=============================================================\n" << std::endl;
 }

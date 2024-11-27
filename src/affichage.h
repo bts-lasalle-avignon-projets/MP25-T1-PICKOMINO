@@ -20,5 +20,8 @@ bool choisirFinTour();
 void afficherJoueurGagnant(const std::string& nom, int versTotal);
 void afficherAccueil();
 int  afficherMenu();
+void afficherRegles();
+void afficherSaisieInvalide();
+void separation();
 
 #endif

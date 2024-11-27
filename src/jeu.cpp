@@ -10,6 +10,7 @@ void jouerPickomino()
     Jeu jeu;
 
     afficherAccueil();
+    int choisirOption = afficherMenu();
     initialiserPartie(jeu);
 
     do

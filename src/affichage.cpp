@@ -239,3 +239,18 @@ void afficherAccueil()
     std::cout << "  NAVARRO Mattéo" << std::endl;
     std::cout << "\n\n";
 }
+
+int afficherMenu()
+{
+    int optionChoisi = 0;
+
+    std::cout << "<----------------------> MENU <---------------------->" << std::endl;
+    std::cout << std::endl;
+    std::cout << "                    1 - Règles                        " << std::endl;
+    std::cout << "                    2 - Jouer une partie              " << std::endl;
+    std::cout << std::endl;
+    std::cout << "<---------------------------------------------------->" << std::endl;
+    std::cin >> optionChoisi;
+
+    return optionChoisi;
+}

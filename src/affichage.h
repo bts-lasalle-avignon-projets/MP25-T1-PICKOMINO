@@ -19,5 +19,6 @@ void afficherCalculTotalDesRetenus(int totalDes);
 bool choisirFinTour();
 void afficherJoueurGagnant(const std::string& nom, int versTotal);
 void afficherAccueil();
+int  afficherMenu();
 
 #endif

@@ -9,6 +9,7 @@ void jouerPickomino()
 {
     Jeu jeu;
 
+    afficherAccueil();
     initialiserPartie(jeu);
 
     do

@@ -103,9 +103,27 @@ $ ./pickomino.out
 
 ## Changelog
 
+### Version 1.0
+
+- [x] Accueil
+- [x] Lancer une partie
+- [x] Jouer avec 2 - 7 joueurs en physique
+- [x] Choisir un nom de joueur
+- [x] Lancer les dès
+- [x] Récupérer une tuile de la brochette
+- [x] Récupérer un pickomino dans l'inventaire d'un joueur adverse (becquetage)
+- [x] Afficher le nom du gagnant
+
 ## TODO
 
+- [ ] Gérer un cas d'égalité
+- [ ] Jouer une partie contre l'ordinateur
+- [ ] Jouer une ou plusieurs parties
+- [ ] Visualiser l'historique des parties
+
 ## Défauts constatés non corrigés
+
+- [ ] Cas d'égalité
 
 ## Équipe de développement
 

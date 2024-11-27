@@ -226,3 +226,16 @@ void afficherJoueurGagnant(const std::string& nom, int versTotal)
     std::cout << versTotal;
     std::cout << " vers";
 }
+
+void afficherAccueil()
+{
+    std::cout << "  ____  _      _                   _             " << std::endl;
+    std::cout << " |  _ \\(_) ___| | _____  _ __ ___ (_)_ __   ___  " << std::endl;
+    std::cout << " | |_) | |/ __| |/ / _ \\| '_ ` _ \\| | '_ \\ / _ \\ " << std::endl;
+    std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |" << std::endl;
+    std::cout << " |_|   |_|\\___|_|\\_\\___/|_| |_| |_|_|_| |_|\\___/ " << std::endl;
+    std::cout << std::endl;
+    std::cout << "  MILLOT Pierre                            v1.0" << std::endl;
+    std::cout << "  NAVARRO Mattéo" << std::endl;
+    std::cout << "\n\n";
+}

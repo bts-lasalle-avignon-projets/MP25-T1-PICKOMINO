@@ -5,6 +5,10 @@
 
 #define VERSION "1.0"
 
+#define REGLES  1
+#define JOUER   2
+#define QUITTER 3
+
 #define NB_JOUEURS_MIN 2
 #define NB_JOUEURS_MAX 7
 

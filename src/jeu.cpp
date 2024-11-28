@@ -7,7 +7,7 @@
 
 void jouerPickomino()
 {
-    Jeu jeu;
+    Jeu  jeu;
     bool saisieInvalide = true;
 
     afficherAccueil();
@@ -16,23 +16,22 @@ void jouerPickomino()
     {
         int optionChoisie = afficherMenu();
 
-        switch (optionChoisie)
+        switch(optionChoisie)
         {
-            case 1:
+            case REGLES:
             {
                 afficherRegles();
-                //saisieInvalide = false;
                 break;
             }
 
-            case 2:
+            case JOUER:
             {
                 jouerPartie(jeu);
                 saisieInvalide = true;
                 break;
             }
 
-            case 3: 
+            case QUITTER:
             {
                 std::exit(false);
             }
@@ -43,7 +42,7 @@ void jouerPickomino()
                 break;
             }
         }
-    } while (saisieInvalide);
+    } while(saisieInvalide);
 }
 
 void jouerPartie(Jeu& jeu)

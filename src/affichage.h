@@ -22,6 +22,6 @@ void afficherAccueil();
 int  afficherMenu();
 void afficherRegles();
 void afficherSaisieInvalide();
-void separation();
+void afficherSeparation();
 
 #endif

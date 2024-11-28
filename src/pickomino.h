@@ -3,6 +3,8 @@
 
 #include <string>
 
+#define VERSION "1.0"
+
 #define NB_JOUEURS_MIN 2
 #define NB_JOUEURS_MAX 7
 

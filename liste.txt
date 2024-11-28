@@ -1,0 +1,9 @@
+23	Retenir les des	22-retenir-les-des	MERGED	2024-11-11T20:56:36Z
+21	Lancer les des	18-lancer-de-des	MERGED	2024-10-31T10:46:16Z
+20	19 initialiser une partie	19-initialiser-une-partie	MERGED	2024-10-30T10:42:26Z
+16	Declarer les donnees	15-declarer-les-donnees	MERGED	2024-10-16T03:08:38Z
+12	6 modifier readme	6-modifier-readme	MERGED	2024-10-14T07:37:45Z
+9	Ajout des fichiers .DS_Store dans .gitignore	8-modifier-le-gitignore-pour-ajouter--la-liste-ds_store	MERGED	2024-10-01T12:22:45Z
+7	Créer squelette des fichiers	5-créer-squelettes-des-fichiers	MERGED	2024-09-30T10:31:20Z
+4	initialiser le dépôt	1-initialiser-le-dépôt	MERGED	2024-08-23T18:49:18Z
+3	Ajoute les fichiers de base	2-initialiser-le-code-source	MERGED	2024-08-23T14:56:08Z

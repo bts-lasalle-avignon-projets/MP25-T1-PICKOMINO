@@ -28,7 +28,7 @@ void saisirNomJoueur(std::string& nom)
 
 void afficherJoueurs(const Jeu& jeu)
 {
-    std::cout << "=============================================================\n" << std::endl;
+    afficherSeparation();
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
@@ -98,7 +98,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
 
 void afficherJoueurTour(const Joueur& joueur)
 {
-    std::cout << "=============================================================\n" << std::endl;
+    afficherSeparation();
 
     std::cout << "Au tour du joueur : " << joueur.nom << std::endl << std::endl;
 }
@@ -158,7 +158,8 @@ void afficherVerifierDeDejaPris()
 {
     std::cout << "Ce dé est déjà retenu ou il n'est pas existant parmis les dés lancés."
               << std::endl
-              << "Veuillez choisir une autre valeur.\n" << std::endl;
+              << "Veuillez choisir une autre valeur.\n"
+              << std::endl;
 }
 
 void afficherDesRetenus(const int desRetenus[NB_FACES])
@@ -219,7 +220,7 @@ bool choisirFinTour()
         }
     } while(!valide);
 
-    std::cout << "______________________________________________\n" << std::endl;
+    afficherSeparation();
 
     return finTour;
 }
@@ -230,63 +231,93 @@ void afficherJoueurGagnant(const std::string& nom, int versTotal)
     std::cout << nom;
     std::cout << " avec ";
     std::cout << versTotal;
-    std::cout << " vers\n";
-
-    std::cout << "=============================================================\n" << std::endl;
+    std::cout << " vers";
+    std::cout << std::endl;
+    afficherSeparation();
 }
 
 void afficherAccueil()
 {
-    std::cout << "  ____  _      _                   _             " << std::endl;
-    std::cout << " |  _ \\(_) ___| | _____  _ __ ___ (_)_ __   ___  " << std::endl;
+    afficherSeparation();
+    std::cout << "  ____  _      _                   _                 " << std::endl;
+    std::cout << " |  _ \\(_) ___| | _____  _ __ ___ (_)_ __   ___     " << std::endl;
     std::cout << " | |_) | |/ __| |/ / _ \\| '_ ` _ \\| | '_ \\ / _ \\ " << std::endl;
-    std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |" << std::endl;
+    std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |    " << std::endl;
     std::cout << " |_|   |_|\\___|_|\\_\\___/|_| |_| |_|_|_| |_|\\___/ " << std::endl;
     std::cout << std::endl;
-    std::cout << "  MILLOT Pierre                            v1.0" << std::endl;
+    std::cout << "  MILLOT Pierre                            v" << VERSION << std::endl;
     std::cout << "  NAVARRO Mattéo" << std::endl;
-    std::cout << "\n\n";
+    afficherSeparation();
+    std::cout << std::endl << std::endl;
 }
 
 int afficherMenu()
 {
-    int optionChoisi = 0;
+    int optionChoisie = 0;
 
     std::cout << "<----------------------> MENU <---------------------->" << std::endl;
     std::cout << std::endl;
-    std::cout << "                    1 - Règles                        " << std::endl;
+    std::cout << "                    1 - Afficher les règles           " << std::endl;
     std::cout << "                    2 - Jouer une partie              " << std::endl;
-    std::cout << "                    3 - Quitter pickomino             " << std::endl;
+    std::cout << "                    3 - Quitter le jeu                " << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
-    std::cout << "Choisir une option :";
-    std::cin >> optionChoisi;
-    std::cout << "\n\n";
+    std::cout << "Choisir une option : ";
+    std::cin >> optionChoisie;
+    std::cout << std::endl;
 
-    return optionChoisi;
+    return optionChoisie;
 }
 
-void  afficherRegles()
+void afficherRegles()
 {
-    std::cout << "Pour commencer une partie, c'est le joueur le plus jeune qui débute.\n" << std::endl;
-    std::cout << "Le premier joueur lance les 8 dés. Il doit choisir parmi les dés le symbole qui lui convient et mettre de côté tous les dés ayant le même symbole.\n" << std::endl;
-    std::cout << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile correspondant à la valeur totale de tous ses dés.\n" << std::endl;
+    std::cout << "But du jeu : Le vainqueur sera le joueur qui aura récupéré le plus de vers à la "
+                 "fin de la partie."
+              << std::endl
+              << std::endl;
+    std::cout << "Déroulement du jeu : Le premier joueur lance les 8 dés. Il doit choisir parmi "
+                 "les dés le symbole qui "
+                 "lui convient et mettre de côté tous les dés ayant le même symbole."
+              << std::endl
+              << std::endl;
+    std::cout
+      << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
+         "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
+         "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
+         "correspondant à la valeur totale de tous ses dés."
+      << std::endl
+      << std::endl;
     std::cout << "Face 1 = 1 point" << std::endl;
     std::cout << "Face 2 = 2 points" << std::endl;
     std::cout << "Face 3 = 3 points" << std::endl;
     std::cout << "Face 4 = 4 points" << std::endl;
     std::cout << "Face 5 = 5 points" << std::endl;
     std::cout << "Face v = 5 points\n" << std::endl;
-    std::cout << "Si, à l'issue des lancers, le joueur ne peut pas prendre de tuile ou n'a pas obtenu de « ver », il doit remettre sa dernière tuile obtenue dans la brochette sur le plateau de jeu, et la tuile de plus haute valeur est retournée (retirée du jeu).\n" << std::endl;
-    std::cout << "La partie se termine quand toutes les tuiles ont été prises. Chaque joueur compte le nombre de vers présents sur l'ensemble de ses tuiles. Le joueur ayant le plus de vers remporte la partie.\n" << std::endl;
+    std::cout << std::endl;
+    std::cout
+      << "Si, à l'issue des lancers, le joueur ne peut pas prendre de tuile ou n'a pas obtenu de « "
+         "ver », il doit remettre sa dernière tuile obtenue dans la brochette sur le plateau de "
+         "jeu, et la tuile de plus haute valeur est retournée (retirée du jeu)."
+      << std::endl
+      << std::endl;
+    std::cout << "La partie se termine quand toutes les tuiles ont été prises. Chaque joueur "
+                 "compte le nombre de vers présents sur l'ensemble de ses tuiles. Le joueur ayant "
+                 "le plus de vers remporte la partie."
+              << std::endl
+              << std::endl;
+    std::cout << "Tuiles 21 à 24 = 1 ver" << std::endl;
+    std::cout << "Tuiles 25 à 28 = 2 vers" << std::endl;
+    std::cout << "Tuiles 29 à 32 = 3 vers" << std::endl;
+    std::cout << "Tuiles 33 à 36 = 4 vers" << std::endl;
+    std::cout << std::endl;
 }
 
-void  afficherSaisieInvalide()
+void afficherSaisieInvalide()
 {
-    std::cout << "Saisie invalide, réessayez." << std::endl;
+    std::cout << "Saisie invalide ! Réessayez." << std::endl << std::endl;
 }
 
-void separation()
+void afficherSeparation()
 {
-    std::cout << "=============================================================\n" << std::endl;
+    std::cout << "=============================================================" << std::endl;
 }

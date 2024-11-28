@@ -14,9 +14,9 @@ void jouerPickomino()
 
     do
     {
-        int choisirOption = afficherMenu();
+        int optionChoisie = afficherMenu();
 
-        switch (choisirOption)
+        switch (optionChoisie)
         {
             case 1:
             {

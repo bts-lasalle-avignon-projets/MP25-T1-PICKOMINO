@@ -34,7 +34,7 @@ void jouerPickomino()
 
             case 3: 
             {
-                std::exit(0);
+                std::exit(false);
             }
 
             default:

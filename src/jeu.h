@@ -3,6 +3,10 @@
 
 #include "pickomino.h"
 
+#define AFFICHER_REGLES 1
+#define JOUER           2
+#define QUITTER         3
+
 void jouerPickomino();
 void initialiserPartie(Jeu& jeu);
 bool jouerTour(Jeu& jeu);

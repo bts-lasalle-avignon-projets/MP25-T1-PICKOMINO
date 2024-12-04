@@ -172,6 +172,7 @@ void prendrePickominoBrochette(Jeu& jeu)
                   jeu.plateau.brochettePickominos[i - 1].nombreVers;
 
                 jeu.plateau.brochettePickominos[i - 1].etat = RETOURNE;
+                break;
             }
         }
     }
@@ -180,12 +181,13 @@ void prendrePickominoBrochette(Jeu& jeu)
     }
 }
 
-void volerPickominoJoueur(Jeu& jeu)
+bool volerPickominoJoueur(Jeu& jeu)
 {
     int totalDesRetenus = calculerTotalDesRetenus(jeu.plateau.desRetenus);
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
-        if(totalDesRetenus == jeu.joueurs[i].sommetPile)
+        if(totalDesRetenus == jeu.joueurs[i].pilePickomino[jeu.joueurs[i].sommetPile] &&
+           jeu.joueurs[jeu.plateau.numeroJoueur].numero != jeu.joueurs[i].numero)
         {
             jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile++;
             jeu.joueurs[jeu.plateau.numeroJoueur]
@@ -199,8 +201,11 @@ void volerPickominoJoueur(Jeu& jeu)
               jeu.joueurs[i].versTotal -
               jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].nombreVers;
             jeu.joueurs[i].sommetPile--;
+
+            return true;
         }
     }
+    return false;
 }
 
 void remettreTuileDansBrochette(Jeu& jeu)

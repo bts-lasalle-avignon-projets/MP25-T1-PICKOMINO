@@ -68,6 +68,7 @@ bool jouerTour(Jeu& jeu)
 {
     bool finTour = false;
     int  valeurDeChoisi;
+    bool tourPerdu = false;
 
     afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
 
@@ -94,7 +95,7 @@ bool jouerTour(Jeu& jeu)
             finTour = choisirFinTour();
             if(finTour)
             {
-                gererFinTour(jeu);
+                gererFinTour(jeu, tourPerdu);
             }
         }
     } while(!finTour);
@@ -104,12 +105,16 @@ bool jouerTour(Jeu& jeu)
     return true;
 }
 
-void gererFinTour(Jeu& jeu)
+void gererFinTour(Jeu& jeu, bool tourPerdu)
 {
-    if(verifierPresenceVer(jeu.plateau.desRetenus) && verifierValeurTotalDesTropPetit(jeu.plateau))
+    if(verifierPresenceVer(jeu.plateau.desRetenus) &&
+       verifierValeurTotalDesTropPetit(jeu.plateau) && !tourPerdu)
     {
-        volerPickominoJoueur(jeu);
-        prendrePickominoBrochette(jeu);
+        bool verifierVolPossible = volerPickominoJoueur(jeu);
+        if(!verifierVolPossible)
+        {
+            prendrePickominoBrochette(jeu);
+        }
     }
     else
     {

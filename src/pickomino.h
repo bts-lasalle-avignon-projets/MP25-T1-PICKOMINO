@@ -66,7 +66,7 @@ bool verifierDeDejaPris(int valeurDeChoisi, const Plateau& plateau);
 int  calculerTotalDesRetenus(int desRetenus[NB_FACES]);
 bool verifierPresenceVer(int desRetenus[NB_FACES]);
 void prendrePickominoBrochette(Jeu& jeu);
-void volerPickominoJoueur(Jeu& jeu);
+bool volerPickominoJoueur(Jeu& jeu);
 void remettreTuileDansBrochette(Jeu& jeu);
 bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);

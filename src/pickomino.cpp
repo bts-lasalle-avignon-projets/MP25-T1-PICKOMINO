@@ -228,6 +228,12 @@ void remettreTuileDansBrochette(Jeu& jeu)
           .pilePickomino[jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile] = 0;
         jeu.joueurs[jeu.plateau.numeroJoueur].sommetPile--;
     }
+    else
+    {
+        // Si le joueur n’a pas de Pickomino à remettre, aucun Pickomino n’est retourné sur la
+        // brochette.
+        return;
+    }
 
     for(int i = NB_PICKOMINOS - 1; i >= 0; --i)
     {

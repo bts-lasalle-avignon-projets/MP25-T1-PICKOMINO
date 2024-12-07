@@ -1,6 +1,7 @@
 #include "affichage.h"
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
 {
@@ -10,10 +11,20 @@ int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
         std::cout << "Entrez le nombre de joueurs (minimum : " << nbJoueursMin
                   << " - maximum : " << nbJoueursMax << ") ? ";
         std::cin >> nombreJoueurs;
-        if(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax)
+        if(std::cin.good())
+        {
+            if(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax)
+            {
+                std::cout << "Saisie invalide !" << std::endl;
+            }
+        }
+        else
         {
             std::cout << "Saisie invalide !" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
+
     } while(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax);
 
     return nombreJoueurs;

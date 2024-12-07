@@ -108,16 +108,23 @@ bool jouerTour(Jeu& jeu)
 
 void gererFinTour(Jeu& jeu, bool tourPerdu)
 {
+    bool lancerNul = false;
+
     if(verifierPresenceVer(jeu.plateau.desRetenus) &&
        verifierValeurTotalDesTropPetit(jeu.plateau) && !tourPerdu)
     {
         bool verifierVolPossible = volerPickominoJoueur(jeu);
         if(!verifierVolPossible)
         {
-            prendrePickominoBrochette(jeu);
+            lancerNul = !prendrePickominoBrochette(jeu);
         }
     }
     else
+    {
+        lancerNul = true;
+    }
+
+    if(lancerNul)
     {
         remettreTuileDansBrochette(jeu);
     }

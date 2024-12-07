@@ -131,7 +131,7 @@ bool verifierPresenceVer(int desRetenus[NB_FACES])
     return false;
 }
 
-void prendrePickominoBrochette(Jeu& jeu)
+bool prendrePickominoBrochette(Jeu& jeu)
 {
     int totalDesRetenus = calculerTotalDesRetenus(jeu.plateau.desRetenus);
 
@@ -140,6 +140,7 @@ void prendrePickominoBrochette(Jeu& jeu)
         totalDesRetenus = VALEUR_PICKOMINOS_MAX;
     }
 
+    // disponible dans la brochette ?
     if(jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur ==
          totalDesRetenus &&
        jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
@@ -153,12 +154,13 @@ void prendrePickominoBrochette(Jeu& jeu)
 
         jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat = RETOURNE;
     }
-
+    // le prochain disponible dans la brochette ?
     else if(jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur ==
               totalDesRetenus &&
             jeu.plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat ==
               RETOURNE)
     {
+        bool prise = false;
         for(int i = totalDesRetenus - VALEUR_PICKOMINOS_MIN; i > 0; --i)
         {
             if(jeu.plateau.brochettePickominos[i - 1].etat == VISIBLE)
@@ -172,13 +174,22 @@ void prendrePickominoBrochette(Jeu& jeu)
                   jeu.plateau.brochettePickominos[i - 1].nombreVers;
 
                 jeu.plateau.brochettePickominos[i - 1].etat = RETOURNE;
+                prise                                       = true;
                 break;
             }
+        }
+        // S’il ne reste aucun Pickomino qui convienne,
+        // le lancer du joueur est considéré comme nul.
+        if(!prise)
+        {
+            return false;
         }
     }
     else
     {
     }
+
+    return true;
 }
 
 bool volerPickominoJoueur(Jeu& jeu)

@@ -26,6 +26,7 @@ void jouerPickomino()
                 break;
             case QUITTER:
                 estFinie = true;
+                break;
             default:
                 afficherSaisieInvalide();
                 break;

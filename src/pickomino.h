@@ -3,6 +3,8 @@
 
 #include <string>
 
+#define VERSION "1.0"
+
 #define NB_JOUEURS_MIN 2
 #define NB_JOUEURS_MAX 7
 
@@ -63,8 +65,8 @@ void stockerDesRetenus(int valeurDeChoisi, Plateau& plateau);
 bool verifierDeDejaPris(int valeurDeChoisi, const Plateau& plateau);
 int  calculerTotalDesRetenus(int desRetenus[NB_FACES]);
 bool verifierPresenceVer(int desRetenus[NB_FACES]);
-void prendrePickominoBrochette(Jeu& jeu);
-void volerPickominoJoueur(Jeu& jeu);
+bool prendrePickominoBrochette(Jeu& jeu);
+bool volerPickominoJoueur(Jeu& jeu);
 void remettreTuileDansBrochette(Jeu& jeu);
 bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);

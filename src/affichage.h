@@ -18,5 +18,10 @@ void afficherDesRetenus(const int desRetenus[NB_FACES]);
 void afficherCalculTotalDesRetenus(int totalDes);
 bool choisirFinTour();
 void afficherJoueurGagnant(const std::string& nom, int versTotal);
+void afficherAccueil();
+int  afficherMenu();
+void afficherRegles();
+void afficherSaisieInvalide();
+void afficherSeparation();
 
 #endif

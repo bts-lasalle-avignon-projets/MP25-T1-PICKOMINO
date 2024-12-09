@@ -7,10 +7,36 @@
 
 void jouerPickomino()
 {
-    Jeu jeu;
+    Jeu  jeu;
+    bool estFinie = false;
 
+    afficherAccueil();
+
+    do
+    {
+        int optionChoisie = afficherMenu();
+
+        switch(optionChoisie)
+        {
+            case AFFICHER_REGLES:
+                afficherRegles();
+                break;
+            case JOUER:
+                jouerPartie(jeu);
+                break;
+            case QUITTER:
+                estFinie = true;
+                break;
+            default:
+                afficherSaisieInvalide();
+                break;
+        }
+    } while(!estFinie);
+}
+
+void jouerPartie(Jeu& jeu)
+{
     initialiserPartie(jeu);
-
     do
     {
         jouerTour(jeu);
@@ -43,6 +69,7 @@ bool jouerTour(Jeu& jeu)
 {
     bool finTour = false;
     int  valeurDeChoisi;
+    bool tourPerdu = false;
 
     afficherJoueurTour(jeu.joueurs[jeu.plateau.numeroJoueur]);
 
@@ -69,7 +96,7 @@ bool jouerTour(Jeu& jeu)
             finTour = choisirFinTour();
             if(finTour)
             {
-                gererFinTour(jeu);
+                gererFinTour(jeu, tourPerdu);
             }
         }
     } while(!finTour);
@@ -79,14 +106,25 @@ bool jouerTour(Jeu& jeu)
     return true;
 }
 
-void gererFinTour(Jeu& jeu)
+void gererFinTour(Jeu& jeu, bool tourPerdu)
 {
-    if(verifierPresenceVer(jeu.plateau.desRetenus) && verifierValeurTotalDesTropPetit(jeu.plateau))
+    bool lancerNul = false;
+
+    if(verifierPresenceVer(jeu.plateau.desRetenus) &&
+       verifierValeurTotalDesTropPetit(jeu.plateau) && !tourPerdu)
     {
-        volerPickominoJoueur(jeu);
-        prendrePickominoBrochette(jeu);
+        bool verifierVolPossible = volerPickominoJoueur(jeu);
+        if(!verifierVolPossible)
+        {
+            lancerNul = !prendrePickominoBrochette(jeu);
+        }
     }
     else
+    {
+        lancerNul = true;
+    }
+
+    if(lancerNul)
     {
         remettreTuileDansBrochette(jeu);
     }

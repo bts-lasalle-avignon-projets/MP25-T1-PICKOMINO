@@ -1,15 +1,16 @@
 [![make](https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/actions/workflows/c-cpp.yml)
 
 # Mini-projet : Pickomino
-
 - [Mini-projet : Pickomino](#mini-projet--pickomino)
   - [Présentation](#présentation)
+  - [Déroulement d'une partie](#déroulement-dune-partie)
   - [Utilisation](#utilisation)
   - [Itérations](#itérations)
     - [Itération 1](#itération-1)
     - [Itération 2](#itération-2)
     - [Itération 3](#itération-3)
   - [Changelog](#changelog)
+    - [Version 1.0](#version-10)
   - [TODO](#todo)
   - [Défauts constatés non corrigés](#défauts-constatés-non-corrigés)
   - [Équipe de développement](#équipe-de-développement)
@@ -31,20 +32,14 @@ Le jeu est composé de 16 pickominos (tuiles), de 21 à 36 :
 
 Le jeu est composé de 2 zones distinctes :
 
-- L'inventaire de chaque joueur
-- Le plateau de jeu
+- L'inventaire de chaque joueur :
+  - Stockage des pickominos gagnés sous forme de pile
+  - Échange des pickominos perdus
+- Le plateau de jeu :
+  - Brochette de tous les pickominos
+  - 8 dés de 6 faces (avec une face Ver)
 
-### L'inventaire du joueur
-
-- Stockage des pickominos gagnés sous forme de pile
-- Échange des pickominos perdus
-
-### Le plateau de jeu
-
-- Brochette de tous les pickominos
-- 8 dés de 6 faces
-
-### Déroulement d'une partie
+## Déroulement d'une partie
 
 Pour commencer une partie, c'est le joueur le plus jeune qui débute.
 
@@ -77,41 +72,60 @@ $ ./pickomino.out
 
 ## Itérations
 
-### Itération 1 :
+- [Gestion de projet](https://github.com/orgs/bts-lasalle-avignon-projets/projects/9)
+
+### Itération 1
 
 - Créer le squelette des fichiers
 - Lancer une partie :
   - Saisir le nombre de joueurs
   - Saisir le nom du joueur
 - Jouer une partie :
-  - Lancer les dés 
+  - Lancer les dés
   - Récupérer les tuiles
   - Récupérer un pickomino dans l'inventaire d'un joueur adverse (becquetage)
 - Terminer une partie :
   - Afficher le gagnant
 
-### Itération 2 :
+### Itération 2
 
+- Saisir l'age des joueurs
 - Jouer une partie contre la machine
 - Jouer une ou plusieurs parties
 - Visualiser l'historique des parties
 
-### Itération 3 :
+### Itération 3
 
 - Visualiser l'historique des scores
 - Jouer une partie en réseau
 
 ## Changelog
 
+### Version 1.0
+
+- [x] Afficher et gérer un menu
+- [x] Lancer une partie
+- [x] Jouer avec 2 - 7 joueurs en physique
+- [x] Choisir un nom de joueur
+- [x] Lancer les dès
+- [x] Récupérer une tuile de la brochette
+- [x] Récupérer un pickomino dans l'inventaire d'un joueur adverse (becquetage)
+- [x] Afficher le nom du gagnant
+
 ## TODO
 
+- [ ] Jouer une partie contre l'ordinateur
+- [ ] Jouer une ou plusieurs parties
+- [ ] Visualiser l'historique des parties
+
 ## Défauts constatés non corrigés
+
+- [ ] Gérer un cas d'égalité
 
 ## Équipe de développement
 
 - MILLOT Pierre : [**[pierre(dot)millot(dot)pro(at)gmail(dot)com](mailto:pierre.millot.pro@gmail.com)**]
-
 - NAVARRO Mattéo : [**[matteo(dot)navarro(dot)pro(at)gmail(dot)com](mailto:matteo.navarro.pro@gmail.com)**]
 
 ---
-&copy; 2024-2025 LaSalle Avignon
+&copy; 2024-2025 BTS LaSalle Avignon

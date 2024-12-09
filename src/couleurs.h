@@ -1,5 +1,5 @@
 #ifndef COULEURS_H
-#define COULEUR_H
+#define COULEURS_H
 
 #define COULEUR_DEFAUT "\033[0m"
 #define BLEU           "\033[34m"

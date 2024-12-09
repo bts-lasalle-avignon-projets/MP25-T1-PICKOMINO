@@ -1,4 +1,5 @@
 #include "affichage.h"
+#include "couleurs.h"
 #include <iostream>
 #include <iomanip>
 #include <limits>
@@ -15,12 +16,12 @@ int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
         {
             if(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax)
             {
-                std::cout << "Saisie invalide !" << std::endl;
+                std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
             }
         }
         else
         {
-            std::cout << "Saisie invalide !" << std::endl;
+            std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -49,20 +50,20 @@ void afficherJoueurs(const Jeu& jeu)
 
 void afficherJoueur(const Joueur& joueur)
 {
-    std::cout << "Nom du joueur : " << joueur.nom << std::endl;
-    std::cout << "Total vers : " << joueur.versTotal << std::endl;
+    std::cout << "Nom du joueur : " << BLEU_GRAS << joueur.nom << COULEUR_DEFAUT << std::endl;
+    std::cout << "Total vers : " << VERT << joueur.versTotal << COULEUR_DEFAUT << std::endl;
     std::cout << "Nombre de pickominos : ";
     if(joueur.sommetPile == 0)
     {
-        std::cout << "aucun" << std::endl;
+        std::cout << ROUGE << "aucun" << COULEUR_DEFAUT << std::endl;
     }
     else
     {
-        std::cout << joueur.sommetPile << std::endl;
+        std::cout << VERT << joueur.sommetPile << COULEUR_DEFAUT << std::endl;
         std::cout << "Pile de pickominos : ";
         for(int i = joueur.sommetPile; i > 0; --i)
         {
-            std::cout << joueur.pilePickomino[i] << " ";
+            std::cout << VERT << joueur.pilePickomino[i] << COULEUR_DEFAUT << " ";
         }
         std::cout << std::endl;
     }
@@ -81,7 +82,7 @@ void afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS])
         }
         else if(brochette[i].etat == Etat::RETOURNE)
         {
-            std::cout << "  X";
+            std::cout << ROUGE << "  X" << COULEUR_DEFAUT;
         }
         else
         {
@@ -111,7 +112,8 @@ void afficherJoueurTour(const Joueur& joueur)
 {
     afficherSeparation();
 
-    std::cout << "Au tour du joueur : " << joueur.nom << std::endl << std::endl;
+    std::cout << "Au tour du joueur : " << BLEU_GRAS << joueur.nom << COULEUR_DEFAUT << std::endl
+              << std::endl;
 }
 
 void afficherDes(int nbDes, const int des[NB_DES])
@@ -133,8 +135,9 @@ void afficherDes(int nbDes, const int des[NB_DES])
 
 void afficherChoixImpossible()
 {
-    std::cout << "Les faces possibles ont déjà été retenues ou plus aucun dé n'est disponible.\n"
-              << std::endl;
+    std::cout << ROUGE
+              << "Les faces possibles ont déjà été retenues ou plus aucun dé n'est disponible.\n"
+              << COULEUR_DEFAUT << std::endl;
 }
 
 int choisirDesRetenus()
@@ -158,7 +161,8 @@ int choisirDesRetenus()
         }
         else
         {
-            std::cout << "Valeur invalide ! choisir une valeur de 1 à 5 ou 'V'\n" << std::endl;
+            std::cout << ROUGE << "Valeur invalide ! choisir une valeur de 1 à 5 ou 'V'\n"
+                      << COULEUR_DEFAUT << std::endl;
         }
     } while(valeur < 1 || valeur > FACE_VER);
 
@@ -167,10 +171,10 @@ int choisirDesRetenus()
 
 void afficherVerifierDeDejaPris()
 {
-    std::cout << "Ce dé est déjà retenu ou il n'est pas existant parmis les dés lancés."
+    std::cout << ROUGE << "Ce dé est déjà retenu ou il n'est pas existant parmis les dés lancés."
               << std::endl
               << "Veuillez choisir une autre valeur.\n"
-              << std::endl;
+              << COULEUR_DEFAUT << std::endl;
 }
 
 void afficherDesRetenus(const int desRetenus[NB_FACES])
@@ -226,7 +230,7 @@ bool choisirFinTour()
         }
         else
         {
-            std::cout << "Choix invalide !\n" << std::endl;
+            std::cout << ROUGE << "Choix invalide !\n" << COULEUR_DEFAUT << std::endl;
             valide = false;
         }
     } while(!valide);
@@ -239,9 +243,9 @@ bool choisirFinTour()
 void afficherJoueurGagnant(const std::string& nom, int versTotal)
 {
     std::cout << "Le gagnant de cette partie est : ";
-    std::cout << nom;
+    std::cout << JAUNE_GRAS << nom << COULEUR_DEFAUT;
     std::cout << " avec ";
-    std::cout << versTotal;
+    std::cout << JAUNE_GRAS << versTotal << COULEUR_DEFAUT;
     std::cout << " vers";
     std::cout << std::endl;
     afficherSeparation();
@@ -325,7 +329,8 @@ void afficherRegles()
 
 void afficherSaisieInvalide()
 {
-    std::cout << "Saisie invalide ! Réessayez." << std::endl << std::endl;
+    std::cout << ROUGE << "Saisie invalide ! Réessayez." << COULEUR_DEFAUT << std::endl
+              << std::endl;
 }
 
 void afficherSeparation()

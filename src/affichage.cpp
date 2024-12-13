@@ -331,6 +331,8 @@ void afficherSaisieInvalide()
 {
     std::cout << ROUGE << "Saisie invalide ! Réessayez." << COULEUR_DEFAUT << std::endl
               << std::endl;
+    std::cin.clear();
+    std::cin.ignore();
 }
 
 void afficherSeparation()

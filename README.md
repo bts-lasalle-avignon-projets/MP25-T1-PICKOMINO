@@ -11,6 +11,8 @@
     - [Itération 3](#itération-3)
   - [Changelog](#changelog)
     - [Version 1.0](#version-10)
+    - [Version 1.1](#version-11)
+    - [Version 1.2](#version-12)
   - [TODO](#todo)
   - [Défauts constatés non corrigés](#défauts-constatés-non-corrigés)
   - [Équipe de développement](#équipe-de-développement)
@@ -112,11 +114,24 @@ $ ./pickomino.out
 - [x] Récupérer un pickomino dans l'inventaire d'un joueur adverse (becquetage)
 - [x] Afficher le nom du gagnant
 
+### Version 1.1
+
+- [x] Ajouter de la couleur dans le programme
+
+### Version 1.2
+
+- [x] Corriger le problème du menu (n'accepter que les valeurs valides pour naviguer dans le menu).
+- [x] Nettoyer l'affichage à chaque nouvelle saisie de l'utilisateur dans le menu.
+- [x] Ajouter de la couleur au menu.
+
 ## TODO
 
+- [ ] Commencer la partie par le joueur le plus jeune
 - [ ] Jouer une partie contre l'ordinateur
 - [ ] Jouer une ou plusieurs parties
 - [ ] Visualiser l'historique des parties
+- [ ] Visualiser l'historique des scores
+- [ ] Jouer une partie en réseau
 
 ## Défauts constatés non corrigés
 

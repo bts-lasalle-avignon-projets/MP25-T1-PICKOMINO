@@ -36,6 +36,8 @@ void jouerPickomino()
 
 void jouerPartie(Jeu& jeu)
 {
+    system("clear");
+    afficherAccueil();
     initialiserPartie(jeu);
     do
     {

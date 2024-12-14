@@ -286,6 +286,7 @@ int afficherMenu()
 
 void afficherRegles()
 {
+    system("clear");
     std::cout << "But du jeu : Le vainqueur sera le joueur qui aura récupéré le plus de vers à la "
                  "fin de la partie."
               << std::endl

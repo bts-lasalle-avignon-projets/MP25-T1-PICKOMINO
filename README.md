@@ -95,11 +95,12 @@ $ ./pickomino.out
 - Jouer une partie contre la machine
 - Jouer une ou plusieurs parties
 - Visualiser l'historique des parties
+- Visualiser l'historique des scores
 
 ### Itération 3
 
-- Visualiser l'historique des scores
 - Jouer une partie en réseau
+- Ajouter une interface graphique
 
 ## Changelog
 
@@ -120,9 +121,10 @@ $ ./pickomino.out
 
 ### Version 1.2
 
-- [x] Corriger le problème du menu (n'accepter que les valeurs valides pour naviguer dans le menu).
-- [x] Nettoyer l'affichage à chaque nouvelle saisie de l'utilisateur dans le menu.
-- [x] Ajouter de la couleur au menu.
+- [x] Corriger le problème du menu (n'accepter que les valeurs valides pour naviguer dans le menu)
+- [x] Nettoyer l'affichage à chaque nouvelle saisie de l'utilisateur dans le menu
+- [x] Ajouter de la couleur au menu
+- [x] Gérer le cas d'égalité
 
 ## TODO
 
@@ -132,10 +134,10 @@ $ ./pickomino.out
 - [ ] Visualiser l'historique des parties
 - [ ] Visualiser l'historique des scores
 - [ ] Jouer une partie en réseau
+- [ ] Ajouter une interface graphique
 
 ## Défauts constatés non corrigés
 
-- [ ] Gérer un cas d'égalité
 
 ## Équipe de développement
 

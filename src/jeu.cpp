@@ -161,6 +161,17 @@ int determinerJoueurGagnant(const Jeu& jeu)
         {
             joueurGagnant = i;
         }
+        else if(jeu.joueurs[i].versTotal == jeu.joueurs[joueurGagnant].versTotal)
+        {
+            for(int j = 0; j < NB_PICKOMINOS; ++j)
+            {
+                if(jeu.joueurs[i].pilePickomino[j] > jeu.joueurs[joueurGagnant].pilePickomino[j])
+                {
+                    joueurGagnant = i;
+                    break;
+                }
+            }
+        }
     }
 
     return joueurGagnant;

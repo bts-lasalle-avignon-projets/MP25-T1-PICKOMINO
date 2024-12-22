@@ -154,7 +154,7 @@ void gererDesRetenus(Jeu& jeu, const int& valeurDeChoisi)
 int determinerVainqueurEgalite(const Joueur& joueur)
 {
     int valeurMax = 0;
-    for(int i = 0; i < joueur.sommetPile; i++)
+    for(int i = 1; i < joueur.sommetPile; i++)
     {
         if(joueur.pilePickomino[i] > valeurMax)
         {

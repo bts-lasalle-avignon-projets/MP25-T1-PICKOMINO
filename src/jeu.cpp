@@ -151,20 +151,6 @@ void gererDesRetenus(Jeu& jeu, const int& valeurDeChoisi)
     afficherCalculTotalDesRetenus(calculerTotalDesRetenus(jeu.plateau.desRetenus));
 }
 
-int determinerVainqueurEgalite(const Joueur& joueur)
-{
-    int valeurMax = 0;
-    for(int i = 1; i < joueur.sommetPile; i++)
-    {
-        if(joueur.pilePickomino[i] > valeurMax)
-        {
-            valeurMax = joueur.pilePickomino[i];
-        }
-    }
-
-    return valeurMax;
-}
-
 int determinerJoueurGagnant(const Jeu& jeu)
 {
     int joueurGagnant = 0;
@@ -177,9 +163,7 @@ int determinerJoueurGagnant(const Jeu& jeu)
         }
         else if(jeu.joueurs[i].versTotal == jeu.joueurs[joueurGagnant].versTotal)
         {
-            int valeurMaxPile        = determinerVainqueurEgalite(jeu.joueurs[i]);
-            int valeurMaxPileGagnant = determinerVainqueurEgalite(jeu.joueurs[joueurGagnant]);
-            if(valeurMaxPile > valeurMaxPileGagnant)
+            if(jeu.joueurs[i].valeurMaxPile > jeu.joueurs[joueurGagnant].valeurMaxPile)
             {
                 joueurGagnant = i;
             }
@@ -187,4 +171,11 @@ int determinerJoueurGagnant(const Jeu& jeu)
     }
 
     return joueurGagnant;
+}
+void ajouterTuileDansPile(Joueur& joueur, int nouvelleTuile)
+{
+    if(nouvelleTuile > joueur.valeurMaxPile)
+    {
+        joueur.valeurMaxPile = nouvelleTuile;
+    }
 }

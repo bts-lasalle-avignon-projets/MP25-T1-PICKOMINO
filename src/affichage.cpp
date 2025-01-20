@@ -260,7 +260,8 @@ void afficherAccueil()
     std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |    " << std::endl;
     std::cout << " |_|   |_|\\___|_|\\_\\___/|_| |_| |_|_|_| |_|\\___/ " << std::endl;
     std::cout << std::endl;
-    std::cout << "  MILLOT Pierre                            "<< BLEU << "v" << VERSION << COULEUR_DEFAUT << std::endl;
+    std::cout << "  MILLOT Pierre                            " << BLEU << "v" << VERSION
+              << COULEUR_DEFAUT << std::endl;
     std::cout << "  NAVARRO Mattéo" << std::endl;
     afficherSeparation();
     std::cout << std::endl << std::endl;
@@ -272,9 +273,15 @@ int afficherMenu()
 
     std::cout << "<----------------------> MENU <---------------------->" << std::endl;
     std::cout << std::endl;
-    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT << std::endl;
-    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT << std::endl;
-    std::cout << ROUGE << "                    3 - Quitter le jeu                " << COULEUR_DEFAUT << std::endl;
+    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << BLEU
+              << "                    3 - Jouer une partie contre l'ordinateur              "
+              << COULEUR_DEFAUT << std::endl;
+    std::cout << ROUGE << "                    4 - Quitter le jeu                " << COULEUR_DEFAUT
+              << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
     std::cout << "Choisir une option : ";
@@ -282,6 +289,40 @@ int afficherMenu()
     std::cout << std::endl;
 
     return optionChoisie;
+}
+
+int afficherDifficultes()
+{
+    int optionDifficulteChoisie = 0;
+
+    std::cout << "<----------------------> DIFFICULTES <---------------------->" << std::endl;
+    std::cout << std::endl;
+    std::cout << VERT << "                    1 - Difficile           " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << BLEU << "                    2 - Moyen            " << COULEUR_DEFAUT << std::endl;
+    std::cout << ROUGE << "                    3 - Facile               " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << std::endl;
+    std::cout << "<---------------------------------------------------->\n" << std::endl;
+    std::cout << "Choisir une option : ";
+    std::cin >> optionDifficulteChoisie;
+    switch(optionDifficulteChoisie)
+    {
+        case 1:
+            optionDifficulteChoisie = 5;
+            break;
+        case 2:
+            optionDifficulteChoisie = 6;
+            break;
+        case 3:
+            optionDifficulteChoisie = 7;
+            break;
+        default:
+            break;
+    }
+    std::cout << std::endl;
+
+    return optionDifficulteChoisie;
 }
 
 void afficherRegles()

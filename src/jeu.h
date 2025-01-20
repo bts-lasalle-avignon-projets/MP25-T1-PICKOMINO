@@ -3,9 +3,14 @@
 
 #include "pickomino.h"
 
-#define AFFICHER_REGLES 1
-#define JOUER           2
-#define QUITTER         3
+#define AFFICHER_REGLES         1
+#define JOUER                   2
+#define JOUER_CONTRE_ORDINATEUR 3
+#define QUITTER                 4
+
+#define DIFFICULTE_DIFFICILE 5
+#define DIFFICULTE_MOYEN     6
+#define DIFFICULTE_FACILE    7
 
 void jouerPickomino();
 void initialiserPartie(Jeu& jeu);
@@ -16,5 +21,6 @@ void gererFinTour(Jeu& jeu, bool tourPerdu);
 int  determinerJoueurGagnant(const Jeu& jeu);
 void jouerPartie(Jeu& jeu);
 void ajouterTuileDansPile(Joueur& joueur, int nouvelleTuile);
+void choisirDifficulte(Jeu& jeu, int optionDifficulteChoisie);
 
 #endif

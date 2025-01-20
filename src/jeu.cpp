@@ -24,6 +24,9 @@ void jouerPickomino()
             case JOUER:
                 jouerPartie(jeu);
                 break;
+            case JOUER_CONTRE_ORDINATEUR:
+                choisirDifficulte(jeu, afficherDifficultes());
+                break;
             case QUITTER:
                 estFinie = true;
                 break;
@@ -179,3 +182,23 @@ void ajouterTuileDansPile(Joueur& joueur, int nouvelleTuile)
         joueur.valeurMaxPile = nouvelleTuile;
     }
 }
+
+void choisirDifficulte(Jeu& jeu, int optionDifficulteChoisie)
+{
+    switch(optionDifficulteChoisie)
+    {
+        case DIFFICULTE_DIFFICILE:
+            break;
+        case DIFFICULTE_MOYEN:
+            break;
+        case DIFFICULTE_FACILE:
+            break;
+        default:
+            afficherSaisieInvalide();
+            break;
+    }
+}
+
+/*==========================================================*/
+
+/* TODO : Jouer contre une IA */

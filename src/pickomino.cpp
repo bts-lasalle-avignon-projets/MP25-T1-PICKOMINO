@@ -294,13 +294,3 @@ void ajouterPartieHistorique(const std::string& nom, int versTotal)
     fichier << "[" << nom << ";" << versTotal << "]";
     fichier.close();
 }
-
-void effacerHistorique()
-{
-    std::ofstream fichier("src/historique.txt", std::ios::out);
-    if(!fichier)
-    {
-        std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
-    }
-    fichier.close();
-}

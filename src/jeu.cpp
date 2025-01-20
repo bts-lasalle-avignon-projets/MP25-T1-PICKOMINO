@@ -36,6 +36,8 @@ void jouerPickomino()
 
 void jouerPartie(Jeu& jeu)
 {
+    system("clear");
+    afficherAccueil();
     initialiserPartie(jeu);
     do
     {
@@ -159,7 +161,21 @@ int determinerJoueurGagnant(const Jeu& jeu)
         {
             joueurGagnant = i;
         }
+        else if(jeu.joueurs[i].versTotal == jeu.joueurs[joueurGagnant].versTotal)
+        {
+            if(jeu.joueurs[i].valeurMaxPile > jeu.joueurs[joueurGagnant].valeurMaxPile)
+            {
+                joueurGagnant = i;
+            }
+        }
     }
 
     return joueurGagnant;
+}
+void ajouterTuileDansPile(Joueur& joueur, int nouvelleTuile)
+{
+    if(nouvelleTuile > joueur.valeurMaxPile)
+    {
+        joueur.valeurMaxPile = nouvelleTuile;
+    }
 }

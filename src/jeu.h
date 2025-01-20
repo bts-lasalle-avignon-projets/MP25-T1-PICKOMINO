@@ -15,5 +15,6 @@ void gererDesRetenus(Jeu& jeu, const int& valeurDeChoisi);
 void gererFinTour(Jeu& jeu, bool tourPerdu);
 int  determinerJoueurGagnant(const Jeu& jeu);
 void jouerPartie(Jeu& jeu);
+void ajouterTuileDansPile(Joueur& joueur, int nouvelleTuile);
 
 #endif

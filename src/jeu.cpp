@@ -27,6 +27,9 @@ void jouerPickomino()
             case HISTORIQUE:
                 afficherHistorique();
                 break;
+            case EFFACER_HISTORIQUE:
+                effacerHistorique();
+                break;
             case QUITTER:
                 estFinie = true;
                 break;

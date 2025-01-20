@@ -72,5 +72,6 @@ void remettreTuileDansBrochette(Jeu& jeu);
 bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);
 void ajouterPartieHistorique(const std::string& nom, int versTotal);
+void effacerHistorique();
 
 #endif

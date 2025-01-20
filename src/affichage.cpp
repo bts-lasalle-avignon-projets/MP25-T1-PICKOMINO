@@ -281,7 +281,9 @@ int afficherMenu()
               << std::endl;
     std::cout << JAUNE << "                    3 - Historique des parties        " << COULEUR_DEFAUT
               << std::endl;
-    std::cout << ROUGE << "                    4 - Quitter le jeu                " << COULEUR_DEFAUT
+    std::cout << JAUNE << "                    4 - Effacer l'historique        " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << ROUGE << "                    5 - Quitter le jeu                " << COULEUR_DEFAUT
               << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;

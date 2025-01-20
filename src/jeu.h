@@ -3,10 +3,11 @@
 
 #include "pickomino.h"
 
-#define AFFICHER_REGLES 1
-#define JOUER           2
-#define HISTORIQUE      3
-#define QUITTER         4
+#define AFFICHER_REGLES    1
+#define JOUER              2
+#define HISTORIQUE         3
+#define EFFACER_HISTORIQUE 4
+#define QUITTER            5
 
 void jouerPickomino();
 void initialiserPartie(Jeu& jeu);

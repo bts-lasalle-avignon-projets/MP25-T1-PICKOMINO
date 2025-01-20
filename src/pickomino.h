@@ -24,6 +24,7 @@ struct Joueur
     int         versTotal;
     int         pilePickomino[NB_PICKOMINOS];
     int         sommetPile;
+    int         valeurMaxPile;
 };
 
 enum Etat

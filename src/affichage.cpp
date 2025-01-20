@@ -260,7 +260,7 @@ void afficherAccueil()
     std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |    " << std::endl;
     std::cout << " |_|   |_|\\___|_|\\_\\___/|_| |_| |_|_|_| |_|\\___/ " << std::endl;
     std::cout << std::endl;
-    std::cout << "  MILLOT Pierre                            v" << VERSION << std::endl;
+    std::cout << "  MILLOT Pierre                            "<< BLEU << "v" << VERSION << COULEUR_DEFAUT << std::endl;
     std::cout << "  NAVARRO Mattéo" << std::endl;
     afficherSeparation();
     std::cout << std::endl << std::endl;
@@ -272,9 +272,9 @@ int afficherMenu()
 
     std::cout << "<----------------------> MENU <---------------------->" << std::endl;
     std::cout << std::endl;
-    std::cout << "                    1 - Afficher les règles           " << std::endl;
-    std::cout << "                    2 - Jouer une partie              " << std::endl;
-    std::cout << "                    3 - Quitter le jeu                " << std::endl;
+    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT << std::endl;
+    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT << std::endl;
+    std::cout << ROUGE << "                    3 - Quitter le jeu                " << COULEUR_DEFAUT << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
     std::cout << "Choisir une option : ";
@@ -286,6 +286,7 @@ int afficherMenu()
 
 void afficherRegles()
 {
+    system("clear");
     std::cout << "But du jeu : Le vainqueur sera le joueur qui aura récupéré le plus de vers à la "
                  "fin de la partie."
               << std::endl
@@ -331,6 +332,8 @@ void afficherSaisieInvalide()
 {
     std::cout << ROUGE << "Saisie invalide ! Réessayez." << COULEUR_DEFAUT << std::endl
               << std::endl;
+    std::cin.clear();
+    std::cin.ignore();
 }
 
 void afficherSeparation()

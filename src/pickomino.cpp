@@ -7,9 +7,10 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
 {
     for(int i = 0; i < nbJoueurs; ++i)
     {
-        joueurs[i].versTotal  = 0;
-        joueurs[i].sommetPile = 0;
-        joueurs[i].numero     = i;
+        joueurs[i].versTotal     = 0;
+        joueurs[i].sommetPile    = 0;
+        joueurs[i].numero        = i;
+        joueurs[i].valeurMaxPile = 0;
         for(int j = 0; j < NB_PICKOMINOS; ++j)
         {
             joueurs[i].pilePickomino[j] = 0;

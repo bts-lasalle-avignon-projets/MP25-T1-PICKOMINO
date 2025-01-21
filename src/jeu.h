@@ -9,9 +9,9 @@
 #define HISTORIQUE              4
 #define QUITTER                 5
 
-#define DIFFICULTE_DIFFICILE 6
+#define DIFFICULTE_FACILE    6
 #define DIFFICULTE_MOYEN     7
-#define DIFFICULTE_FACILE    8
+#define DIFFICULTE_DIFFICILE 8
 
 void jouerPickomino();
 void initialiserPartie(Jeu& jeu);

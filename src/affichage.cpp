@@ -302,12 +302,12 @@ int afficherDifficultes()
     system("clear");
     std::cout << "<----------------------> DIFFICULTES <---------------------->" << std::endl;
     std::cout << std::endl;
-    std::cout << VERT << "                    1 - Difficile           " << COULEUR_DEFAUT
+    std::cout << VERT << "                         1 - Facile               " << COULEUR_DEFAUT
               << std::endl;
-    std::cout << BLEU << "                    2 - Moyen            " << COULEUR_DEFAUT << std::endl;
-    std::cout << ROUGE << "                    3 - Facile               " << COULEUR_DEFAUT
+    std::cout << BLEU << "                         2 - Moyen            " << COULEUR_DEFAUT
               << std::endl;
-    std::cout << std::endl;
+    std::cout << ROUGE << "                         3 - Difficile           " << COULEUR_DEFAUT
+              << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
     std::cout << "Choisir une option : ";
     std::cin >> optionDifficulteChoisie;
@@ -342,13 +342,12 @@ void afficherRegles()
                  "lui convient et mettre de côté tous les dés ayant le même symbole."
               << std::endl
               << std::endl;
-    std::cout
-      << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
-         "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
-         "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
-         "correspondant à la valeur totale de tous ses dés."
-      << std::endl
-      << std::endl;
+    std::cout << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
+                 "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
+                 "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
+                 "correspondant à la valeur totale de tous ses dés."
+              << std::endl
+              << std::endl;
     std::cout << "Face 1 = 1 point" << std::endl;
     std::cout << "Face 2 = 2 points" << std::endl;
     std::cout << "Face 3 = 3 points" << std::endl;

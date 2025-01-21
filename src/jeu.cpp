@@ -1,6 +1,7 @@
 #include "jeu.h"
 #include "pickomino.h"
 #include "affichage.h"
+#include "ia.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -196,6 +197,7 @@ void choisirDifficulte(Jeu& jeu, int optionDifficulteChoisie)
         case DIFFICULTE_MOYEN:
             break;
         case DIFFICULTE_FACILE:
+            jouerPartieIAFacile(jeu);
             break;
         default:
             afficherSaisieInvalide();

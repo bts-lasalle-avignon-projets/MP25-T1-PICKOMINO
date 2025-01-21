@@ -3,6 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <fstream>
+#include <string>
 
 int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
 {
@@ -260,7 +262,8 @@ void afficherAccueil()
     std::cout << " |  __/| | (__|   < (_) | | | | | | | | | | (_) |    " << std::endl;
     std::cout << " |_|   |_|\\___|_|\\_\\___/|_| |_| |_|_|_| |_|\\___/ " << std::endl;
     std::cout << std::endl;
-    std::cout << "  MILLOT Pierre                            "<< BLEU << "v" << VERSION << COULEUR_DEFAUT << std::endl;
+    std::cout << "  MILLOT Pierre                            " << BLEU << "v" << VERSION
+              << COULEUR_DEFAUT << std::endl;
     std::cout << "  NAVARRO Mattéo" << std::endl;
     afficherSeparation();
     std::cout << std::endl << std::endl;
@@ -272,9 +275,14 @@ int afficherMenu()
 
     std::cout << "<----------------------> MENU <---------------------->" << std::endl;
     std::cout << std::endl;
-    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT << std::endl;
-    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT << std::endl;
-    std::cout << ROUGE << "                    3 - Quitter le jeu                " << COULEUR_DEFAUT << std::endl;
+    std::cout << VERT << "                    1 - Afficher les règles           " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT
+              << std::endl;
+    std::cout << MAGENTA << "                    3 - Historique des parties        "
+              << COULEUR_DEFAUT << std::endl;
+    std::cout << ROUGE << "                    4 - Quitter le jeu                " << COULEUR_DEFAUT
+              << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
     std::cout << "Choisir une option : ";
@@ -296,13 +304,12 @@ void afficherRegles()
                  "lui convient et mettre de côté tous les dés ayant le même symbole."
               << std::endl
               << std::endl;
-    std::cout
-      << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
-         "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
-         "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
-         "correspondant à la valeur totale de tous ses dés."
-      << std::endl
-      << std::endl;
+    std::cout << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
+                 "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
+                 "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
+                 "correspondant à la valeur totale de tous ses dés."
+              << std::endl
+              << std::endl;
     std::cout << "Face 1 = 1 point" << std::endl;
     std::cout << "Face 2 = 2 points" << std::endl;
     std::cout << "Face 3 = 3 points" << std::endl;
@@ -339,4 +346,114 @@ void afficherSaisieInvalide()
 void afficherSeparation()
 {
     std::cout << "=============================================================" << std::endl;
+}
+
+std::string lireFichier(const std::string& chemin)
+{
+    std::ifstream fichier(chemin);
+    if(!fichier.is_open())
+    {
+        std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
+        return "";
+    }
+    std::string contenu;
+    std::getline(fichier, contenu);
+    fichier.close();
+    return contenu;
+}
+
+void traiterTrame(const std::string& trame)
+{
+    size_t debut = 0;
+    while((debut = trame.find('[', debut)) != std::string::npos)
+    {
+        size_t fin = trame.find(']', debut);
+        if(fin == std::string::npos)
+        {
+            std::cerr << "Erreur : Trame mal formatée (']' manquant)." << std::endl;
+        }
+
+        std::string contenu = trame.substr(debut + 1, fin - debut - 1);
+
+        size_t virgule = contenu.find(',');
+        if(virgule == std::string::npos)
+        {
+            std::cerr << "Erreur : Format incorrect (',' manquant)." << std::endl;
+        }
+
+        std::string nom   = contenu.substr(0, virgule);
+        int         score = std::stoi(contenu.substr(virgule + 1));
+
+        std::cout << VERT << "Nom du Gagnant: " << JAUNE << nom << COULEUR_DEFAUT;
+        std::cout << VERT << " avec vers: " << JAUNE << score << COULEUR_DEFAUT << "\n"
+                  << std::endl;
+
+        debut = fin + 1;
+    }
+}
+
+bool choisirEffacerHistorique()
+{
+    char saisieReponse;
+    bool saisieValide      = false;
+    bool effacerHistorique = false;
+    do
+    {
+        std::cout << "Voulez vous effacer l'historique ? (o / n) : " << std::endl;
+        std::cin >> saisieReponse;
+        std::cout << std::endl;
+        if(saisieReponse == 'o' || saisieReponse == 'O')
+        {
+            saisieValide      = true;
+            effacerHistorique = true;
+        }
+        else if(saisieReponse == 'n' || saisieReponse == 'N')
+        {
+            saisieValide      = true;
+            effacerHistorique = false;
+        }
+        else
+        {
+            std::cout << ROUGE << "Choix invalide !\n" << COULEUR_DEFAUT << std::endl;
+            saisieValide = false;
+        }
+    } while(!saisieValide);
+    return effacerHistorique;
+}
+
+void effacerHistorique()
+{
+    std::ofstream fichier("src/historique.txt", std::ios::out);
+    if(!fichier)
+    {
+        std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
+    }
+    fichier.close();
+}
+
+void afficherHistorique()
+{
+    system("clear");
+    std::string trame = lireFichier("src/historique.txt");
+
+    if(!trame.empty())
+    {
+        traiterTrame(trame);
+        if(choisirEffacerHistorique())
+        {
+            effacerHistorique();
+            std::cout << VERT_GRAS << "L'historique des parties effacer !" << COULEUR_DEFAUT
+                      << std::endl;
+        }
+        else
+        {
+            std::cout << VERT_GRAS << "L'historique des parties n'a pas été effacé !\n"
+                      << COULEUR_DEFAUT << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << ROUGE_GRAS << "L'historique des parties est vide" << COULEUR_DEFAUT
+                  << std::endl;
+    }
 }

@@ -1,5 +1,7 @@
 #include "pickomino.h"
 
+#include <fstream>
+#include <iostream>
 #include <cstdlib>
 #include <time.h>
 
@@ -281,4 +283,14 @@ bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS])
     }
 
     return false;
+}
+void ajouterPartieHistorique(const std::string& nom, int versTotal)
+{
+    std::ofstream fichier("src/historique.txt", std::ios::app);
+    if(!fichier)
+    {
+        std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
+    }
+    fichier << "[" << nom << ";" << versTotal << "]";
+    fichier.close();
 }

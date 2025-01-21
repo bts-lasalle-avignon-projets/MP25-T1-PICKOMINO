@@ -27,6 +27,9 @@ void jouerPickomino()
             case JOUER_CONTRE_ORDINATEUR:
                 choisirDifficulte(jeu, afficherDifficultes());
                 break;
+            case HISTORIQUE:
+                afficherHistorique();
+                break;
             case QUITTER:
                 estFinie = true;
                 break;
@@ -51,6 +54,7 @@ void jouerPartie(Jeu& jeu)
     } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
 
     int joueurGagnant = determinerJoueurGagnant(jeu);
+    ajouterPartieHistorique(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
     afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
 }
 

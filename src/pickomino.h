@@ -3,7 +3,7 @@
 
 #include <string>
 
-#define VERSION "1.0"
+#define VERSION "1.2"
 
 #define NB_JOUEURS_MIN 2
 #define NB_JOUEURS_MAX 7
@@ -71,5 +71,6 @@ bool volerPickominoJoueur(Jeu& jeu);
 void remettreTuileDansBrochette(Jeu& jeu);
 bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);
+void ajouterPartieHistorique(const std::string& nom, int versTotal);
 
 #endif

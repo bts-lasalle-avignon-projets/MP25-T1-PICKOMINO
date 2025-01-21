@@ -279,7 +279,7 @@ int afficherMenu()
               << std::endl;
     std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT
               << std::endl;
-    std::cout << BLEU
+    std::cout << CYAN
               << "                    3 - Jouer une partie contre l'ordinateur              "
               << COULEUR_DEFAUT << std::endl;
     std::cout << MAGENTA << "                    4 - Historique des parties        "
@@ -299,6 +299,7 @@ int afficherDifficultes()
 {
     int optionDifficulteChoisie = 0;
 
+    system("clear");
     std::cout << "<----------------------> DIFFICULTES <---------------------->" << std::endl;
     std::cout << std::endl;
     std::cout << VERT << "                    1 - Difficile           " << COULEUR_DEFAUT
@@ -313,13 +314,13 @@ int afficherDifficultes()
     switch(optionDifficulteChoisie)
     {
         case 1:
-            optionDifficulteChoisie = 5;
-            break;
-        case 2:
             optionDifficulteChoisie = 6;
             break;
-        case 3:
+        case 2:
             optionDifficulteChoisie = 7;
+            break;
+        case 3:
+            optionDifficulteChoisie = 8;
             break;
         default:
             break;

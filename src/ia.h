@@ -5,6 +5,9 @@
 #include "jeu.h"
 #include "affichage.h"
 
+#define NB_IA_MIN 1
+#define NB_IA_MAX 6
+
 void jouerPartieIAFacile(Jeu& jeu);
 void jouerTourIA(Jeu& jeu);
 void initialiserPartieIA(Jeu& jeu, int difficulteChoisie);

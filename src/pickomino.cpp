@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
+#include <thread>
+#include <chrono>
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
 {
@@ -298,6 +300,7 @@ void ajouterPartieHistorique(const std::string& nom, int versTotal)
 int choisirFaceAleatoire(Plateau& plateau)
 
 {
+    std::this_thread::sleep_for(std::chrono::seconds(2));
     int facesDisponibles[NB_DES];
     int compteurFacesDisponibles = 0;
 

@@ -204,7 +204,3 @@ void choisirDifficulte(Jeu& jeu, int optionDifficulteChoisie)
             break;
     }
 }
-
-/*==========================================================*/
-
-/* TODO : Jouer contre une IA */

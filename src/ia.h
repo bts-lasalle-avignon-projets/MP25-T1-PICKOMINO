@@ -6,8 +6,9 @@
 #include "affichage.h"
 
 void jouerPartieIAFacile(Jeu& jeu);
-//void jouerTourIA(Jeu& jeu);
+void jouerTourIA(Jeu& jeu);
 void initialiserPartieIA(Jeu& jeu, int difficulteChoisie);
-
+bool choisirFinTourIA(Plateau& plateau);
+bool parcourirBrochette(Plateau& plateau);
 
 #endif

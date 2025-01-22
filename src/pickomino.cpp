@@ -308,8 +308,8 @@ int choisirFaceAleatoire(Plateau& plateau)
 
     if(plateau.desRetenus[FACE_VER - 1] > 0)
     {
-        int index = rand() % compteurFacesDisponibles;
-        return facesDisponibles[index];
+        int faceChoisi = rand() % compteurFacesDisponibles;
+        return facesDisponibles[faceChoisi];
     }
 
     return FACE_VER;

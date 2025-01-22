@@ -1,5 +1,6 @@
 #include "affichage.h"
 #include "couleurs.h"
+#include "ia.h"
 #include <iostream>
 #include <iomanip>
 #include <limits>
@@ -31,6 +32,61 @@ int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
     } while(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax);
 
     return nombreJoueurs;
+}
+
+int saisirNombreJoueursIA(int nbJoueursIAMax, int nbJoueursIAMin)
+{
+    int nombreJoueursIA = 0;
+    do
+    {
+        std::cout << "Entrez le nombre de joueurs (minimum : " << nbJoueursIAMin
+                  << " - maximum : " << nbJoueursIAMax << ") ? ";
+        std::cin >> nombreJoueursIA;
+        if(std::cin.good())
+        {
+            if(nombreJoueursIA < nbJoueursIAMin || nombreJoueursIA > nbJoueursIAMax)
+            {
+                std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+    } while(nombreJoueursIA < nbJoueursIAMin || nombreJoueursIA > nbJoueursIAMax);
+
+    return nombreJoueursIA;
+}
+
+int saisirNombreOrdinateursIA(int nbOrdinateursIAMax, int nbOrdinateursIAMin)
+{
+    int nombreOrdinateursIA = 0;
+
+    do
+    {
+        std::cout << "Entrez le nombre d'ordinateurs (minimum : " << nbOrdinateursIAMin
+                  << " - maximum : " << nbOrdinateursIAMax << ") ? ";
+        std::cin >> nombreOrdinateursIA;
+        if(std::cin.good())
+        {
+            if(nombreOrdinateursIA < nbOrdinateursIAMin || nombreOrdinateursIA > nbOrdinateursIAMax)
+            {
+                std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+    } while(nombreOrdinateursIA < nbOrdinateursIAMin || nombreOrdinateursIA > nbOrdinateursIAMax);
+
+    return nombreOrdinateursIA;
 }
 
 void saisirNomJoueur(std::string& nom)

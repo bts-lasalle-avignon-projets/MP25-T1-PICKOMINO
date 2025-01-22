@@ -7,11 +7,10 @@ void jouerPartieIAFacile(Jeu& jeu)
 {
     afficherAccueil();
     initialiserPartieIA(jeu, DIFFICULTE_FACILE);
-    int numeroJoueurHumain = 1;
 
     do
     {
-        if(jeu.plateau.numeroJoueur < numeroJoueurHumain)
+        if(jeu.plateau.numeroJoueur < jeu.nbJoueursIA)
         {
             jouerTour(jeu);
         }
@@ -33,20 +32,23 @@ void initialiserPartieIA(Jeu& jeu, int difficulteChoisie)
 {
     srand(time(NULL));
 
-    int nombreJoueursHumains = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
-    int numeroJoueurHumain   = 1;
-    jeu.nbJoueurs            = nombreJoueursHumains + 1;
+    jeu.nbJoueursIA = saisirNombreJoueursIA(NB_JOUEURS_IA_MAX, NB_JOUEURS_IA_MIN);
+
+    int nbOrdinateursIAMaxPossible = NB_JOUEURS_MAX - jeu.nbJoueursIA;
+
+    jeu.nbOrdinateursIA = saisirNombreOrdinateursIA(nbOrdinateursIAMaxPossible, NB_ORDINATEURS_IA_MIN);
+    jeu.nbJoueurs = jeu.nbJoueursIA + jeu.nbOrdinateursIA;
     jeu.plateau.numeroJoueur = 0;
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
-        if(i < numeroJoueurHumain)
+        if(i < jeu.nbJoueursIA)
         {
             saisirNomJoueur(jeu.joueurs[i].nom);
         }
         else
         {
-            jeu.joueurs[i].nom = "IA " + std::to_string(i + 1);
+            jeu.joueurs[i].nom = "IA " + std::to_string(i - jeu.nbJoueursIA + 1);
         }
         initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     }

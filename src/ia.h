@@ -5,8 +5,11 @@
 #include "jeu.h"
 #include "affichage.h"
 
-#define NB_IA_MIN 1
-#define NB_IA_MAX 6
+#define NB_ORDINATEURS_IA_MIN 1
+#define NB_ORDINATEURS_IA_MAX 6
+
+#define NB_JOUEURS_IA_MIN 1
+#define NB_JOUEURS_IA_MAX 6
 
 void jouerPartieIAFacile(Jeu& jeu);
 void jouerTourIA(Jeu& jeu);

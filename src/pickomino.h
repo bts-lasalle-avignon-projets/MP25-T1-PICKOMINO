@@ -53,6 +53,8 @@ struct Plateau
 struct Jeu
 {
     int     nbJoueurs;
+    int     nbJoueursIA;
+    int     nbOrdinateursIA;
     Joueur  joueurs[NB_JOUEURS_MAX];
     Plateau plateau;
 };

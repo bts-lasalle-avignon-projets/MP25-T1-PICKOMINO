@@ -11,7 +11,7 @@
 #define NB_JOUEURS_IA_MIN 1
 #define NB_JOUEURS_IA_MAX 6
 
-void jouerPartieIAFacile(Jeu& jeu);
+void jouerPartieIA(Jeu& jeu);
 void jouerTourIA(Jeu& jeu);
 void initialiserPartieIA(Jeu& jeu, int difficulteChoisie);
 bool choisirFinTourIA(Plateau& plateau);

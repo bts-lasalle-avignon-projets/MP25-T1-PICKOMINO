@@ -197,7 +197,7 @@ void choisirDifficulte(Jeu& jeu, int optionDifficulteChoisie)
         case DIFFICULTE_MOYEN:
             break;
         case DIFFICULTE_FACILE:
-            jouerPartieIAFacile(jeu);
+            jouerPartieIA(jeu);
             break;
         default:
             afficherSaisieInvalide();

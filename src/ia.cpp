@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iostream>
 
-void jouerPartieIAFacile(Jeu& jeu)
+void jouerPartieIA(Jeu& jeu)
 {
     afficherAccueil();
     initialiserPartieIA(jeu, DIFFICULTE_FACILE);

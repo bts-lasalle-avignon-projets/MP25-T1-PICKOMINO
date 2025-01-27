@@ -298,21 +298,20 @@ void ajouterPartieHistorique(const std::string& nom, int versTotal)
 }
 
 int choisirFaceAleatoire(Plateau& plateau)
-
 {
     std::this_thread::sleep_for(std::chrono::seconds(2));
     int facesDisponibles[NB_DES];
-    int compteurFacesDisponibles = 0;
+    int nombreFacesDisponibles = 0;
 
     for(int i = 0; i < plateau.nbDes; ++i)
     {
-        facesDisponibles[compteurFacesDisponibles++] = plateau.des[i];
+        facesDisponibles[nombreFacesDisponibles++] = plateau.des[i];
     }
 
     if(plateau.desRetenus[FACE_VER - 1] > 0)
     {
-        int faceChoisi = rand() % compteurFacesDisponibles;
-        return facesDisponibles[faceChoisi];
+        int faceChoisie = rand() % nombreFacesDisponibles;
+        return facesDisponibles[faceChoisie];
     }
 
     return FACE_VER;

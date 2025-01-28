@@ -1,6 +1,6 @@
 #include "jeu.h"
-#include "pickomino.h"
 #include "affichage.h"
+#include "ia.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -24,6 +24,9 @@ void jouerPickomino()
             case JOUER:
                 jouerPartie(jeu);
                 break;
+            case JOUER_CONTRE_ORDINATEUR:
+                jouerPartie(jeu, true);
+                break;
             case HISTORIQUE:
                 afficherHistorique();
                 break;
@@ -37,14 +40,31 @@ void jouerPickomino()
     } while(!estFinie);
 }
 
-void jouerPartie(Jeu& jeu)
+void jouerPartie(Jeu& jeu, bool avecIA /*= false*/)
 {
     system("clear");
     afficherAccueil();
-    initialiserPartie(jeu);
+
+    if(avecIA)
+    {
+        initialiserPartieIA(jeu);
+    }
+    else
+    {
+        initialiserPartie(jeu);
+    }
+
     do
     {
-        jouerTour(jeu);
+        if(jeu.joueurs[jeu.plateau.numeroJoueur].estIA)
+        {
+            jouerTourIA(jeu);
+        }
+        else
+        {
+            jouerTour(jeu);
+        }
+
         // au joueur suivant
         jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
 
@@ -59,13 +79,13 @@ void initialiserPartie(Jeu& jeu)
 {
     srand(time(NULL));
 
-    jeu.nbJoueurs            = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
+    jeu.nbJoueurs = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
+    initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     jeu.plateau.numeroJoueur = 0;
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
         saisirNomJoueur(jeu.joueurs[i].nom);
-        initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     }
 
     initialiserBrochette(jeu.plateau.brochettePickominos);

@@ -5,6 +5,8 @@
 #include "pickomino.h"
 
 int         saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin);
+int         saisirNombreJoueursIA(int nbJoueursIAMax, int nbJoueursIAMin);
+int         saisirNombreOrdinateursIA(int nbOrdinateursIAMax, int nbOrdinateursIAMin);
 void        saisirNomJoueur(std::string& nom);
 void        afficherJoueurs(const Jeu& jeu);
 void        afficherJoueur(const Joueur& joueur);
@@ -27,5 +29,6 @@ std::string lireFichier(const std::string& chemin);
 void        traiterTrame(const std::string& trame);
 void        effacerHistorique();
 void        afficherHistorique();
+int         afficherDifficultes(const std::string& nomIA);
 
 #endif

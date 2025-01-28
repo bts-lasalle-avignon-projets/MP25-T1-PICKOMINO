@@ -4,11 +4,15 @@
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
+#include <thread>
+#include <chrono>
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
 {
     for(int i = 0; i < nbJoueurs; ++i)
     {
+        joueurs[i].estIA         = false;
+        joueurs[i].niveauIA      = NIVEAU_IA_AUCUN;
         joueurs[i].versTotal     = 0;
         joueurs[i].sommetPile    = 0;
         joueurs[i].numero        = i;
@@ -18,6 +22,15 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
             joueurs[i].pilePickomino[j] = 0;
         }
     }
+}
+
+void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                         int  numeroJoueur,
+                         bool estIA /*= false*/,
+                         int  niveauIA /*= NIVEAU_IA_AUCUN*/)
+{
+    joueurs[numeroJoueur].estIA    = estIA;
+    joueurs[numeroJoueur].niveauIA = niveauIA;
 }
 
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS])
@@ -291,6 +304,6 @@ void ajouterPartieHistorique(const std::string& nom, int versTotal)
     {
         std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
     }
-    fichier << "[" << nom << ";" << versTotal << "]";
+    fichier << "[" << nom << "," << versTotal << "]";
     fichier.close();
 }

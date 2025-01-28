@@ -17,9 +17,16 @@
 #define VALEUR_PICKOMINOS_MAX 36
 #define NB_VERS_MAX           4
 
+#define NIVEAU_IA_AUCUN     0
+#define NIVEAU_IA_FACILE    1
+#define NIVEAU_IA_MOYEN     2
+#define NIVEAU_IA_DIFFICILE 3
+
 struct Joueur
 {
     std::string nom;
+    bool        estIA;
+    int         niveauIA;
     int         numero;
     int         versTotal;
     int         pilePickomino[NB_PICKOMINOS];
@@ -53,11 +60,17 @@ struct Plateau
 struct Jeu
 {
     int     nbJoueurs;
+    int     nbJoueursIA;
+    int     nbOrdinateursIA;
     Joueur  joueurs[NB_JOUEURS_MAX];
     Plateau plateau;
 };
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
+void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                         int  numeroJoueur,
+                         bool estIA    = false,
+                         int  niveauIA = NIVEAU_IA_AUCUN);
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
 void reinitialiserPlateau(Plateau& plateau);
 void lancerDes(int nbDes, int des[NB_DES]);

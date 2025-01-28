@@ -1,5 +1,6 @@
 #include "affichage.h"
 #include "couleurs.h"
+#include "ia.h"
 #include <iostream>
 #include <iomanip>
 #include <limits>
@@ -31,6 +32,61 @@ int saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin)
     } while(nombreJoueurs < nbJoueursMin || nombreJoueurs > nbJoueursMax);
 
     return nombreJoueurs;
+}
+
+int saisirNombreJoueursIA(int nbJoueursIAMax, int nbJoueursIAMin)
+{
+    int nombreJoueursIA = 0;
+    do
+    {
+        std::cout << "Entrez le nombre de joueurs (minimum : " << nbJoueursIAMin
+                  << " - maximum : " << nbJoueursIAMax << ") ? ";
+        std::cin >> nombreJoueursIA;
+        if(std::cin.good())
+        {
+            if(nombreJoueursIA < nbJoueursIAMin || nombreJoueursIA > nbJoueursIAMax)
+            {
+                std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+    } while(nombreJoueursIA < nbJoueursIAMin || nombreJoueursIA > nbJoueursIAMax);
+
+    return nombreJoueursIA;
+}
+
+int saisirNombreOrdinateursIA(int nbOrdinateursIAMax, int nbOrdinateursIAMin)
+{
+    int nombreOrdinateursIA = 0;
+
+    do
+    {
+        std::cout << "Entrez le nombre d'ordinateurs (minimum : " << nbOrdinateursIAMin
+                  << " - maximum : " << nbOrdinateursIAMax << ") ? ";
+        std::cin >> nombreOrdinateursIA;
+        if(std::cin.good())
+        {
+            if(nombreOrdinateursIA < nbOrdinateursIAMin || nombreOrdinateursIA > nbOrdinateursIAMax)
+            {
+                std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << ROUGE << "Saisie invalide !" << COULEUR_DEFAUT << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+
+    } while(nombreOrdinateursIA < nbOrdinateursIAMin || nombreOrdinateursIA > nbOrdinateursIAMax);
+
+    return nombreOrdinateursIA;
 }
 
 void saisirNomJoueur(std::string& nom)
@@ -279,9 +335,12 @@ int afficherMenu()
               << std::endl;
     std::cout << BLEU << "                    2 - Jouer une partie              " << COULEUR_DEFAUT
               << std::endl;
-    std::cout << MAGENTA << "                    3 - Historique des parties        "
+    std::cout << CYAN
+              << "                    3 - Jouer une partie contre l'ordinateur              "
               << COULEUR_DEFAUT << std::endl;
-    std::cout << ROUGE << "                    4 - Quitter le jeu                " << COULEUR_DEFAUT
+    std::cout << MAGENTA << "                    4 - Historique des parties        "
+              << COULEUR_DEFAUT << std::endl;
+    std::cout << ROUGE << "                    5 - Quitter le jeu                " << COULEUR_DEFAUT
               << std::endl;
     std::cout << std::endl;
     std::cout << "<---------------------------------------------------->\n" << std::endl;
@@ -290,6 +349,42 @@ int afficherMenu()
     std::cout << std::endl;
 
     return optionChoisie;
+}
+
+int afficherDifficultes(const std::string& nomIA)
+{
+    int  optionDifficulteChoisie = 0;
+    bool saisieValide            = false;
+
+    do
+    {
+        system("clear");
+        std::cout << "<----------------------> DIFFICULTES <---------------------->" << std::endl;
+        std::cout << std::endl;
+        std::cout << VERT << "                         1 - Facile               " << COULEUR_DEFAUT
+                  << std::endl;
+        std::cout << BLEU << "                         2 - Moyen            " << COULEUR_DEFAUT
+                  << std::endl;
+        std::cout << ROUGE << "                         3 - Difficile           " << COULEUR_DEFAUT
+                  << std::endl;
+        std::cout << "<---------------------------------------------------->\n" << std::endl;
+        std::cout << "Choisir une option pour " << nomIA << " : ";
+        std::cin >> optionDifficulteChoisie;
+        switch(optionDifficulteChoisie)
+        {
+            case NIVEAU_IA_FACILE:
+            case NIVEAU_IA_MOYEN:
+            case NIVEAU_IA_DIFFICILE:
+                saisieValide = true;
+                break;
+            default:
+                afficherSaisieInvalide();
+                break;
+        }
+        std::cout << std::endl;
+    } while(!saisieValide);
+
+    return optionDifficulteChoisie;
 }
 
 void afficherRegles()
@@ -304,12 +399,13 @@ void afficherRegles()
                  "lui convient et mettre de côté tous les dés ayant le même symbole."
               << std::endl
               << std::endl;
-    std::cout << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
-                 "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
-                 "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
-                 "correspondant à la valeur totale de tous ses dés."
-              << std::endl
-              << std::endl;
+    std::cout
+      << "À chaque lancer, l'action est répétée, sauf qu'il doit choisir un symbole qu'il "
+         "n'a pas choisi auparavant. ⚠️ Le joueur doit impérativement mettre de côté au "
+         "moins un dé avec le symbole « ver » pour valider son tour et récupérer une tuile "
+         "correspondant à la valeur totale de tous ses dés."
+      << std::endl
+      << std::endl;
     std::cout << "Face 1 = 1 point" << std::endl;
     std::cout << "Face 2 = 2 points" << std::endl;
     std::cout << "Face 3 = 3 points" << std::endl;

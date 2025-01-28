@@ -1,5 +1,4 @@
 #include "jeu.h"
-#include "pickomino.h"
 #include "affichage.h"
 #include "ia.h"
 
@@ -26,7 +25,7 @@ void jouerPickomino()
                 jouerPartie(jeu);
                 break;
             case JOUER_CONTRE_ORDINATEUR:
-                choisirDifficulte(jeu, afficherDifficultes());
+                jouerPartie(jeu, true);
                 break;
             case HISTORIQUE:
                 afficherHistorique();
@@ -41,14 +40,31 @@ void jouerPickomino()
     } while(!estFinie);
 }
 
-void jouerPartie(Jeu& jeu)
+void jouerPartie(Jeu& jeu, bool avecIA /*= false*/)
 {
     system("clear");
     afficherAccueil();
-    initialiserPartie(jeu);
+
+    if(avecIA)
+    {
+        initialiserPartieIA(jeu);
+    }
+    else
+    {
+        initialiserPartie(jeu);
+    }
+
     do
     {
-        jouerTour(jeu);
+        if(jeu.joueurs[jeu.plateau.numeroJoueur].estIA)
+        {
+            jouerTourIA(jeu);
+        }
+        else
+        {
+            jouerTour(jeu);
+        }
+
         // au joueur suivant
         jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
 
@@ -63,13 +79,13 @@ void initialiserPartie(Jeu& jeu)
 {
     srand(time(NULL));
 
-    jeu.nbJoueurs            = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
+    jeu.nbJoueurs = saisirNombreJoueurs(NB_JOUEURS_MAX, NB_JOUEURS_MIN);
+    initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     jeu.plateau.numeroJoueur = 0;
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
         saisirNomJoueur(jeu.joueurs[i].nom);
-        initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     }
 
     initialiserBrochette(jeu.plateau.brochettePickominos);
@@ -185,22 +201,5 @@ void ajouterTuileDansPile(Joueur& joueur, int nouvelleTuile)
     if(nouvelleTuile > joueur.valeurMaxPile)
     {
         joueur.valeurMaxPile = nouvelleTuile;
-    }
-}
-
-void choisirDifficulte(Jeu& jeu, int optionDifficulteChoisie)
-{
-    switch(optionDifficulteChoisie)
-    {
-        case DIFFICULTE_DIFFICILE:
-            break;
-        case DIFFICULTE_MOYEN:
-            break;
-        case DIFFICULTE_FACILE:
-            jouerPartieIA(jeu);
-            break;
-        default:
-            afficherSaisieInvalide();
-            break;
     }
 }

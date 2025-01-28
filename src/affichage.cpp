@@ -351,37 +351,38 @@ int afficherMenu()
     return optionChoisie;
 }
 
-int afficherDifficultes()
+int afficherDifficultes(const std::string& nomIA)
 {
-    int optionDifficulteChoisie = 0;
+    int  optionDifficulteChoisie = 0;
+    bool saisieValide            = false;
 
-    system("clear");
-    std::cout << "<----------------------> DIFFICULTES <---------------------->" << std::endl;
-    std::cout << std::endl;
-    std::cout << VERT << "                         1 - Facile               " << COULEUR_DEFAUT
-              << std::endl;
-    std::cout << BLEU << "                         2 - Moyen            " << COULEUR_DEFAUT
-              << std::endl;
-    std::cout << ROUGE << "                         3 - Difficile           " << COULEUR_DEFAUT
-              << std::endl;
-    std::cout << "<---------------------------------------------------->\n" << std::endl;
-    std::cout << "Choisir une option : ";
-    std::cin >> optionDifficulteChoisie;
-    switch(optionDifficulteChoisie)
+    do
     {
-        case 1:
-            optionDifficulteChoisie = 6;
-            break;
-        case 2:
-            optionDifficulteChoisie = 7;
-            break;
-        case 3:
-            optionDifficulteChoisie = 8;
-            break;
-        default:
-            break;
-    }
-    std::cout << std::endl;
+        system("clear");
+        std::cout << "<----------------------> DIFFICULTES <---------------------->" << std::endl;
+        std::cout << std::endl;
+        std::cout << VERT << "                         1 - Facile               " << COULEUR_DEFAUT
+                  << std::endl;
+        std::cout << BLEU << "                         2 - Moyen            " << COULEUR_DEFAUT
+                  << std::endl;
+        std::cout << ROUGE << "                         3 - Difficile           " << COULEUR_DEFAUT
+                  << std::endl;
+        std::cout << "<---------------------------------------------------->\n" << std::endl;
+        std::cout << "Choisir une option pour " << nomIA << " : ";
+        std::cin >> optionDifficulteChoisie;
+        switch(optionDifficulteChoisie)
+        {
+            case NIVEAU_IA_FACILE:
+            case NIVEAU_IA_MOYEN:
+            case NIVEAU_IA_DIFFICILE:
+                saisieValide = true;
+                break;
+            default:
+                afficherSaisieInvalide();
+                break;
+        }
+        std::cout << std::endl;
+    } while(!saisieValide);
 
     return optionDifficulteChoisie;
 }

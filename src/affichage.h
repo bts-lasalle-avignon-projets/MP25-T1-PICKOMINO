@@ -29,6 +29,6 @@ std::string lireFichier(const std::string& chemin);
 void        traiterTrame(const std::string& trame);
 void        effacerHistorique();
 void        afficherHistorique();
-int         afficherDifficultes();
+int         afficherDifficultes(const std::string& nomIA);
 
 #endif

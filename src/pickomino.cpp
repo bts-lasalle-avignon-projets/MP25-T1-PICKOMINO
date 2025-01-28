@@ -7,11 +7,12 @@
 #include <thread>
 #include <chrono>
 
-void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs, bool estIA /*= false*/)
+void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
 {
     for(int i = 0; i < nbJoueurs; ++i)
     {
-        joueurs[i].estIA         = estIA;
+        joueurs[i].estIA         = false;
+        joueurs[i].niveauIA      = NIVEAU_IA_AUCUN;
         joueurs[i].versTotal     = 0;
         joueurs[i].sommetPile    = 0;
         joueurs[i].numero        = i;
@@ -21,6 +22,15 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs, bool es
             joueurs[i].pilePickomino[j] = 0;
         }
     }
+}
+
+void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                         int  numeroJoueur,
+                         bool estIA /*= false*/,
+                         int  niveauIA /*= NIVEAU_IA_AUCUN*/)
+{
+    joueurs[numeroJoueur].estIA    = estIA;
+    joueurs[numeroJoueur].niveauIA = niveauIA;
 }
 
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS])
@@ -296,24 +306,4 @@ void ajouterPartieHistorique(const std::string& nom, int versTotal)
     }
     fichier << "[" << nom << "," << versTotal << "]";
     fichier.close();
-}
-
-int choisirFaceAleatoire(Plateau& plateau)
-{
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    int facesDisponibles[NB_DES];
-    int nombreFacesDisponibles = 0;
-
-    for(int i = 0; i < plateau.nbDes; ++i)
-    {
-        facesDisponibles[nombreFacesDisponibles++] = plateau.des[i];
-    }
-
-    if(plateau.desRetenus[FACE_VER - 1] > 0)
-    {
-        int faceChoisie = rand() % nombreFacesDisponibles;
-        return facesDisponibles[faceChoisie];
-    }
-
-    return FACE_VER;
 }

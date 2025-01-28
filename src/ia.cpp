@@ -1,34 +1,12 @@
 #include "ia.h"
+#include "affichage.h"
+
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
+#include <thread>
+#include <chrono>
 
-void jouerPartieIA(Jeu& jeu)
-{
-    afficherAccueil();
-    initialiserPartieIA(jeu, DIFFICULTE_FACILE);
-
-    do
-    {
-        if(jeu.plateau.numeroJoueur < jeu.nbJoueursIA)
-        {
-            jouerTour(jeu);
-        }
-        else
-        {
-            jouerTourIA(jeu);
-        }
-
-        jeu.plateau.numeroJoueur = (jeu.plateau.numeroJoueur + 1) % jeu.nbJoueurs;
-
-    } while(verifierBrochetteVide(jeu.plateau.brochettePickominos));
-
-    int joueurGagnant = determinerJoueurGagnant(jeu);
-    ajouterPartieHistorique(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
-    afficherJoueurGagnant(jeu.joueurs[joueurGagnant].nom, jeu.joueurs[joueurGagnant].versTotal);
-}
-
-void initialiserPartieIA(Jeu& jeu, int difficulteChoisie)
+void initialiserPartieIA(Jeu& jeu)
 {
     srand(time(NULL));
 
@@ -38,7 +16,8 @@ void initialiserPartieIA(Jeu& jeu, int difficulteChoisie)
 
     jeu.nbOrdinateursIA =
       saisirNombreOrdinateursIA(nbOrdinateursIAMaxPossible, NB_ORDINATEURS_IA_MIN);
-    jeu.nbJoueurs            = jeu.nbJoueursIA + jeu.nbOrdinateursIA;
+    jeu.nbJoueurs = jeu.nbJoueursIA + jeu.nbOrdinateursIA;
+    initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
     jeu.plateau.numeroJoueur = 0;
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
@@ -50,8 +29,8 @@ void initialiserPartieIA(Jeu& jeu, int difficulteChoisie)
         else
         {
             jeu.joueurs[i].nom = "IA " + std::to_string(i - jeu.nbJoueursIA + 1);
+            initialiserJoueurIA(jeu.joueurs, i, true, afficherDifficultes(jeu.joueurs[i].nom));
         }
-        initialiserJoueur(jeu.joueurs, jeu.nbJoueurs, true);
     }
     initialiserBrochette(jeu.plateau.brochettePickominos);
 }
@@ -78,7 +57,7 @@ void jouerTourIA(Jeu& jeu)
         }
         else
         {
-            valeurDeChoisi = choisirFaceAleatoire(jeu.plateau);
+            valeurDeChoisi = choisirFaceIA(jeu);
             gererDesRetenus(jeu, valeurDeChoisi);
             finTour = choisirFinTourIA(jeu.plateau);
 
@@ -114,4 +93,38 @@ bool parcourirBrochette(Plateau& plateau)
         }
     }
     return false;
+}
+
+int choisirFaceIA(Jeu& jeu)
+{
+    switch(jeu.joueurs[jeu.plateau.numeroJoueur].niveauIA)
+    {
+        case NIVEAU_IA_FACILE:
+        case NIVEAU_IA_MOYEN:
+        case NIVEAU_IA_DIFFICILE:
+            return choisirFaceAleatoire(jeu.plateau);
+            break;
+        default:
+            break;
+    }
+}
+
+int choisirFaceAleatoire(Plateau& plateau)
+{
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    int facesDisponibles[NB_DES];
+    int nombreFacesDisponibles = 0;
+
+    for(int i = 0; i < plateau.nbDes; ++i)
+    {
+        facesDisponibles[nombreFacesDisponibles++] = plateau.des[i];
+    }
+
+    if(plateau.desRetenus[FACE_VER - 1] > 0)
+    {
+        int faceChoisie = rand() % nombreFacesDisponibles;
+        return facesDisponibles[faceChoisie];
+    }
+
+    return FACE_VER;
 }

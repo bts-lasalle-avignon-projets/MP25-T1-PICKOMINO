@@ -20,6 +20,7 @@
 struct Joueur
 {
     std::string nom;
+    bool        estIA;
     int         numero;
     int         versTotal;
     int         pilePickomino[NB_PICKOMINOS];
@@ -59,7 +60,7 @@ struct Jeu
     Plateau plateau;
 };
 
-void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
+void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs, bool estIA = false);
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
 void reinitialiserPlateau(Plateau& plateau);
 void lancerDes(int nbDes, int des[NB_DES]);

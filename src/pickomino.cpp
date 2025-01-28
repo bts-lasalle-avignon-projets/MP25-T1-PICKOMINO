@@ -7,10 +7,11 @@
 #include <thread>
 #include <chrono>
 
-void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
+void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs, bool estIA /*= false*/)
 {
     for(int i = 0; i < nbJoueurs; ++i)
     {
+        joueurs[i].estIA         = estIA;
         joueurs[i].versTotal     = 0;
         joueurs[i].sommetPile    = 0;
         joueurs[i].numero        = i;

@@ -36,8 +36,9 @@ void initialiserPartieIA(Jeu& jeu, int difficulteChoisie)
 
     int nbOrdinateursIAMaxPossible = NB_JOUEURS_MAX - jeu.nbJoueursIA;
 
-    jeu.nbOrdinateursIA = saisirNombreOrdinateursIA(nbOrdinateursIAMaxPossible, NB_ORDINATEURS_IA_MIN);
-    jeu.nbJoueurs = jeu.nbJoueursIA + jeu.nbOrdinateursIA;
+    jeu.nbOrdinateursIA =
+      saisirNombreOrdinateursIA(nbOrdinateursIAMaxPossible, NB_ORDINATEURS_IA_MIN);
+    jeu.nbJoueurs            = jeu.nbJoueursIA + jeu.nbOrdinateursIA;
     jeu.plateau.numeroJoueur = 0;
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
@@ -50,7 +51,7 @@ void initialiserPartieIA(Jeu& jeu, int difficulteChoisie)
         {
             jeu.joueurs[i].nom = "IA " + std::to_string(i - jeu.nbJoueursIA + 1);
         }
-        initialiserJoueur(jeu.joueurs, jeu.nbJoueurs);
+        initialiserJoueur(jeu.joueurs, jeu.nbJoueurs, true);
     }
     initialiserBrochette(jeu.plateau.brochettePickominos);
 }

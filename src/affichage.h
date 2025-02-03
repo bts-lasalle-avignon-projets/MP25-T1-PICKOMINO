@@ -5,9 +5,10 @@
 #include "pickomino.h"
 
 int         saisirNombreJoueurs(int nbJoueursMax, int nbJoueursMin);
+void        saisirNomJoueur(std::string& nom, int& age);
 int         saisirNombreJoueursIA(int nbJoueursIAMax, int nbJoueursIAMin);
 int         saisirNombreOrdinateursIA(int nbOrdinateursIAMax, int nbOrdinateursIAMin);
-void        saisirNomJoueur(std::string& nom);
+void        saisirNomJoueur(std::string& nom, int& age);
 void        afficherJoueurs(const Jeu& jeu);
 void        afficherJoueur(const Joueur& joueur);
 void        afficherBrochettePickominos(const Pickomino (&brochette)[NB_PICKOMINOS]);

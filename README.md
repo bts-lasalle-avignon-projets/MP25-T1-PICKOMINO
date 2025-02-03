@@ -96,10 +96,10 @@ $ ./pickomino.out
 - Jouer une ou plusieurs parties
 - Visualiser l'historique des parties
 - Visualiser l'historique des scores
-- Ajouter une interface graphique
 
 ### Itération 3
 
+- Ajouter une interface graphique
 - Jouer une partie en réseau
 
 ## Changelog

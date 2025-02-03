@@ -109,6 +109,7 @@ int choisirFaceIA(Jeu& jeu)
         default:
             break;
     }
+    return -1;
 }
 
 int choisirFaceAleatoire(Plateau& plateau)

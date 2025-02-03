@@ -100,10 +100,12 @@ int choisirFaceIA(Jeu& jeu)
     switch(jeu.joueurs[jeu.plateau.numeroJoueur].niveauIA)
     {
         case NIVEAU_IA_FACILE:
-        case NIVEAU_IA_MOYEN:
-        case NIVEAU_IA_DIFFICILE:
             return choisirFaceAleatoire(jeu.plateau);
             break;
+        case NIVEAU_IA_MOYEN:
+            return choisirFacePlusGrandTotal(jeu.plateau);
+            break;
+        case NIVEAU_IA_DIFFICILE:
         default:
             break;
     }
@@ -127,4 +129,61 @@ int choisirFaceAleatoire(Plateau& plateau)
     }
 
     return FACE_VER;
+}
+
+int choisirFacePlusGrandTotal(Plateau& plateau)
+{
+    int faceOccurence[NB_FACES];
+    int valeurTotalFace[NB_FACES];
+    int faceOccurencePlusEleve = -1;
+
+    if(plateau.desRetenus[FACE_VER - 1] > 0 || presenceVerDansLancer(plateau))
+    {
+        for(int i = 0; i < plateau.nbDes; ++i)
+        {
+            if(plateau.desRetenus[plateau.des[i] - 1] == 0)
+            {
+                faceOccurence[plateau.des[i]]++;
+            }
+            else
+            {
+                faceOccurence[plateau.des[i]] = 0;
+            }
+        }
+
+        for(int i = 0; i < NB_FACES; ++i)
+        {
+            valeurTotalFace[i] = faceOccurence[i] * i;
+        }
+
+        for(int i = 0; i < NB_FACES; ++i)
+        {
+            if(valeurTotalFace[i] == valeurTotalFace[faceOccurencePlusEleve])
+            {
+                if(i < faceOccurencePlusEleve)
+                {
+                    faceOccurencePlusEleve = i;
+                }
+            }
+            else if(valeurTotalFace[i] > valeurTotalFace[faceOccurencePlusEleve])
+            {
+                faceOccurencePlusEleve = i;
+            }
+        }
+        return faceOccurencePlusEleve;
+    }
+
+    return FACE_VER;
+}
+
+bool presenceVerDansLancer(Plateau& plateau)
+{
+    for(int i = 0; i < plateau.nbDes; ++i)
+    {
+        if(plateau.des[i] == FACE_VER - 1)
+        {
+            return true;
+        }
+    }
+    return false;
 }

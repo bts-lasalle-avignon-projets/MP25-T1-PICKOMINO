@@ -24,14 +24,16 @@ void initialiserPartieIA(Jeu& jeu)
     {
         if(i < jeu.nbJoueursIA)
         {
-            saisirNomJoueur(jeu.joueurs[i].nom);
+            saisirNomJoueur(jeu.joueurs[i].nom, jeu.joueurs[i].age);
         }
         else
         {
             jeu.joueurs[i].nom = "IA " + std::to_string(i - jeu.nbJoueursIA + 1);
+            jeu.joueurs[i].age = AGE_IA + i;
             initialiserJoueurIA(jeu.joueurs, i, true, afficherDifficultes(jeu.joueurs[i].nom));
         }
     }
+    trierAgeJoueur(jeu.joueurs, jeu.nbJoueurs);
     initialiserBrochette(jeu.plateau.brochettePickominos);
 }
 

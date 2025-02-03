@@ -25,6 +25,7 @@
 struct Joueur
 {
     std::string nom;
+    int         age;
     bool        estIA;
     int         niveauIA;
     int         numero;
@@ -67,6 +68,7 @@ struct Jeu
 };
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
+void trierAgeJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
 void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
                          int  numeroJoueur,
                          bool estIA    = false,

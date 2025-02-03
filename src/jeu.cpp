@@ -85,9 +85,9 @@ void initialiserPartie(Jeu& jeu)
 
     for(int i = 0; i < jeu.nbJoueurs; ++i)
     {
-        saisirNomJoueur(jeu.joueurs[i].nom);
+        saisirNomJoueur(jeu.joueurs[i].nom, jeu.joueurs[i].age);
     }
-
+    trierAgeJoueur(jeu.joueurs, jeu.nbJoueurs);
     initialiserBrochette(jeu.plateau.brochettePickominos);
 }
 

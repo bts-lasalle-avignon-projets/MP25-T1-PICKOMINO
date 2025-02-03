@@ -10,6 +10,8 @@
 #define NB_JOUEURS_IA_MIN 1
 #define NB_JOUEURS_IA_MAX 6
 
+#define AGE_IA 100
+
 void jouerTourIA(Jeu& jeu);
 void initialiserPartieIA(Jeu& jeu);
 bool choisirFinTourIA(Plateau& plateau);

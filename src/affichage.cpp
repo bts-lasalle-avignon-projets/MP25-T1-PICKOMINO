@@ -89,10 +89,15 @@ int saisirNombreOrdinateursIA(int nbOrdinateursIAMax, int nbOrdinateursIAMin)
     return nombreOrdinateursIA;
 }
 
-void saisirNomJoueur(std::string& nom)
+void saisirNomJoueur(std::string& nom, int& age)
 {
     std::cout << "Entrez le nom du joueur : ";
     std::cin >> nom;
+    std::cout << "\n";
+    std::cout << "Entrez l'âge du joueur : ";
+    std::cin >> age;
+    std::cout << "\n";
+    afficherSeparation();
     std::cout << "\n";
 }
 

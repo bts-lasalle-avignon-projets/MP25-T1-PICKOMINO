@@ -23,6 +23,21 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
         }
     }
 }
+void trierAgeJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
+{
+    for(int i = 0; i < nbJoueurs - 1; i++)
+    {
+        for(int j = 0; j < nbJoueurs - 1 - i; j++)
+        {
+            if(joueurs[j].age > joueurs[j + 1].age)
+            {
+                Joueur joueurTemporaire = joueurs[j];
+                joueurs[j]              = joueurs[j + 1];
+                joueurs[j + 1]          = joueurTemporaire;
+            }
+        }
+    }
+}
 
 void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
                          int  numeroJoueur,

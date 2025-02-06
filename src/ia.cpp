@@ -84,15 +84,21 @@ bool choisirFinTourIA(Plateau& plateau)
 bool parcourirBrochette(Plateau& plateau)
 {
     int totalDesRetenus = calculerTotalDesRetenus(plateau.desRetenus);
-    for(int i = 0; i < NB_PICKOMINOS; ++i)
+
+    if(totalDesRetenus ==
+         plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur &&
+       plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
     {
-        if(totalDesRetenus ==
-             plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].valeur &&
-           plateau.brochettePickominos[totalDesRetenus - VALEUR_PICKOMINOS_MIN].etat == VISIBLE)
+        return true;
+    }
+    for(int i = totalDesRetenus - VALEUR_PICKOMINOS_MIN; i > 0; --i)
+    {
+        if(plateau.brochettePickominos[i].etat == VISIBLE)
         {
             return true;
         }
     }
+
     return false;
 }
 
@@ -118,71 +124,84 @@ int choisirFaceAleatoire(Plateau& plateau)
     std::this_thread::sleep_for(std::chrono::seconds(2));
     int facesDisponibles[NB_DES];
     int nombreFacesDisponibles = 0;
-
-    for(int i = 0; i < plateau.nbDes; ++i)
-    {
-        facesDisponibles[nombreFacesDisponibles++] = plateau.des[i];
-    }
-
-    if(plateau.desRetenus[FACE_VER - 1] > 0)
-    {
-        int faceChoisie = rand() % nombreFacesDisponibles;
-        return facesDisponibles[faceChoisie];
-    }
-
-    return FACE_VER;
-}
-
-int choisirFacePlusGrandTotal(Plateau& plateau)
-{
-    int faceOccurence[NB_FACES] = {0,0,0,0,0,0};
-    int valeurTotalFace[NB_FACES] = {0,0,0,0,0,0};
-    int faceOccurencePlusEleve = 0;
+    int faceChoisie;
 
     if(plateau.desRetenus[FACE_VER - 1] > 0 || !presenceVerDansLancer(plateau))
     {
         for(int i = 0; i < plateau.nbDes; ++i)
         {
-            if(plateau.desRetenus[plateau.des[i] - 1] == 0)
-            {
-                faceOccurence[plateau.des[i] - 1]++;
-            }
-            else
-            {
-                faceOccurence[plateau.des[i] - 1] = 0;
-            }
+            facesDisponibles[nombreFacesDisponibles++] = plateau.des[i];
         }
+
+        faceChoisie = rand() % nombreFacesDisponibles;
+        return facesDisponibles[faceChoisie];
+    }
+    return FACE_VER;
+}
+
+int choisirFacePlusGrandTotal(Plateau& plateau)
+{
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    int faceOccurence[NB_FACES]   = { 0, 0, 0, 0, 0, 0 };
+    int valeurTotalFace[NB_FACES] = { 0, 0, 0, 0, 0, 0 };
+    int faceOccurencePlusEleve    = 0;
+
+    if(plateau.desRetenus[FACE_VER - 1] > 0 || !presenceVerDansLancer(plateau))
+    {
+        compterOccurencesDeChaqueFace(plateau, faceOccurence);
 
         for(int i = 0; i < NB_FACES; ++i)
         {
             valeurTotalFace[i] = faceOccurence[i] * (i + 1);
         }
 
-        for(int i = 0; i < NB_FACES; ++i)
+        calculerMeilleurFace(plateau, valeurTotalFace, faceOccurencePlusEleve);
+
+        return faceOccurencePlusEleve + 1;
+    }
+    return FACE_VER;
+}
+
+void compterOccurencesDeChaqueFace(Plateau& plateau, int faceOccurence[NB_FACES])
+{
+    for(int i = 0; i < plateau.nbDes; ++i)
+    {
+        if(plateau.desRetenus[plateau.des[i] - 1] == 0)
         {
-            if(valeurTotalFace[i] == valeurTotalFace[faceOccurencePlusEleve])
-            {
-                if(i > faceOccurencePlusEleve)
-                {
-                    faceOccurencePlusEleve = i;
-                }
-            }
-            else if(faceOccurencePlusEleve != 0)
-            {
-                if(valeurTotalFace[i] > valeurTotalFace[faceOccurencePlusEleve])
-                {
-                    faceOccurencePlusEleve = i;
-                }
-            }
-            else
+            faceOccurence[plateau.des[i] - 1]++;
+        }
+        else
+        {
+            faceOccurence[plateau.des[i] - 1] = 0;
+        }
+    }
+}
+
+void calculerMeilleurFace(Plateau& plateau,
+                          int      valeurTotalFace[NB_FACES],
+                          int&     faceOccurencePlusEleve)
+{
+    for(int i = 0; i < NB_FACES; ++i)
+    {
+        if(valeurTotalFace[i] == valeurTotalFace[faceOccurencePlusEleve])
+        {
+            if(i > faceOccurencePlusEleve)
             {
                 faceOccurencePlusEleve = i;
             }
         }
-        return faceOccurencePlusEleve + 1;
+        else if(faceOccurencePlusEleve != 0)
+        {
+            if(valeurTotalFace[i] > valeurTotalFace[faceOccurencePlusEleve])
+            {
+                faceOccurencePlusEleve = i;
+            }
+        }
+        else
+        {
+            faceOccurencePlusEleve = i;
+        }
     }
-    return FACE_VER;
-
 }
 
 bool presenceVerDansLancer(Plateau& plateau)

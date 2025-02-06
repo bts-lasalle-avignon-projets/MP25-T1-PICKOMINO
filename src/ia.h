@@ -18,5 +18,11 @@ bool choisirFinTourIA(Plateau& plateau);
 bool parcourirBrochette(Plateau& plateau);
 int  choisirFaceIA(Jeu& jeu);
 int  choisirFaceAleatoire(Plateau& plateau);
+int  choisirFacePlusGrandTotal(Plateau& plateau);
+void compterOccurencesDeChaqueFace(Plateau& plateau, int faceOccurence[NB_FACES]);
+void calculerMeilleurFace(Plateau& plateau,
+                          int      valeurTotalFace[NB_FACES],
+                          int&     faceOccurencePlusEleve);
+bool presenceVerDansLancer(Plateau& plateau);
 
 #endif

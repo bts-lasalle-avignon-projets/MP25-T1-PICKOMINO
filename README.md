@@ -1,15 +1,101 @@
-<!-- main -->
-<p align="center"><a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/"><img src="https://img.shields.io/badge/Mini%20Projet-BTS%20CIEL-green.svg" alt="Mini Projet BTS CIEL"/></a>&nbsp;&nbsp;<a href="https://isocpp.org/"><img src="https://img.shields.io/badge/R%C3%A9alis%C3%A9%20en-C++-1f425f.svg" alt="made"/></a>&nbsp;&nbsp;<a href="https://github.com/orgs/bts-lasalle-avignon-projets/projects/9"><img src="https://img.shields.io/badge/Avec-GitHub%20Projects-1f425f.svg" alt="projects"/></a></p>
-<!-- main -->
-<p align="center"><a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/releases"><img src="https://img.shields.io/github/v/release/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="release"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO"><img src="https://img.shields.io/github/languages/code-size/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="code size"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/actions"><img src="https://img.shields.io/github/check-runs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/develop" alt="check"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/actions/workflows/c-cpp.yml"><img src="https://img.shields.io/github/actions/workflow/status/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/c-cpp.yml" alt="build"/></a></p>
-<!-- divers -->
-<p align="center"><a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/branches"><img src="https://badgen.net/github/branches/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="branches"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/commit/"><img src="https://badgen.net/github/commits/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="commits"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/graphs/contributors"><img src="https://img.shields.io/github/contributors/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="contributors"/></a></p>
-<!-- issues -->
-<p align="center"><a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues"><img src="https://badgen.net/github/issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="issues"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20state%3Aopen"><img src="https://badgen.net/github/open-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="open issues"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20state%3Aclosed"><img src="https://badgen.net/github/closed-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="closed issues"/></a></p>
-<!-- labels issues -->
-<p align="center"><a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Afeature"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/feature" alt="feature issues"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Atask"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/task" alt="task issues"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Abug"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/bug" alt="bug issues"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Arelease"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/release" alt="release issues"/></a></p>
-<!-- prs -->
-<p align="center"><a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls"><img src="https://badgen.net/github/prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="prs"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls?q=is%3Aopen+is%3Apr"><img src="https://badgen.net/github/open-prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="open prs"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls?q=is%3Apr+is%3Aclosed"><img src="https://badgen.net/github/closed-prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="closed prs"/></a>&nbsp;&nbsp;<a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls?q=is%3Apr+is%3Amerged"><img src="https://badgen.net/github/merged-prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="merged prs"/></a></p>
+<table>
+    <tr>
+        <th colspan="3">Pickomino</th>
+    </tr>
+    <tr>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/"><img src="https://img.shields.io/badge/Mini%20Projet-BTS%20CIEL-green.svg" alt="Mini Projet BTS CIEL"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/orgs/bts-lasalle-avignon-projets/projects/9"><img src="https://img.shields.io/badge/Avec-GitHub%20Projects-1f425f.svg" alt="projects"/></a>
+        </td>
+        <td>
+        <a href="https://isocpp.org/"><img src="https://img.shields.io/badge/R%C3%A9alis%C3%A9%20en-C++-1f425f.svg" alt="made"/></a>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="2">Dernière version</th>
+        <th colspan="2">GitHub Actions</th>
+    </tr>
+    <tr>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/releases"><img src="https://img.shields.io/github/v/release/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="release"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO"><img src="https://img.shields.io/github/languages/code-size/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="code size"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/actions"><img src="https://img.shields.io/github/check-runs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/develop" alt="check"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/actions/workflows/c-cpp.yml"><img src="https://img.shields.io/github/actions/workflow/status/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/c-cpp.yml" alt="build"/></a>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Activité</th>
+        <th>Issues</th>
+        <th>Pull Requests</th>
+        <th>GitHub Projects</th>
+    </tr>
+    <tr>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/graphs/contributors"><img src="https://img.shields.io/github/contributors/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="contributors"/>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues"><img src="https://badgen.net/github/issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="issues"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls"><img src="https://badgen.net/github/prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="prs"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Arelease"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/release" alt="release issues"/></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/commit/"><img src="https://badgen.net/github/commits/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="commits"/>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20state%3Aopen"><img src="https://badgen.net/github/open-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="open issues"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls?q=is%3Aopen+is%3Apr"><img src="https://badgen.net/github/open-prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="open prs"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Afeature"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/feature" alt="feature issues"/></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/branches"><img src="https://badgen.net/github/branches/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="branches"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20state%3Aclosed"><img src="https://badgen.net/github/closed-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="closed issues"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls?q=is%3Apr+is%3Aclosed"><img src="https://badgen.net/github/closed-prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="closed prs"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Atask"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/task" alt="task issues"/></a>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/pulls?q=is%3Apr+is%3Amerged"><img src="https://badgen.net/github/merged-prs/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO" alt="merged prs"/></a>
+        </td>
+        <td>
+        <a href="https://github.com/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/issues?q=is%3Aissue%20label%3Abug"><img src="https://badgen.net/github/label-issues/bts-lasalle-avignon-projets/MP25-T1-PICKOMINO/bug" alt="bug issues"/></a>
+        </td>
+    </tr>
+</table>
 
 # Mini-projet : Pickomino
 - [Mini-projet : Pickomino](#mini-projet--pickomino)
@@ -137,13 +223,17 @@ $ ./pickomino.out
 - [x] Ajouter de la couleur au menu
 - [x] Gérer le cas d'égalité
 
+### Version 2.0
+
+- [x] Jouer une partie contre l'ordinateur
+- [x] Ajouter une IA facile
+- [x] Ajouter une IA moyenne
+- [x] Ajouter un historique des parties
+- [x] Débuter la partie avec le joueur le plus jeune
+
 ## TODO
 
-- [ ] Commencer la partie par le joueur le plus jeune
-- [ ] Jouer une partie contre l'ordinateur
 - [ ] Jouer une ou plusieurs parties
-- [ ] Visualiser l'historique des parties
-- [ ] Visualiser l'historique des scores
 - [ ] Jouer une partie en réseau
 - [ ] Ajouter une interface graphique
 

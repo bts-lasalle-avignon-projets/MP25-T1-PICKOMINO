@@ -1,12 +1,18 @@
 #include "pickomino.h"
 
+#include <fstream>
+#include <iostream>
 #include <cstdlib>
 #include <time.h>
+#include <thread>
+#include <chrono>
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
 {
     for(int i = 0; i < nbJoueurs; ++i)
     {
+        joueurs[i].estIA         = false;
+        joueurs[i].niveauIA      = NIVEAU_IA_AUCUN;
         joueurs[i].versTotal     = 0;
         joueurs[i].sommetPile    = 0;
         joueurs[i].numero        = i;
@@ -16,6 +22,30 @@ void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
             joueurs[i].pilePickomino[j] = 0;
         }
     }
+}
+void trierAgeJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs)
+{
+    for(int i = 0; i < nbJoueurs - 1; i++)
+    {
+        for(int j = 0; j < nbJoueurs - 1 - i; j++)
+        {
+            if(joueurs[j].age > joueurs[j + 1].age)
+            {
+                Joueur joueurTemporaire = joueurs[j];
+                joueurs[j]              = joueurs[j + 1];
+                joueurs[j + 1]          = joueurTemporaire;
+            }
+        }
+    }
+}
+
+void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                         int  numeroJoueur,
+                         bool estIA /*= false*/,
+                         int  niveauIA /*= NIVEAU_IA_AUCUN*/)
+{
+    joueurs[numeroJoueur].estIA    = estIA;
+    joueurs[numeroJoueur].niveauIA = niveauIA;
 }
 
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS])
@@ -281,4 +311,14 @@ bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS])
     }
 
     return false;
+}
+void ajouterPartieHistorique(const std::string& nom, int versTotal)
+{
+    std::ofstream fichier("src/historique.txt", std::ios::app);
+    if(!fichier)
+    {
+        std::cerr << "Erreur : impossible d'accéder à l'historique " << std::endl;
+    }
+    fichier << "[" << nom << "," << versTotal << "]";
+    fichier.close();
 }

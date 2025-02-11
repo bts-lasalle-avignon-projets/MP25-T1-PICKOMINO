@@ -3,7 +3,7 @@
 
 #include <string>
 
-#define VERSION "1.0"
+#define VERSION "2.0"
 
 #define NB_JOUEURS_MIN 2
 #define NB_JOUEURS_MAX 7
@@ -17,9 +17,17 @@
 #define VALEUR_PICKOMINOS_MAX 36
 #define NB_VERS_MAX           4
 
+#define NIVEAU_IA_AUCUN     0
+#define NIVEAU_IA_FACILE    1
+#define NIVEAU_IA_MOYEN     2
+#define NIVEAU_IA_DIFFICILE 3
+
 struct Joueur
 {
     std::string nom;
+    int         age;
+    bool        estIA;
+    int         niveauIA;
     int         numero;
     int         versTotal;
     int         pilePickomino[NB_PICKOMINOS];
@@ -53,11 +61,18 @@ struct Plateau
 struct Jeu
 {
     int     nbJoueurs;
+    int     nbJoueursIA;
+    int     nbOrdinateursIA;
     Joueur  joueurs[NB_JOUEURS_MAX];
     Plateau plateau;
 };
 
 void initialiserJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
+void trierAgeJoueur(Joueur (&joueurs)[NB_JOUEURS_MAX], int nbJoueurs);
+void initialiserJoueurIA(Joueur (&joueurs)[NB_JOUEURS_MAX],
+                         int  numeroJoueur,
+                         bool estIA    = false,
+                         int  niveauIA = NIVEAU_IA_AUCUN);
 void initialiserBrochette(Pickomino (&brochette)[NB_PICKOMINOS]);
 void reinitialiserPlateau(Plateau& plateau);
 void lancerDes(int nbDes, int des[NB_DES]);
@@ -71,5 +86,6 @@ bool volerPickominoJoueur(Jeu& jeu);
 void remettreTuileDansBrochette(Jeu& jeu);
 bool verifierValeurTotalDesTropPetit(Plateau& plateau);
 bool verifierBrochetteVide(Pickomino (&brochette)[NB_PICKOMINOS]);
+void ajouterPartieHistorique(const std::string& nom, int versTotal);
 
 #endif
